@@ -28,7 +28,7 @@ public class GameData implements IStrategy{
     final List<GameFigure> figures;
     ///////////////////////////////
     
-    ///////////////////////////////
+    ////////////////////////////////
     // Instantiates each of these classes
     ArrowTower ArrowT;
     BlueTower BlueT;
