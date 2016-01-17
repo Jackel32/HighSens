@@ -25,7 +25,7 @@ public class Main extends JFrame
     boolean BluePlaceable = false;
 
    
-    public Main() { 
+    public Main() {
         TowerPosition = new ArrayList();
         setSize(600, 400);
         Container c = getContentPane();
