@@ -7,7 +7,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-public class FastMonster extends TemplateClass implements Monster, GameFigure, IStrategy {
+public class FastMonster extends AbstractMonster implements Monster, GameFigure, IStrategy {
 
 	Image fastMonsterImage;
 	Sound deathSound;

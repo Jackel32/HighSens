@@ -3,12 +3,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public abstract class TemplateClass {
+public abstract class AbstractMonster {
 
 	protected int maxHealth;
 	protected int speed;
-	protected int health; 
-	public TemplateClass() {
+	protected int health;
+
+	public AbstractMonster() {
 	}
 
 	/**

@@ -7,7 +7,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-public class RegularMonster extends TemplateClass implements Monster, GameFigure, IStrategy {
+public class RegularMonster extends AbstractMonster implements Monster, GameFigure, IStrategy {
 
 	Image fastMonsterImage;
 	Sound deathSound;
@@ -46,6 +46,7 @@ public class RegularMonster extends TemplateClass implements Monster, GameFigure
 	@Override
 	public void render(Graphics g) {
 		drawHealthBar(g, x, y);
+
 		g.drawImage(fastMonsterImage, (int) x, (int) y, null);
 	}
 

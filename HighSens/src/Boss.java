@@ -6,7 +6,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-public class Boss extends TemplateClass implements Monster, GameFigure, IStrategy {
+public class Boss extends AbstractMonster implements Monster, GameFigure, IStrategy {
 
 	private Image bossImage;
 	private Sound deathSound;
