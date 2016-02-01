@@ -152,11 +152,17 @@ public class Main extends JFrame
     }
     
     public static void main(String[] args) {
-        JFrame game =  new Main();
+    	final MainScreen mainScreen = new MainScreen();
+    	
+    	
+    	mainScreen.setVisible(true);
+    	
+    	/*JFrame game =  new Main();
         game.setTitle("Tower Defence");
         game.setResizable(false);
         game.setLocationRelativeTo(null);
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         game.setVisible(true);
+        */
     }
 }
