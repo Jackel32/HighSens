@@ -14,9 +14,12 @@ public class Main extends JFrame
         implements ActionListener, MouseListener, KeyListener {
 
     private final GamePanel gamePanel;
+    private final StorePanel storePanel;
     private final GameData gameData;
     private final Animator animator;
+    private final StoreAnimator storeAnimator;
     private final JButton playButton;
+    private final JButton storeButton;
     private final JButton quitButton;
     private static ArrowTower ArrowTower;
     private static BlueTower BlueTower;
@@ -30,16 +33,22 @@ public class Main extends JFrame
         setSize(600, 400);
         Container c = getContentPane();
         animator = new Animator();
+        storeAnimator = new StoreAnimator();
         gameData = new GameData();
         gamePanel = new GamePanel(animator, gameData);
+        storePanel = new StorePanel(storeAnimator, gameData);
         animator.setGamePanel(gamePanel);
         animator.setGameData(gameData);
+        storeAnimator.setStorePanel(storePanel);
+        storeAnimator.setStoreData(gameData);
         
         c.add(gamePanel, "Center");
 
         JPanel southPanel = new JPanel(); 
         playButton = new JButton("Play");
         southPanel.add(playButton);
+        storeButton = new JButton("Store");
+        southPanel.add(storeButton);
         quitButton = new JButton("Quit");
         southPanel.add(quitButton);
         c.add(southPanel, "South");
@@ -49,6 +58,7 @@ public class Main extends JFrame
         gamePanel.setFocusable(true);
         gamePanel.addKeyListener(this);
         playButton.addActionListener(this);
+        storeButton.addActionListener(this);
         quitButton.addActionListener(this);
         
     }
@@ -58,6 +68,9 @@ public class Main extends JFrame
         if (e.getSource() == playButton) {
             playButton.setEnabled(false);
             gamePanel.startGame();
+        } else if (e.getSource() == storeButton) {
+        	storeButton.setEnabled(false);
+            storePanel.startStore();
         } else if (e.getSource() == quitButton) {
             animator.running = false;
         }
