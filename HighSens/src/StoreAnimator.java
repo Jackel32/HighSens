@@ -30,5 +30,4 @@ public class StoreAnimator implements Runnable {
         }
         System.exit(0);
     }
-    
 }

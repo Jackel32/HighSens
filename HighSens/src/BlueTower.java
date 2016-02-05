@@ -14,7 +14,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	Point2D.Float target;
 	private int state = STATE_IDLE;
 	Monster m;
-	GameData gd;
+	GameData gd; 
 	public Ellipse2D.Double radius;
 	private int range;
 
