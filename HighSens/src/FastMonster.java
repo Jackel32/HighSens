@@ -79,10 +79,12 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 			deathSound = new Sound("sounds/pop.wav");
 			deathSound.start();
 			gd.moneyManager("kill2", gd.getMoney());
+			gd.monsterManager("kill2");
 			break;
 		case LIFE_LOST:
 			updateLives();
 			state = STATE_DONE;
+			gd.monsterManager("kill2");
 			break;
 		}
 	}

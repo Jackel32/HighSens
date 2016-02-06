@@ -99,6 +99,9 @@ public class GamePanel extends JPanel {
     private Image mapImage;
     private Image ArrowTowerImage;
     private Image BlueTowerImage;
+    private Image RegularMonsterImage;
+    private Image FastMonsterImage;
+    private Image BossImage;
     ///////////////////////////////
     
     public GamePanel(Animator animator, GameData gameData) {
@@ -134,6 +137,15 @@ public class GamePanel extends JPanel {
         // Adds the Blue Tower image from the images director with a distinct seperator and path
         BlueTowerImage = getImage(imagePath + separator + "images" + separator
                 + "BlueTower.png");
+        
+        RegularMonsterImage = getImage(imagePath + separator + "images" + separator
+                + "RegularMonster1.png");
+        
+        FastMonsterImage = getImage(imagePath + separator + "images" + separator
+                + "fastMonster1.png");
+        
+        BossImage = getImage(imagePath + separator + "images" + separator
+                + "boss1.png");
         ///////////////////////////////
     }
     
@@ -271,6 +283,23 @@ public class GamePanel extends JPanel {
             g8.setFont(new Font("Serif", Font.PLAIN, 20));
             g8.drawString("Next Wave", 255, 317);
             ///////////////////////////////
+            
+            //////////////////////////////
+            Graphics2D g12 = (Graphics2D)graphics;
+            g12.drawImage(RegularMonsterImage, 30, 30, this);
+            
+            Graphics2D g13 = (Graphics2D)graphics;
+            g13.drawImage(FastMonsterImage, 88, 30, this);
+            
+            Graphics2D g14 = (Graphics2D)graphics;
+            g14.drawImage(BossImage, 144, 28, this);
+            
+            Graphics2D g15 = (Graphics2D)graphics;
+            g15.setColor(Color.RED);
+            g15.setFont(new Font("Serif", Font.PLAIN, 20));
+            g15.drawString("x" + gameData.getRegularMonsterCount(), 64, 48);
+            g15.drawString("x" + gameData.getFastMonsterCount(), 124, 48);
+            g15.drawString("x" + gameData.getBossCount(), 180, 48);
             
             // END GAME CONDITION
             // If the user has no more lives

@@ -79,10 +79,12 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 			deathSound = new Sound("sounds/pop.wav");
 			deathSound.start();
 			gd.moneyManager("kill1", gd.getMoney());
+			gd.monsterManager("kill1");
 			break;
 		case LIFE_LOST:
 			updateLives();
 			state = STATE_DONE;
+			gd.monsterManager("kill1");
 			break;
 		}
 	}

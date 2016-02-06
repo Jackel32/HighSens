@@ -57,6 +57,12 @@ public class GameData implements IStrategy {
 
 	// global variable for the amount of creep per wave
 	int creepCount = 0;
+	
+	int regularMonsterCount = 0;
+	
+	int fastMonsterCount = 0;
+	
+	int bossCount = 0;
 
 	// Time variable to keep track of the bullet speed
 	long bulletElapsedTime = 0;
@@ -208,7 +214,51 @@ public class GameData implements IStrategy {
 		setMoney(money);
 	}
 	///////////////////////////////
+	
+	
+	public void monsterManager(String val) {
+		switch (val) {
+		case "kill1":
+			regularMonsterCount--;
+			setRegularMonsterCount(regularMonsterCount);
+			break;
+		case "kill2":
+			fastMonsterCount--;
+			setFastMonsterCount(fastMonsterCount);
+			break;
+		case "bossKill":
+			bossCount--;
+			setBossCount(bossCount);
+			break;
+		}
+	}
+	//////////////////////////////////
+	public int getRegularMonsterCount() {
+		return regularMonsterCount;
+	}
 
+	public void setRegularMonsterCount(int regularMonsterCount) {
+		this.regularMonsterCount = regularMonsterCount;
+	}
+	
+	public int getFastMonsterCount() {
+		return fastMonsterCount;
+	}
+
+	public void setFastMonsterCount(int fastMonsterCount) {
+		this.fastMonsterCount = fastMonsterCount;
+	}
+	
+	public int getBossCount() {
+		return bossCount;
+	}
+
+	public void setBossCount(int bossCount) {
+		this.bossCount = bossCount;
+	}
+	
+	///////////////////////////////
+	
 	public void resetCreepCount() {
 		creepCount = 0;
 	}
@@ -239,12 +289,15 @@ public class GameData implements IStrategy {
 							// Adds a monster to the screen
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -257,12 +310,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -275,12 +331,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -293,12 +352,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -311,12 +373,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -329,12 +394,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -347,12 +415,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -365,12 +436,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -383,12 +457,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -401,12 +478,15 @@ public class GameData implements IStrategy {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
+							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
 							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
+							fastMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
+							bossCount++;
 						}
 					}
 				}
@@ -418,6 +498,7 @@ public class GameData implements IStrategy {
 					if (creepCount <= waveSize) {
 						figures.add(new Boss(-50, 120, this));
 						creepCount++;
+						bossCount++;
 					}
 				}
 				break;

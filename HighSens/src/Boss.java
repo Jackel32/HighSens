@@ -75,10 +75,12 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 			deathSound = new Sound("sounds/pop.wav");
 			deathSound.start();
 			gd.moneyManager("bossKill", gd.getMoney());
+			gd.monsterManager("bossKill");
 			break;
 		case LIFE_LOST:
 			updateLives();
 			state = STATE_DONE;
+			gd.monsterManager("bossKill");
 			break;
 		}
 	}
