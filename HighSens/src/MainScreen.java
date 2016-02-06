@@ -57,6 +57,13 @@ public class MainScreen extends JFrame {
 		btnStore.setBounds(50, 278, 112, 46);
 		btnStore.setContentAreaFilled(false);
 		btnStore.setOpaque(true);
+		btnStore.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				final StoreScreen storeScreen = new StoreScreen();
+				storeScreen.setVisible(true);
+				setVisible(false);
+			}
+		});
 		
 		JButton btnAbout = new JButton("About");
 		btnAbout.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
