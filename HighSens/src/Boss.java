@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 public class Boss extends AbstractMonster implements Monster, GameFigure, IStrategy {
 
-	private Image bossImage;
+	private Image MonsterImage;
 	private Sound deathSound;
 	private GameData gd;
 	private int state;
@@ -25,7 +25,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 		this.speed = 3;
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
-		bossImage = getImage(imagePath + separator + "images" + separator + "boss.png");
+		MonsterImage = getImage(imagePath + separator + "images" + separator + "boss.png");
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	@Override
 	public void render(Graphics g) {
 		drawHealthBar(g, x, y);
-		g.drawImage(bossImage, (int) x, (int) y, null);
+		g.drawImage(MonsterImage, (int) x, (int) y, null);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 			moveRight();
 			break;
 		case STATE_DONE:
-			deathSound = new Sound("sounds/pop.wav");
+			deathSound = new Sound("sounds/pop.wav", 1);
 			deathSound.start();
 			gd.moneyManager("bossKill", gd.getMoney());
 			break;

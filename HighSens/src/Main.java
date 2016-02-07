@@ -21,6 +21,8 @@ public class Main extends JFrame
     private static ArrowTower ArrowTower;
     private static BlueTower BlueTower;
     public ArrayList TowerPosition;
+    private Sound bgMusic;
+    private boolean loop = false;
     boolean ArrowPlaceable = false;
     boolean BluePlaceable = false;
 
@@ -57,7 +59,10 @@ public class Main extends JFrame
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == playButton) {
             playButton.setEnabled(false);
+            bgMusic = new Sound("sounds/bgmusic.wav", 10);
+            bgMusic.start();
             gamePanel.startGame();
+            
         } else if (e.getSource() == quitButton) {
             animator.running = false;
         }

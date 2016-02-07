@@ -3,14 +3,15 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 public class RegularMonster extends AbstractMonster implements Monster, GameFigure, IStrategy {
 
-	Image fastMonsterImage;
-	Sound deathSound;
+	Image MonsterImage;
+	Sound deathSound = new Sound("sounds/pop.wav", 1);
 	Point2D.Float target;
 	Missile missile;
 	GameData gd;
@@ -28,7 +29,7 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 		this.speed = 5;
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
-		fastMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster.png");
+		MonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster.png");
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 	public void render(Graphics g) {
 		drawHealthBar(g, x, y);
 
-		g.drawImage(fastMonsterImage, (int) x, (int) y, null);
+		g.drawImage(MonsterImage, (int) x, (int) y, null);
 	}
 
 	@Override
@@ -76,7 +77,7 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 			moveRight();
 			break;
 		case STATE_DONE:
-			deathSound = new Sound("sounds/pop.wav");
+			//deathSound = new Sound("sounds/pop.wav", 0);
 			deathSound.start();
 			gd.moneyManager("kill1", gd.getMoney());
 			break;
