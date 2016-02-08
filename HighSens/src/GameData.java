@@ -33,6 +33,7 @@ public class GameData implements IStrategy {
 	FastMonster fastMonster;
 	Boss boss;
 	Missile missile;
+	ArrowMissile arrowMissile;
 	GameFigure gf;
 	///////////////////////////////
 
@@ -117,7 +118,7 @@ public class GameData implements IStrategy {
 	public void shoot(float x, float y, ArrowTower tower) {
 		// Instantiates a new Missile at the x and y location of the Regular
 		// Tower, color is black
-		Missile f = new Missile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLACK);
+		ArrowMissile f = new ArrowMissile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLACK);
 		// Sets the target of the missile via Vector math
 		f.setTarget((int) x, (int) y);
 		// Creates a random seed generator
@@ -602,6 +603,45 @@ public class GameData implements IStrategy {
 							figures.get(i).updateHealth();
 						}
 					}
+					//
+					if (figures.get(i) instanceof ArrowMissile && figures.get(j) instanceof RegularMonster) {
+						if (((RegularMonster) figures.get(j)).contains((int) figures.get(i).getX(),
+								(int) figures.get(i).getY())) {
+							figures.get(i).setState(GameFigure.STATE_DONE);
+							figures.get(j).updateHealth();
+						}
+					} else if (figures.get(i) instanceof ArrowMissile && figures.get(j) instanceof FastMonster) {
+						if (((FastMonster) figures.get(j)).contains((int) figures.get(i).getX(),
+								(int) figures.get(i).getY())) {
+							figures.get(i).setState(GameFigure.STATE_DONE);
+							figures.get(j).updateHealth();
+						}
+					} else if (figures.get(i) instanceof ArrowMissile && figures.get(j) instanceof Boss) {
+						if (((Boss) figures.get(j)).contains((int) figures.get(i).getX(),
+								(int) figures.get(i).getY())) {
+							figures.get(i).setState(GameFigure.STATE_DONE);
+							figures.get(j).updateHealth();
+						}
+					} else if (figures.get(i) instanceof RegularMonster && figures.get(j) instanceof ArrowMissile) {
+						if (((RegularMonster) figures.get(i)).contains((int) figures.get(j).getX(),
+								(int) figures.get(j).getY())) {
+							figures.get(j).setState(GameFigure.STATE_DONE);
+							figures.get(i).updateHealth();
+						}
+					} else if (figures.get(i) instanceof FastMonster && figures.get(j) instanceof ArrowMissile) {
+						if (((FastMonster) figures.get(i)).contains((int) figures.get(j).getX(),
+								(int) figures.get(j).getY())) {
+							figures.get(j).setState(GameFigure.STATE_DONE);
+							figures.get(i).updateHealth();
+						}
+					} else if (figures.get(i) instanceof Boss && figures.get(j) instanceof ArrowMissile) {
+						if (((Boss) figures.get(i)).contains((int) figures.get(j).getX(),
+								(int) figures.get(j).getY())) {
+							figures.get(j).setState(GameFigure.STATE_DONE);
+							figures.get(i).updateHealth();
+						}
+					}
+					
 				}
 			}
 		}
