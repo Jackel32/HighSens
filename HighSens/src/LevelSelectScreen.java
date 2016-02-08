@@ -33,7 +33,7 @@ public class LevelSelectScreen extends JFrame {
 		pnl1.setLayout(null);
 		
 		JLabel lbl1 = new JLabel("New label");
-		lbl1.setIcon(new ImageIcon("C:\\Users\\Sha\\Desktop\\UCO\\Software Design and Development\\HighSens-GUI\\images\\mapIcon.png"));
+		lbl1.setIcon(new ImageIcon("image/map.png"));
 		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl1.setBounds(0, 0, 125, 106);
 		pnl1.add(lbl1);
@@ -119,6 +119,13 @@ public class LevelSelectScreen extends JFrame {
 		getContentPane().add(btnMap);
 		
 		JButton btnMap2 = new JButton("Map 2");
+		btnMap2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				JFrame game =  new Frame();
+			}
+		});
+		
 		btnMap2.setFont(new Font("Showcard Gothic", Font.PLAIN, 11));
 		btnMap2.setBounds(216, 153, 125, 23);
 		getContentPane().add(btnMap2);

@@ -52,6 +52,8 @@ public class Main extends JFrame
         quitButton.addActionListener(this);
         
     }
+    
+    
      
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -85,7 +87,7 @@ public class Main extends JFrame
         
         if(x >= 440 && x <= 530 && y >= 250 && y <= 320)
         {
-                ArrowPlaceable = true;
+            ArrowPlaceable = true;
         }
         
         // Only allow the placement of towers if we have enough money and have clicked the tower
