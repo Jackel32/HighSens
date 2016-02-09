@@ -45,6 +45,12 @@ public class MainScreen extends JFrame {
 		btnStart.setOpaque(true);
 		
 		JButton btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				System.exit(0);
+			}
+		});
 		btnQuit.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnQuit.setBackground(new Color(255, 0, 0));
 		btnQuit.setBounds(386, 278, 112, 46);
