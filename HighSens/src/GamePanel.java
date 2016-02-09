@@ -150,6 +150,7 @@ public class GamePanel extends JPanel {
         
         BossImage = getImage(imagePath + separator + "images" + separator
                 + "boss1.png");
+        AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
         ///////////////////////////////
     }
     
@@ -183,6 +184,7 @@ public class GamePanel extends JPanel {
     public void startGame() {
         // Creates a new thread for the animator within this class.
         Thread t = new Thread(animator);
+        AudioPlayer.play("background", true);
         // Calls the start class within our Thread Instantiation (starts the loop)
         t.start();
     }

@@ -60,6 +60,7 @@ public class Main extends JFrame
         if (e.getSource() == playButton) {
             playButton.setEnabled(false);
             gamePanel.startGame();
+            
         } else if (e.getSource() == quitButton) {
             animator.running = false;
         }

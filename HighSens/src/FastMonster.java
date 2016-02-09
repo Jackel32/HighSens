@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class FastMonster extends AbstractMonster implements Monster, GameFigure, IStrategy {
 
 	Image fastMonsterImage;
-	Sound deathSound;
+	AudioData deathSound;
 	Point2D.Float target;
 	Missile missile;
 	GameData gd;
@@ -30,6 +30,7 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
 		fastMonsterImage = getImage(imagePath + separator + "images" + separator + "fastMonster.png");
+		AudioPlayer.loadClip("pop", "sounds/pop.wav");
 	}
 
 	@Override
@@ -76,8 +77,7 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 			moveRight();
 			break;
 		case STATE_DONE:
-			deathSound = new Sound("sounds/pop.wav");
-			deathSound.start();
+			AudioPlayer.play("pop",  false);
 			gd.moneyManager("kill2", gd.getMoney());
 			gd.monsterManager("kill2");
 			break;
