@@ -155,7 +155,7 @@ public class Main extends JFrame
     }
     
     public static void main(String[] args) {
-    	final MainScreen mainScreen = new MainScreen();
+    	 final MainScreen mainScreen = new MainScreen();
     	
     	
     	mainScreen.setVisible(true);

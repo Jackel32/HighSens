@@ -72,6 +72,13 @@ public class MainScreen extends JFrame {
 		});
 		
 		JButton btnAbout = new JButton("About");
+		btnAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				final about About = new about();
+				About.setVisible(true);
+				setVisible(false);
+			}
+		});
 		btnAbout.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnAbout.setBackground(new Color(255, 215, 0));
 		btnAbout.setBounds(386, 127, 112, 46);

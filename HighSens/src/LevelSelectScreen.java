@@ -18,10 +18,11 @@ import java.awt.event.ActionEvent;
 public class LevelSelectScreen extends JFrame {
 	public LevelSelectScreen() {
 		
-		setMaximumSize(new Dimension(600, 400));
-		setMinimumSize(new Dimension(600, 400));
+		
+		setMaximumSize(new Dimension(600, 440));
+		setMinimumSize(new Dimension(600, 440));
 		setResizable(false);
-		setPreferredSize(new Dimension(600, 400));
+		setPreferredSize(new Dimension(600, 440));
 		getContentPane().setBackground(new Color(0, 128, 128));
 		setTitle("Level Select");
 		getContentPane().setLayout(null);
@@ -149,5 +150,17 @@ public class LevelSelectScreen extends JFrame {
 		btnMap6.setFont(new Font("Showcard Gothic", Font.PLAIN, 11));
 		btnMap6.setBounds(392, 323, 125, 23);
 		getContentPane().add(btnMap6);
+		
+		JButton button = new JButton("<<<<<< Back");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				final MainScreen mainScreen = new MainScreen();
+				mainScreen.setVisible(true);
+				setVisible(false);
+			}
+		});
+		button.setFont(new Font("Showcard Gothic", Font.PLAIN, 11));
+		button.setBounds(141, 369, 272, 23);
+		getContentPane().add(button);
 	}
 }
