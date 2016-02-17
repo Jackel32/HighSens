@@ -35,6 +35,7 @@ public class AboutScreen extends JFrame{
 		frmAbout.setBounds(100, 100, 500, 373);
 		frmAbout.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAbout.getContentPane().setLayout(null);
+		this.setLocationRelativeTo(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 11, 472, 317);

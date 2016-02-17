@@ -27,6 +27,7 @@ public class LevelSelectScreen extends JFrame {
 		setTitle("Level Select");
 		getContentPane().setLayout(null);
 		getContentPane().setSize(600, 400);
+		this.setLocationRelativeTo(null);
 		
 		JPanel pnl1 = new JPanel();
 		pnl1.setBounds(29, 36, 125, 106);

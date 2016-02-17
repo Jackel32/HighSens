@@ -22,6 +22,7 @@ public class MainScreen extends JFrame {
 		getContentPane().setBackground(new Color(70, 130, 180));
 		getContentPane().setLayout(null);
 		getContentPane().setSize(600, 400);
+		this.setLocationRelativeTo(null);
 		
 		JLabel lblTowerDefense = new JLabel("Tower Defense");
 		lblTowerDefense.setBounds(0, 0, 535, 36);

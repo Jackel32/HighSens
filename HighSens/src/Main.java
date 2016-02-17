@@ -155,9 +155,10 @@ public class Main extends JFrame
     }
     
     public static void main(String[] args) {
-    	 final MainScreen mainScreen = new MainScreen();
+    	final Splash splash = new Splash();
+    	splash.showSplash();
     	
-    	
+    	final MainScreen mainScreen = new MainScreen();
     	mainScreen.setVisible(true);
     	
     	/*JFrame game =  new Main();

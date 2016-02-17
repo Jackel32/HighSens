@@ -20,6 +20,7 @@ public class StoreScreen extends JFrame {
 		setTitle("Store Screen");
 		getContentPane().setLayout(null);
 		getContentPane().setSize(600, 400);
+		this.setLocationRelativeTo(null);
 		
 	    JLabel background=new JLabel(new ImageIcon(imagePath + separator + "images" + separator
                 + "store.png"));
