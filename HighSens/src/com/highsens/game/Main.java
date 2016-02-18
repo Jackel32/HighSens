@@ -134,7 +134,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 
 		if(x >= 10 && x <= 40 && y >= 295 && y <= 320) {
 			muteCount++;
-			if(muteCount % 2 == 0){
+			if(muteCount % 2 != 0){
 				sound.stop("background");
 			} else {
 				AudioPlayer.play("background", true);
