@@ -31,10 +31,13 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	private final JButton quitButton;
 	private static ArrowTower ArrowTower;
 	private static BlueTower BlueTower;
+	private AudioPlayer sound;
 	public ArrayList TowerPosition;
 	boolean ArrowPlaceable = false;
 	boolean BluePlaceable = false;
 
+	int muteCount = 0;
+	
 	public Main() {
 		TowerPosition = new ArrayList();
 		setSize(600, 400);
@@ -108,11 +111,12 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	public void mousePressed(MouseEvent me) {
 		int x = me.getX();
 		int y = me.getY();
+	
 
 		increaseSizeOfTowerRangeWhenOverlapped(x, y);
 
-		// System.out.println("X: " + x);
-		// System.out.println("Y: " + y);
+		 //System.out.println("X: " + x);
+		 //System.out.println("Y: " + y);
 
 		// Limits the clickable range to the button
 		if (x >= 250 && x <= 350 && y >= 295 && y <= 325) {
@@ -128,6 +132,15 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 			ArrowPlaceable = true;
 		}
 
+		if(x >= 10 && x <= 40 && y >= 295 && y <= 320) {
+			muteCount++;
+			if(muteCount % 2 == 0){
+				sound.stop("background");
+			} else {
+				AudioPlayer.play("background", true);
+			}
+		}
+		
 		// Only allow the placement of towers if we have enough money and have
 		// clicked the tower
 		// Additionally only allow the placement of towers on any buttons.

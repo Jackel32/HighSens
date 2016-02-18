@@ -97,6 +97,7 @@ public class GamePanel extends JPanel {
 	private Image RegularMonsterImage;
 	private Image FastMonsterImage;
 	private Image BossImage;
+	private Image mute;
 	///////////////////////////////
 
 	public GamePanel(Animator animator, GameData gameData) {
@@ -139,6 +140,9 @@ public class GamePanel extends JPanel {
 		FastMonsterImage = getImage(imagePath + separator + "images" + separator + "fastMonster1.png");
 
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
+		
+		mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
+		
 		AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
 		///////////////////////////////
 	}
@@ -258,7 +262,7 @@ public class GamePanel extends JPanel {
 			g5.setColor(Color.RED);
 			g5.setFont(new Font("Serif", Font.PLAIN, 16));
 			g5.drawString("Tower 1", 450, 240);
-			g5.drawString("50 Gold", 450, 335);
+			g5.drawString("50 Gold", 450, 330);
 			///////////////////////////////
 
 			///////////////////////////////
@@ -268,7 +272,7 @@ public class GamePanel extends JPanel {
 			g6.setColor(Color.RED);
 			g6.setFont(new Font("Serif", Font.PLAIN, 16));
 			g6.drawString("Tower 2", 530, 240);
-			g6.drawString("100 Gold", 530, 335);
+			g6.drawString("100 Gold", 530, 330);
 			///////////////////////////////
 
 			///////////////////////////////
@@ -287,6 +291,12 @@ public class GamePanel extends JPanel {
 			g8.drawString("Next Wave", 255, 317);
 			///////////////////////////////
 
+			///////////////////////////////
+			//Creates the mute button
+			Graphics2D g16 = (Graphics2D) graphics;
+			g16.drawImage(mute, 10, 295, this);
+			///////////////////////////////
+			
 			//////////////////////////////
 			Graphics2D g12 = (Graphics2D) graphics;
 			g12.drawImage(RegularMonsterImage, 30, 30, this);
