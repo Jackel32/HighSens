@@ -90,6 +90,7 @@ public class GamePanel extends JPanel {
 	///////////////////////////////
 	// Graphical screen rendering (Instantiation)
 	private Graphics graphics;
+	private Graphics graphics2;
 	private Image dbImage;
 	private Image mapImage;
 	private Image ArrowTowerImage;
@@ -355,6 +356,14 @@ public class GamePanel extends JPanel {
 				// Calls render from class GameFigure:
 				f.render(graphics);
 			}
+			
+			
+			synchronized (gameData.sellFigures) {
+                for (GameFigure f2 :gameData.sellFigures) {
+                    f2.render(graphics);
+                }
+            }
+			
 		}
 
 	}

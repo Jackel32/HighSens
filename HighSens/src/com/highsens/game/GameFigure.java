@@ -13,6 +13,7 @@ public interface GameFigure {
     public int getHealth();
     public boolean collision(GameFigure m);
     
+    
     //missle states --------------
     static final int STATE_TRAVELING = 1;
     static final int STATE_EXPLODING = 2;

@@ -9,6 +9,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import com.highsens.game.AudioPlayer;
 import com.highsens.game.GameData;
 import com.highsens.game.GameFigure;
 import com.highsens.game.Monster;
@@ -19,6 +20,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	float x, y;
 	Point2D.Float target;
 	private int state = STATE_IDLE;
+	
 	Monster m;
 	GameData gd;
 
@@ -64,12 +66,19 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public void updateState() {
-
+		
+		
 	}
 
 	@Override
 	public void update() {
-
+		
+		switch (state) {
+		
+		case STATE_DONE:
+			gd.moneyManager("sellBlueTower", gd.getMoney());
+			break;
+		}
 	}
 
 	@Override

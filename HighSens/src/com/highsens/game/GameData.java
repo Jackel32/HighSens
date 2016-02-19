@@ -21,6 +21,7 @@ import com.highsens.game.monster.RegularMonster;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
 
+
 ///////////////////////////////
 // *** New Class ***
 // Implements IStrategy, which is an abstract class
@@ -32,6 +33,8 @@ public class GameData implements IStrategy {
 	final List<GameFigure> figures;
 	///////////////////////////////
 
+	final List<SellManager> sellFigures;
+	
 	////////////////////////////////
 	// Instantiates each of these classes
 	ArrowTower ArrowT;
@@ -98,6 +101,8 @@ public class GameData implements IStrategy {
 		// Returns a synchronized (thread-safe) list backed by the specified
 		// list.
 		figures = Collections.synchronizedList(new ArrayList<GameFigure>());
+		
+		sellFigures = Collections.synchronizedList(new ArrayList<SellManager>());
 	}
 
 	///////////////////////////////
@@ -214,8 +219,14 @@ public class GameData implements IStrategy {
 			break;
 		case "kill2":
 			money += 10;
-			break;
+			break; 
 		case "bossKill":
+			money += 50;
+			break;
+		case "sellArrowTower":
+			money += 25;
+			break;
+		case "sellBlueTower":
 			money += 50;
 			break;
 		}

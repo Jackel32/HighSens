@@ -21,6 +21,7 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 	float x, y;
 	Point2D.Float target;
 	private int state = STATE_IDLE;
+	
 	FastMonster fastMonster;
 	RegularMonster regularMonster;
 	Boss boss;
@@ -73,7 +74,13 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public void update() {
-
+		
+		switch (state) {
+		
+		case STATE_DONE:
+			gd.moneyManager("sellArrowTower", gd.getMoney());
+			break;
+	}
 	}
 
 	@Override

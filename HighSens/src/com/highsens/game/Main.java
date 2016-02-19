@@ -65,21 +65,38 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 
 	private void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {
 		Iterator<GameFigure> iterator = gameData.figures.iterator();
+		int i = 0;
 		while (iterator.hasNext()) {
 			GameFigure gameFigure = iterator.next();
 			if (gameFigure instanceof AbstractTower) {
 				AbstractTower abstractTowerGameFigure = (AbstractTower) gameFigure;
 				if (abstractTowerGameFigure.collision(pressedXposition, pressedYposition)) {
+					
 					System.out.println("YOU CLICKED ON THE TOWER");
 					abstractTowerGameFigure.changeRange();
 					String imagePath = System.getProperty("user.dir");
 					String separator = System.getProperty("file.separator");
 					Image newImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
 					abstractTowerGameFigure.setTowerImage(newImage);
+					gameData.sellFigures.clear();
+					gameData.sellFigures.add(new SellManager(gameData.figures.get(i).getX(),gameData.figures.get(i).getY()));
+					
+				}else if(!gameData.sellFigures.isEmpty()){
+					
+					if(gameData.sellFigures.get(0).collisionManager(pressedXposition,pressedYposition)){
+						
+						gameData.sellFigures.clear();
+						gameData.figures.get(i).setState(0);
+						
+					}else{
+						
+						gameData.sellFigures.clear();
+					}
 				}
+				
 			}
+			i++;
 		}
-
 	}
 
 	public Image getImage(String fileName) {
