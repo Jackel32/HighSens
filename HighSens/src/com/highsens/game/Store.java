@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Store {
 	public static int shopWidth = 8;
-	public static int buttonSize = 32;
+	public static int buttonSize = 40;
 	public static int cellSpace = 2;
 	public static int awayFromRoom = 30;
 	public static int iconSize = 16;
@@ -11,7 +11,9 @@ public class Store {
 	public static int iconTextY = 15;
 	public static int itemIn = 4;
 	public static int heldID = -1;
-	public static int[] buttonID = {0, 0, 0, 0, 0, 0, 0, 1};	// 8 items in shop
+	public static int realID = -1;
+	public static int[] buttonID = {Value.airTower, Value.airAir, Value.airAir, Value.airAir, Value.airAir, Value.airAir, Value.airAir, Value.airTrashCan};	// 8 items in shop
+	public static int[] buttonPrice = {10, 0, 0, 0, 0, 0, 0, 0};
 	
 	public Rectangle[] button = new Rectangle[shopWidth];
 	public Rectangle buttonHealth;
@@ -27,11 +29,29 @@ public class Store {
 		if(mouseButton == 1) {
 			for(int i=0;i<button.length;i++) {
 				if(button[i].contains(Screen.mse)) {
-					if(heldID == Value.airTrashCan) {
-						holdsItem = false;
-					} else {
-						heldID = buttonID[i];
-						holdsItem = true;
+					if(buttonID[i] != Value.airAir) {
+						if(buttonID[i] == Value.airTrashCan) {
+							holdsItem = false;
+						} else {
+							heldID = buttonID[i];
+							realID = i;
+							holdsItem = true;
+						}
+					}
+				}
+			}
+			
+			if(holdsItem) {
+				if(Screen.coin_number >= buttonPrice[realID]) {
+					for(int y=0;y<Screen.room.block.length;y++) {
+						for(int x=0;x<Screen.room.block[0].length;x++) {
+							if(Screen.room.block[y][x].contains(Screen.mse)) {
+								if(Screen.room.block[y][x].groundID != Value.groundRoad && Screen.room.block[y][x].airID == Value.airAir) {
+									Screen.room.block[y][x].airID = heldID;
+									Screen.coin_number -= buttonPrice[realID];
+								}
+							}
+						}
 					}
 				}
 			}
@@ -56,7 +76,13 @@ public class Store {
 			}
 			
 			g.drawImage(Screen.tileset_res[0],button[i].x, button[i].y, button[i].width, button[i].height, null);
-			g.drawImage(Screen.tileset_air[buttonID[i]], button[i].x + itemIn, button[i].y + itemIn, button[i].width - (itemIn*2), button[i].height - (itemIn*2), null);
+			if(buttonID[i] != Value.airAir)
+				g.drawImage(Screen.tileset_air[buttonID[i]], button[i].x + itemIn, button[i].y + itemIn, button[i].width - (itemIn*2), button[i].height - (itemIn*2), null);
+			if(buttonPrice[i] > 0) {
+				g.setColor(new Color(255,255,255));
+				g.setFont(new Font("Courier New", Font.BOLD, 14));
+				g.drawString("$" + buttonPrice[i], button[i].x + itemIn, button[i].y + itemIn + 10); //itemIn + 10 to set number in correct position
+			}
 		}
 		
 		// health and coins info

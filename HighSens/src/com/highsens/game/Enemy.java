@@ -3,6 +3,8 @@ import java.awt.*;
 
 public class Enemy extends Rectangle {
 	public int xC, yC;          						// x and y coordinates
+	public int health;
+	public int healthSpace = 3, healthHeight = 6;
 	public int enemySize = 40;
 	public int enemyWalk = 0;
 	public int upward = 0, downward = 1, right = 2, left = 3;
@@ -28,12 +30,17 @@ public class Enemy extends Rectangle {
 		}
 		
 		this.enemyID = enemyID;
+		this.health = enemySize;
 		
 		inGame = true;
 	}
 	
 	public void deleteEnemy() {
 		inGame = false;
+		direction = right;
+		enemyWalk = 0;
+		
+		Screen.room.block[0][0].getMoney(enemyID);
 	}
 	
 	public void loseHealth() {
@@ -41,7 +48,7 @@ public class Enemy extends Rectangle {
 		
 	}
 	
-	public int walkFrame = 0, walkSpeed = 10;				//walkSpeed: small number -> faster moving speed
+	public int walkFrame = 0, walkSpeed = 30;				//walkSpeed: small number -> faster moving speed
 	public void physic() {
 		if(walkFrame >= walkSpeed) {
 			if(direction == right) {
@@ -118,7 +125,39 @@ public class Enemy extends Rectangle {
 		}
 	}
 	
+	public void loseHealth(int amount) {
+		health -= amount;
+		
+		checkDeath();
+	}
+	
+	public void checkDeath() {
+		if(health == 0) {
+			if(health == 0) {
+				deleteEnemy();
+			}
+		}
+	}
+	
+	public boolean isDead() {
+		if(inGame) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	public void draw(Graphics g) {
 			g.drawImage(Screen.tileset_enemy[enemyID], x, y, width, height, null);
+			
+			//Health bar
+			g.setColor(new Color(180, 50, 50));
+			g.fillRect(x, y - (healthSpace + healthHeight), width, healthHeight);
+			
+			g.setColor(new Color(50, 180, 50));
+			g.fillRect(x, y - (healthSpace + healthHeight), health, healthHeight);
+			
+			g.setColor(new Color(0, 0, 0));
+			g.drawRect(x, y - (healthSpace + healthHeight), health - 1, healthHeight - 1);
 	}
 }
