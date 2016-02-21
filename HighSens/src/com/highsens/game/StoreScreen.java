@@ -21,8 +21,14 @@ public class StoreScreen extends JFrame {
 		getContentPane().setSize(600, 400);
 		
 	    JLabel background=new JLabel(new ImageIcon(imagePath + separator + "images" + separator
-                + "store.png"));
+                + "store-background.png"));
 	    background.setSize(600, 400);
 	    add(background);
+	    
+	    JLabel emptyTowerSpace = new JLabel(new ImageIcon(imagePath + separator + "images" + separator
+                + "empty-tower-space.png"));
+	    emptyTowerSpace.setSize(81, 94);
+	    emptyTowerSpace.setLocation(18,10);
+	    background.add(emptyTowerSpace);
 	}
 }
