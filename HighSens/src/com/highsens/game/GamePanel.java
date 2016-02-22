@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 package com.highsens.game;
 ///////////////////////////////
 
@@ -411,6 +411,7 @@ public class GamePanel extends JPanel {
 	///////////////////////////////
 
 =======
+*/
 package com.highsens.game;
 ///////////////////////////////
 
@@ -823,5 +824,5 @@ public class GamePanel extends JPanel {
 	// }
 	///////////////////////////////
 
->>>>>>> origin/master
+//>>>>>>> origin/master
 }

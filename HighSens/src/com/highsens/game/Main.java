@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+/*//<<<<<<< HEAD
 package com.highsens.game;
 
 import java.awt.Container;
@@ -215,10 +215,10 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		 * game.setResizable(false); game.setLocationRelativeTo(null);
 		 * game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 * game.setVisible(true);
-		 */
+		 
 	}
 }
-=======
+*/
 package com.highsens.game;
 
 import java.awt.Container;
@@ -294,7 +294,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 			if (gameFigure instanceof AbstractTower) {
 				AbstractTower abstractTowerGameFigure = (AbstractTower) gameFigure;
 				if (abstractTowerGameFigure.collision(pressedXposition, pressedYposition)) {
-					System.out.println("YOU CLICKED ON THE TOWER");
+					//System.out.println("YOU CLICKED ON THE TOWER");
 					abstractTowerGameFigure.changeRange();
 					String imagePath = System.getProperty("user.dir");
 					String separator = System.getProperty("file.separator");
@@ -434,4 +434,4 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		 */
 	}
 }
->>>>>>> origin/master
+//>>>>>>> origin/master
