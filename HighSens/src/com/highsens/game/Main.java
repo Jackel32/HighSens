@@ -256,6 +256,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	public ArrayList TowerPosition;
 	boolean ArrowPlaceable = false;
 	boolean BluePlaceable = false;
+	private int sellPosition = 0;
 
 	int muteCount = 0;
 	
@@ -289,6 +290,9 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 
 	private void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {
 		Iterator<GameFigure> iterator = gameData.figures.iterator();
+		int countPosition = 0;
+		boolean isCleanofSellBox = true;
+
 		while (iterator.hasNext()) {
 			GameFigure gameFigure = iterator.next();
 			if (gameFigure instanceof AbstractTower) {
@@ -300,8 +304,29 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 					String separator = System.getProperty("file.separator");
 					Image newImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
 					abstractTowerGameFigure.setTowerImage(newImage);
+					
+					gameData.sellFigures.clear();
+					gameData.sellFigures.add(new SellManager(gameData.figures.get(countPosition).getX(),gameData.figures.get(countPosition).getY()));
+					sellPosition = countPosition;
+					isCleanofSellBox = false;
+					
+				}else if (!gameData.sellFigures.isEmpty() && isCleanofSellBox){
+					
+					if (gameData.sellFigures.get(0).collisionManager(pressedXposition,pressedYposition)){
+						
+						gameData.figures.get(sellPosition).setState(0);
+						gameData.sellFigures.clear();
+
+						
+					}else{
+						
+						gameData.sellFigures.clear();
+					}
+					
 				}
 			}
+			
+			countPosition++;
 		}
 
 	}

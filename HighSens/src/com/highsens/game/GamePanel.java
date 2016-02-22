@@ -779,6 +779,12 @@ public class GamePanel extends JPanel {
 				// Calls render from class GameFigure:
 				f.render(graphics);
 			}
+			
+			for (int j = 0; j < gameData.sellFigures.size(); j ++ ){
+				
+				f = (GameFigure) gameData.sellFigures.get(j);
+				f.render(graphics);
+			}
 		}
 
 	}
