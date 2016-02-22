@@ -75,6 +75,7 @@ public class MainScreen extends JFrame {
 		});
 		
 		JButton btnAbout = new JButton("About");
+		btnAbout.setEnabled(false);
 		btnAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				final AboutScreen about = new AboutScreen();

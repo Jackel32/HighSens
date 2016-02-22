@@ -30,6 +30,8 @@ public class LevelSelectScreen extends JFrame {
 		getContentPane().setLayout(null);
 		getContentPane().setSize(600, 400);
 		this.setLocationRelativeTo(null);
+		String imagePath = System.getProperty("user.dir");
+        String separator = System.getProperty("file.separator");
 		
 		JPanel pnl1 = new JPanel();
 		pnl1.setBounds(29, 36, 125, 106);
@@ -37,7 +39,8 @@ public class LevelSelectScreen extends JFrame {
 		pnl1.setLayout(null);
 		
 		JLabel lbl1 = new JLabel("New label");
-		lbl1.setIcon(new ImageIcon("image/map.png"));
+		lbl1.setIcon(new ImageIcon(imagePath + separator + "images" + separator
+                + "map.png"));
 		lbl1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl1.setBounds(0, 0, 125, 106);
 		pnl1.add(lbl1);
