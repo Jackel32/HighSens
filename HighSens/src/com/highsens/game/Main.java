@@ -447,8 +447,9 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	}
 
 	public static void main(String[] args) {
+		final Splash splash = new Splash();
+		splash.showSplash();
 		final MainScreen mainScreen = new MainScreen();
-
 		mainScreen.setVisible(true);
 
 		/*
