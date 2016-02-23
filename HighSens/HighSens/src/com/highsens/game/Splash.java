@@ -26,9 +26,12 @@ private int duration = 3000;
 		setMinimumSize(new Dimension(500, 400));
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
+		String imagePath = System.getProperty("user.dir");
+        String separator = System.getProperty("file.separator");
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sha\\Desktop\\UCO\\Software Design and Development\\HighSens\\HighSens\\images\\Team Logo.png"));
+		lblNewLabel.setIcon(new ImageIcon(imagePath + separator + "images" + separator
+                + "Team Logo.png"));
 		lblNewLabel.setBounds(0, 0, 500, 375);
 		getContentPane().add(lblNewLabel);
 		

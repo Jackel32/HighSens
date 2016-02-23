@@ -128,6 +128,7 @@ public class GamePanel extends JPanel {
 	// Minimum value of -2^(31) and a maximum value of 2^(31) - 1.
 	public static final int PWIDTH = 600;
 	public static final int PHEIGHT = 400;
+	private boolean gameover = false;
 	///////////////////////////////
 
 	///////////////////////////////
@@ -139,6 +140,7 @@ public class GamePanel extends JPanel {
 	// Allows the game to use the classes Animator and GameData
 	private Animator animator;
 	private GameData gameData;
+	private Main main;
 	///////////////////////////////
 
 	///////////////////////////////
@@ -154,11 +156,12 @@ public class GamePanel extends JPanel {
 	private Image mute;
 	///////////////////////////////
 
-	public GamePanel(Animator animator, GameData gameData) {
+	public GamePanel(Animator animator, GameData gameData, Main main) {
 		///////////////////////////////
 		// Use the animator and gamedata from within this class
 		this.animator = animator;
 		this.gameData = gameData;
+		this.main = main;
 		///////////////////////////////
 
 		// Set global background color
@@ -375,6 +378,7 @@ public class GamePanel extends JPanel {
 				for (int i = 0; i < gameData.figures.size(); i++) {
 					f = (GameFigure) gameData.figures.get(i);
 					f.setState(GameFigure.STATE_DONE);
+					gameover = true;
 				}
 
 				///////////////////////////////
@@ -384,7 +388,7 @@ public class GamePanel extends JPanel {
 				g9.setColor(Color.BLACK);
 				g9.fillRect(0, 0, 1000, 1000);
 				///////////////////////////////
-
+				/*
 				///////////////////////////////
 				// Renders Red Text in the specified Font to print GAME OVER
 				/////////////////////////////// MAN!!!
@@ -393,7 +397,6 @@ public class GamePanel extends JPanel {
 				g10.setFont(new Font("Serif", Font.PLAIN, 50));
 				g10.drawString("GAME OVER, MAN!!!", 75, 100);
 				///////////////////////////////
-
 				///////////////////////////////
 				// Renders White Text in the specified Font to print the amount
 				/////////////////////////////// of waves and the score
@@ -403,6 +406,8 @@ public class GamePanel extends JPanel {
 				g11.drawString("Waves Completed: " + gameData.wave, 200, 150);
 				g11.drawString("Score: " + gameData.score, 200, 200);
 				///////////////////////////////
+				 */
+				
 			}
 			///////////////////////////////
 
@@ -419,6 +424,15 @@ public class GamePanel extends JPanel {
 				// Calls render from class GameFigure:
 				f.render(graphics);
 			}
+		}
+		
+		if(gameover)
+		{
+			final GameoverScreen gameoverScreen = new GameoverScreen(gameData.getWaves(), gameData.getScore());
+			gameoverScreen.setVisible(true);
+			main.setVisible(false);
+			//main.dispose();
+			gameover = false;
 		}
 
 	}
@@ -465,4 +479,3 @@ public class GamePanel extends JPanel {
 	// change body of generated methods, choose Tools | Templates.
 	// }
 	///////////////////////////////
-

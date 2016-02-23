@@ -34,7 +34,7 @@ public class Main extends JFrame
         Container c = getContentPane();
         animator = new Animator();
         gameData = new GameData();
-        gamePanel = new GamePanel(animator, gameData);
+        gamePanel = new GamePanel(animator, gameData, this);
         animator.setGamePanel(gamePanel);
         animator.setGameData(gameData);
         
