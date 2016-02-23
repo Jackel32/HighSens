@@ -77,7 +77,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 					abstractTowerGameFigure.changeRange();
 					String imagePath = System.getProperty("user.dir");
 					String separator = System.getProperty("file.separator");
-					Image newImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
+					Image newImage = getImage(imagePath + separator + "images" + separator + "RedTower.png");
 					abstractTowerGameFigure.setTowerImage(newImage);
 					gameData.sellFigures.clear();
 					gameData.sellFigures.add(new SellManager(gameData.figures.get(i).getX(),gameData.figures.get(i).getY()));
