@@ -111,16 +111,7 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public int getHealth() {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	@Override

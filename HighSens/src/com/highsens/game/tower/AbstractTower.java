@@ -13,7 +13,7 @@ public abstract class AbstractTower {
 	public Ellipse2D.Double radius;
 	public BoundingBox boudingBox;
 	public int range;
-	private int xOffset = 75;
+	private int xOffset = 80;
 	private int yOffset = 80;
 
 	/**
@@ -38,9 +38,9 @@ public abstract class AbstractTower {
 	}
 
 	public void changeRange() {
-		range = (int) (range * 1.5);
-		xOffset = (int) (xOffset * 1.5);
-		yOffset = (int) (yOffset * 1.5);
+		range = (int) (range * 1.15);
+		xOffset = (int) (xOffset * 1.15);
+		yOffset = (int) (yOffset * 1.15);
 	}
 
 	public void setTowerImage(Image towerImage) {

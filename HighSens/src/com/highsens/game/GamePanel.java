@@ -142,10 +142,9 @@ public class GamePanel extends JPanel {
 
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
 		AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
-		///////////////////////////////
 	}
 
-	///////////////////////////////
+
 	// This class allows us to obtain an image file from disk.
 	public static Image getImage(String fileName) {
 		// Create an instance of image and make it null
