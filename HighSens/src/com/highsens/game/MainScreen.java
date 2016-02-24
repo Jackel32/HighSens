@@ -1,4 +1,5 @@
 package com.highsens.game;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
@@ -23,6 +24,7 @@ public class MainScreen extends JFrame {
 		getContentPane().setBackground(new Color(70, 130, 180));
 		getContentPane().setLayout(null);
 		getContentPane().setSize(600, 400);
+		this.setLocationRelativeTo(null);
 		
 		JLabel lblTowerDefense = new JLabel("Tower Defense");
 		lblTowerDefense.setBounds(0, 0, 535, 36);
@@ -46,6 +48,12 @@ public class MainScreen extends JFrame {
 		btnStart.setOpaque(true);
 		
 		JButton btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				System.exit(0);
+			}
+		});
 		btnQuit.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnQuit.setBackground(new Color(255, 0, 0));
 		btnQuit.setBounds(386, 278, 112, 46);
@@ -67,6 +75,14 @@ public class MainScreen extends JFrame {
 		});
 		
 		JButton btnAbout = new JButton("About");
+		btnAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//final AboutScreen about = new AboutScreen();
+				//about.setVisible(true);
+				//setVisible(false);
+			}
+		});
+		
 		btnAbout.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnAbout.setBackground(new Color(255, 215, 0));
 		btnAbout.setBounds(386, 127, 112, 46);

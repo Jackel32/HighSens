@@ -266,7 +266,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		Container c = getContentPane();
 		animator = new Animator();
 		gameData = new GameData();
-		gamePanel = new GamePanel(animator, gameData);
+		gamePanel = new GamePanel(animator, gameData, this);
 		animator.setGamePanel(gamePanel);
 		animator.setGameData(gameData);
 
