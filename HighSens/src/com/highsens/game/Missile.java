@@ -13,12 +13,17 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
     Point2D.Float target;
     private int state = STATE_TRAVELING;
    // private static final int UNIT_TRAVEL_DISTANCE = 5;  Original
-    private static final int UNIT_TRAVEL_DISTANCE = 5;    // test
+    private static int UNIT_TRAVEL_DISTANCE = 5;    // test
     private int explosionSize = SIZE;
     private int explosionMaxSize;
     long ElapsedTime;
     long Start, End;
     public boolean targetReached = false;
+    
+    public void setUNIT_TRAVEL_DISTANCE(){
+    	UNIT_TRAVEL_DISTANCE += 2;
+    }
+
 
     public boolean isTargetReached() {
         return targetReached;
@@ -53,7 +58,7 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
         updateState();
         if (state == STATE_TRAVELING) {
             updateLocation();
-            ElapsedTime = End - Start;
+            ElapsedTime = (End - Start) * 2;
         } else if (state == STATE_EXPLODING) {
             updateSize();
         }
@@ -69,7 +74,7 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
         Vector2f update = new Vector2f(target.x, target.y);
         update.sub(currentLoc); // B - A
         update.normalize(); // |B - A|
-        update.scale(UNIT_TRAVEL_DISTANCE); // |B - A| x dist
+        update.scale(UNIT_TRAVEL_DISTANCE * 2); // |B - A| x dist
         
         currentLoc.add(update) ; // A + |B - A| x d
 
