@@ -289,26 +289,43 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	}
 
 	private void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {
-		//int incereseBuilletRange = 0;
 		Iterator<GameFigure> iterator = gameData.figures.iterator();
+		int countPosition = 0;
+		boolean isCleanofSellBox = true;
 		boolean flag = false;
+
 		while (iterator.hasNext()) {
 			GameFigure gameFigure = iterator.next();
-			if (gameFigure instanceof AbstractTower  ) {
-				
-				//gameFigure instanceof ArrowMissile;
+			if (gameFigure instanceof AbstractTower) {
 				AbstractTower abstractTowerGameFigure = (AbstractTower) gameFigure;
-				//ArrowMissile abstractArrowMissileFigure = (ArrowMissile) gameFigure;
 				if (abstractTowerGameFigure.collision(pressedXposition, pressedYposition)) {
-					System.out.println("YOU CLICKED ON THE TOWER");
+					//System.out.println("YOU CLICKED ON THE TOWER");
 					abstractTowerGameFigure.changeRange();
-					//abstractArrowMissileFigure.setUNIT_TRAVEL_DISTANCE();
+					flag = true;
 					String imagePath = System.getProperty("user.dir");
 					String separator = System.getProperty("file.separator");
 					Image newImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
 					abstractTowerGameFigure.setTowerImage(newImage);
-					flag = true;
-				}				
+					
+					gameData.sellFigures.clear();
+					gameData.sellFigures.add(new SellManager(gameData.figures.get(countPosition).getX(),gameData.figures.get(countPosition).getY()));
+					sellPosition = countPosition;
+					isCleanofSellBox = false;
+					
+				}else if (!gameData.sellFigures.isEmpty() && isCleanofSellBox){
+					
+					if (gameData.sellFigures.get(0).collisionManager(pressedXposition,pressedYposition)){
+						
+						gameData.figures.get(sellPosition).setState(0);
+						gameData.sellFigures.clear();
+
+						
+					}else{
+						
+						gameData.sellFigures.clear();
+					}
+					
+				}
 			}
 			
 			if(gameFigure instanceof ArrowMissile && flag){
@@ -322,9 +339,11 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 				flag = false;
 			}
 			
-			
+			countPosition++;
 		}
+
 	}
+
 
 
 	public Image getImage(String fileName) {
