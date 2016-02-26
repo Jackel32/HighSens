@@ -28,16 +28,29 @@ public class StoreScreen extends JFrame {
 		setTitle("Store Screen");
 		getContentPane().setLayout(null);
 		getContentPane().setSize(600, 400);
+		this.setLocationRelativeTo(null);
 		
 	    JLabel background=new JLabel(new ImageIcon(imagePath + separator + "images" + separator
 	            + "store-background.png"));
 	    background.setSize(600, 400);
-	    add(background);
+	    getContentPane().add(background);
 	    
 	    JLabel emptyTowerSpace = new JLabel(new ImageIcon(imagePath + separator + "images" + separator
 	            + "empty-tower-space.png"));
 	    emptyTowerSpace.setSize(81, 94);
 	    emptyTowerSpace.setLocation(18,10);
 	    background.add(emptyTowerSpace);
+	    
+	    JButton button = new JButton("<<<<<< Back");
+	    button.setFont(new Font("Showcard Gothic", Font.PLAIN, 11));
+	    button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				final MainScreen mainScreen = new MainScreen();
+				mainScreen.setVisible(true);
+				setVisible(false);
+			}
+		});
+	    button.setBounds(146, 338, 272, 23);
+	    getContentPane().add(button);
 	}
 }
