@@ -50,7 +50,7 @@ public class GameData implements IStrategy {
 	///////////////////////////////
 	// Variables for the players Score, Lives, and Money
 	public int score;
-	public int lives = 2;
+	public int lives = 10;
 	public int money = 100;
 	///////////////////////////////
 
