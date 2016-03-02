@@ -252,6 +252,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	private final JButton quitButton;
 	private static ArrowTower ArrowTower;
 	private static BlueTower BlueTower;
+	public static GUIManager GUI;
 	private AudioPlayer sound;
 	public ArrayList TowerPosition;
 	boolean ArrowPlaceable = false;
