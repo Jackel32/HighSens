@@ -498,7 +498,7 @@ public class GamePanel extends JPanel {
 	// Allows the game to use the classes Animator and GameData
 	private Animator animator;
 	private GameData gameData;
-	private Main main;
+	private GameScreen gamescreen;
 	private boolean gameover = false;
 	///////////////////////////////
 
@@ -515,12 +515,12 @@ public class GamePanel extends JPanel {
 	private Image mute;
 	///////////////////////////////
 
-	public GamePanel(Animator animator, GameData gameData, Main main) {
+	public GamePanel(Animator animator, GameData gameData, GameScreen gameScreen) {
 		///////////////////////////////
 		// Use the animator and gamedata from within this class
 		this.animator = animator;
 		this.gameData = gameData;
-		this.main = main;
+		this.gamescreen = gameScreen;
 		///////////////////////////////
 
 		// Set global background color
@@ -794,7 +794,7 @@ public class GamePanel extends JPanel {
 			{
 				final GameoverScreen gameoverScreen = new GameoverScreen(gameData.getWaves(), gameData.getScore());
 				gameoverScreen.setVisible(true);
-				main.setVisible(false);
+				gamescreen.setVisible(false);
 				//main.dispose();
 				gameover = false;
 			}

@@ -111,7 +111,7 @@ public class LevelSelectScreen extends JFrame {
 		btnMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				JFrame game =  new Main();
+				GameScreen game = new GameScreen();
 		        game.setTitle("Tower Defence");
 		        game.setResizable(false);
 		        game.setLocationRelativeTo(null);
