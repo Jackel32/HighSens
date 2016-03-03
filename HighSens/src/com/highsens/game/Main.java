@@ -41,9 +41,13 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	boolean BluePlaceable = false;
 	private boolean menuVisible;
 	private int sellPosition = 0;
+	private String imagePath = System.getProperty("user.dir");
+	private String separator = System.getProperty("file.separator");
 	Label LevelPanel = new Label();
 	Label RangePanel = new Label();
-
+	Label imageLabel = new Label();
+	Label imageLabel2 = new Label();
+	Label imageLabel3 = new Label();
 	int muteCount = 0;
 	private JButton menuCloseButton;
 
@@ -96,10 +100,9 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 						}
 
 						abstractTowerGameFigure.upgradeTower();
-						String imagePath = System.getProperty("user.dir");
-						String separator = System.getProperty("file.separator");
+
 						Image newImage = getImage(imagePath + separator + "images" + separator + "RedTower.png");
-					
+
 						abstractTowerGameFigure.setTowerImage(newImage);
 
 						gameData.sellFigures.clear();
@@ -139,32 +142,30 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 
 	public void drawMenuForTower(AbstractTower abstractTowerGameFigure) {
 
-		Label menuPanel = new Label();
-		menuPanel.setBounds(600, 0, 100, 400);
-
 		RangePanel.setText("Range: " + abstractTowerGameFigure.getRange());
 		RangePanel.setBounds(700, 100, 200, 100);
 		LevelPanel.setText("Level: " + abstractTowerGameFigure.getLevel());
 		LevelPanel.setBounds(700, 0, 100, 100);
 
-		Label menuCloseLabel = new Label("CLOSE MENU " + abstractTowerGameFigure.getRange());
-		menuCloseLabel.setBounds(600, 300, 100, 100);
+		imageLabel.setText("image: " + abstractTowerGameFigure.getLevel());
+		imageLabel.setBounds(600, 0, 100, 100);
 
-		// menuCloseButton.setBounds(500, 300, 100, 100);
-		// menuCloseButton.setText("CLOSE|BUTTON");
-		// menuCloseButton.setForeground(Color.BLACK);
-		// menuCloseButton.setBackground(Color.ORANGE);
-		// menuCloseButton.setEnabled(true);
-		// menuCloseButton.setVisible(true);
+		// Image newImage = getImage(imagePath + separator + "images" +
+		// separator + "RedTower.png");
 
-		// gamePanel.add(menuCloseLabel);
-		// gamePanel.add(menuCloseButton);
-		// gamePanel.add(menuPanel);
-		// gamePanel.add(menuLevelLabel);
+		imageLabel2.setText("image2: " + abstractTowerGameFigure.getLevel());
+		imageLabel2.setBounds(600, 100, 100, 100);
+
+		imageLabel3.setText("image3: " + abstractTowerGameFigure.getLevel());
+		imageLabel3.setBounds(600, 200, 100, 100);
+
+		gamePanel.add(imageLabel);
+		gamePanel.add(imageLabel2);
+		gamePanel.add(imageLabel3);
 		gamePanel.add(RangePanel);
 		gamePanel.add(LevelPanel);
-
 	}
+
 	public Image getImage(String fileName) {
 		Image image = null;
 		try {

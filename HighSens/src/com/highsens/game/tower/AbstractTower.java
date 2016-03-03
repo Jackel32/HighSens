@@ -6,10 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
-import java.util.List;
 
 import com.highsens.game.GameData;
-import com.highsens.game.GameFigure;
 
 public abstract class AbstractTower {
 
@@ -43,20 +41,7 @@ public abstract class AbstractTower {
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void upgradeTower() {
-		range = (int) (range * 1.5);
-		xOffset = (int) (xOffset * 1.5);
-		yOffset = (int) (yOffset * 1.5);
-		for (int i = 0; i < figures.size(); i++) {
-			if (figures.get(i) instanceof ArrowTower || figures.get(i) instanceof BlueTower) {
-				// System.out.println("The level of " + figures.get(i) + " is "
-				// + figures.get(i).getLevel());
-
-				level = figures.get(i).getLevel();
-				level++;
-				figures.get(i).setLevel(level++);
-			}
-		}
-
+		level++;
 		changeRange();
 	}
 
@@ -75,22 +60,11 @@ public abstract class AbstractTower {
 	}
 
 	public int getLevel() {
-		int towerLevel = 0;
-		List<GameFigure> figures = null;
-		figures = data.returnList();
-
-		System.out.println("Test");
-
-		for (int i = 0; i < figures.size(); i++) {
-			if (figures.get(i) instanceof ArrowTower || figures.get(i) instanceof BlueTower) {
-				System.out.println("Testing getLevel");
-
-				towerLevel = figures.get(i).getLevel();
-			}
-		}
-		level = towerLevel;
 		return level;
+	}
 
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public int getRange() {

@@ -95,16 +95,6 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 		return state;
 	}
 
-	//////////////////////////////////////////////////////////////
-	@Override
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
 	@Override
 	public void updateHealth() {
 
