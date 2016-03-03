@@ -186,7 +186,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 			if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
 					&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
 				if (BluePlaceable == true) {
-					gameData.moneyManager("tower2", gameData.getMoney());
+					gameData.moneyManager("BlueTower", gameData.getMoney());
 					BlueTower = new BlueTower(x - 25, y - 50, gameData);
 					gameData.figures.add(BlueTower);
 					BluePlaceable = false;
@@ -196,7 +196,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 			if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
 					&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
 				if (ArrowPlaceable == true) {
-					gameData.moneyManager("tower1", gameData.getMoney());
+					gameData.moneyManager("RegularTower", gameData.getMoney());
 					ArrowTower = new ArrowTower(x - 25, y - 50, gameData);
 					gameData.figures.add(ArrowTower);
 					ArrowPlaceable = false;
@@ -243,7 +243,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		mainScreen.setVisible(true);
 
 		/*
-		 * JFrame game = new Main(); game.setTitle("Tower Defence");
+		 * JFrame game = new Main(); game.setTitle("Tower Defense");
 		 * game.setResizable(false); game.setLocationRelativeTo(null);
 		 * game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 * game.setVisible(true);

@@ -512,6 +512,7 @@ public class GamePanel extends JPanel {
 	private Image BlueTowerImage;
 	private Image RegularMonsterImage;
 	private Image FastMonsterImage;
+	private Image BloonMonsterImage;
 	private Image BossImage;
 	private Image mute;
 	///////////////////////////////
@@ -551,6 +552,8 @@ public class GamePanel extends JPanel {
 		// Adds the Blue Tower image from the images director with a distinct
 		// seperator and path
 		BlueTowerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
+		
+		BloonMonsterImage = getImage(imagePath + separator + "images" + separator + "BlueMonster.png");
 
 		RegularMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster1.png");
 
@@ -723,6 +726,9 @@ public class GamePanel extends JPanel {
 
 			Graphics2D g14 = (Graphics2D) graphics;
 			g14.drawImage(BossImage, 144, 28, this);
+			
+			Graphics2D g17 = (Graphics2D) graphics;
+			g17.drawImage(BloonMonsterImage, 210, 30, this);
 
 			Graphics2D g15 = (Graphics2D) graphics;
 			g15.setColor(Color.RED);
@@ -730,6 +736,7 @@ public class GamePanel extends JPanel {
 			g15.drawString("x" + gameData.getRegularMonsterCount(), 64, 48);
 			g15.drawString("x" + gameData.getFastMonsterCount(), 124, 48);
 			g15.drawString("x" + gameData.getBossCount(), 180, 48);
+			g15.drawString("x" + gameData.getBloonMonsterCount(), 244, 48);
 
 			// END GAME CONDITION
 			// If the user has no more lives
@@ -835,15 +842,4 @@ public class GamePanel extends JPanel {
 			System.out.println("Graphics error: " + e);
 		}
 	}
-	///////////////////////////////
-	// Commented out: It worked before, but i dont believe this is necessary
-	/////////////////////////////// (watch for bugs)
-	///////////////////////////////
-	// private File File(Image mapImage) {
-	// throw new UnsupportedOperationException("Not supported yet."); //To
-	// change body of generated methods, choose Tools | Templates.
-	// }
-	///////////////////////////////
-
-//>>>>>>> origin/master
 }
