@@ -21,7 +21,8 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 	float x, y;
 	Point2D.Float target;
 	private int state = STATE_IDLE;
-	
+	public int level;
+
 	FastMonster fastMonster;
 	RegularMonster regularMonster;
 	Boss boss;
@@ -34,8 +35,9 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
 		towerImage = getImage(imagePath + separator + "images" + separator + "ArrowTower.png");
-		boudingBox = new BoundingBox((int) x, (int) x + 50, (int) y, (int) y + 69);
-		range = 200;
+		boundingBox = new BoundingBox((int) x, (int) x + 50, (int) y, (int) y + 69);
+		this.range = 200;
+		this.level = 1;
 		radius = new Ellipse2D.Double((this.x + 50) - 175, (this.y + 69) - 175, 300, 300);
 	}
 
@@ -74,13 +76,13 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public void update() {
-		
+
 		switch (state) {
-		
+
 		case STATE_DONE:
 			gd.moneyManager("sellArrowTower", gd.getMoney());
 			break;
-	}
+		}
 	}
 
 	@Override
@@ -91,6 +93,16 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 	@Override
 	public int getState() {
 		return state;
+	}
+
+	//////////////////////////////////////////////////////////////
+	@Override
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	@Override

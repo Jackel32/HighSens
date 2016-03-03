@@ -231,4 +231,16 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 	public void setY(float y) {
 		this.y = y;
 	}
+
+	@Override
+	public void setLevel(int level) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

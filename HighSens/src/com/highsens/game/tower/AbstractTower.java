@@ -6,14 +6,20 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
+import java.util.List;
+
+import com.highsens.game.GameData;
+import com.highsens.game.GameFigure;
 
 public abstract class AbstractTower {
 
-	public Image towerImage;
+	public GameData data;
 	public Ellipse2D.Double radius;
-	public BoundingBox boudingBox;
-	public int range;
-	private int xOffset = 75;
+	public BoundingBox boundingBox;
+	public Image towerImage;
+	public int level;
+	private int xOffset = 80;
+	protected int range;
 	private int yOffset = 80;
 
 	/**
@@ -26,25 +32,69 @@ public abstract class AbstractTower {
 		g2d.drawOval((int) x - xOffset, (int) y - yOffset, range, range);
 	}
 
-	/**
-	 * Return true if x and y postion has a collision with the tower.
-	 */
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public boolean collision(int xPosition, int yPosition) {
-		if (boudingBox.getxMin() <= xPosition && xPosition <= boudingBox.getxMax() && boudingBox.getyMin() <= yPosition
-				&& yPosition <= boudingBox.getyMax()) {
+		if (boundingBox.getxMin() <= xPosition && xPosition <= boundingBox.getxMax()
+				&& boundingBox.getyMin() <= yPosition && yPosition <= boundingBox.getyMax()) {
 			return true;
 		}
 		return false;
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void changeRange() {
+	public void upgradeTower() {
 		range = (int) (range * 1.5);
 		xOffset = (int) (xOffset * 1.5);
 		yOffset = (int) (yOffset * 1.5);
+		for (int i = 0; i < figures.size(); i++) {
+			if (figures.get(i) instanceof ArrowTower || figures.get(i) instanceof BlueTower) {
+				// System.out.println("The level of " + figures.get(i) + " is "
+				// + figures.get(i).getLevel());
+
+				level = figures.get(i).getLevel();
+				level++;
+				figures.get(i).setLevel(level++);
+			}
+		}
+
+		changeRange();
+	}
+
+	private void changeRange() {
+		range = (int) (range * 1.15);
+		xOffset = (int) (xOffset * 1.15);
+		yOffset = (int) (yOffset * 1.15);
 	}
 
 	public void setTowerImage(Image towerImage) {
 		this.towerImage = towerImage;
+	}
+
+	public Image getTowerImage() {
+		return towerImage;
+	}
+
+	public int getLevel() {
+		int towerLevel = 0;
+		List<GameFigure> figures = null;
+		figures = data.returnList();
+
+		System.out.println("Test");
+
+		for (int i = 0; i < figures.size(); i++) {
+			if (figures.get(i) instanceof ArrowTower || figures.get(i) instanceof BlueTower) {
+				System.out.println("Testing getLevel");
+
+				towerLevel = figures.get(i).getLevel();
+			}
+		}
+		level = towerLevel;
+		return level;
+
+	}
+
+	public int getRange() {
+		return range;
 	}
 
 }
