@@ -50,7 +50,7 @@ public class GameData implements IStrategy {
 	///////////////////////////////
 	// Variables for the players Score, Lives, and Money
 	public int score;
-	public int lives = 2;
+	public int lives = 10;
 	public int money = 100;
 	///////////////////////////////
 
@@ -539,6 +539,7 @@ public class GameData implements IStrategy {
 		mStart = mEnd;
 
 		startWave(getWaves());
+		
 
 		// This confusing area deals with bullet collision with monsters.
 		if (bulletElapsedTime > 350) {

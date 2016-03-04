@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,6 +29,16 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import javax.swing.JMenuBar;
+import java.awt.FlowLayout;
+import javax.swing.JToggleButton;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JLabel;
 
 public class GameScreen extends JFrame implements ActionListener, MouseListener, KeyListener {
 
@@ -35,6 +47,9 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private final Animator animator;
 	private final JButton playButton;
 	private final JButton quitButton;
+	private final JToggleButton arrowToggle;
+	private final JToggleButton blueToggle;
+	private final JToggleButton muteButton;
 	private final JPanel southPanel;
 	private static ArrowTower ArrowTower;
 	private static BlueTower BlueTower;
@@ -44,50 +59,98 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	boolean ArrowPlaceable = false;
 	boolean BluePlaceable = false;
 	private int sellPosition = 0;
+	private Image mute;
+	
 
 	int muteCount = 0;
 	private JTextField txtReady;
 	
 	public GameScreen() {
 		TowerPosition = new ArrayList();
-		setSize(600, 400);
+		setSize(599, 498);
 		Container c = getContentPane();
 		animator = new Animator();
 		gameData = new GameData();
 		gamePanel = new GamePanel(animator, gameData, this);
-		gamePanel.setBounds(0, 33, 584, 329);
+		gamePanel.setBounds(0, 0, 584, 329);
 		animator.setGamePanel(gamePanel);
 		animator.setGameData(gameData);
 		getContentPane().setLayout(null);
+		String imagePath = System.getProperty("user.dir");
+		String separator = System.getProperty("file.separator");
 		
 			    southPanel = new JPanel();
-				southPanel.setBackground(SystemColor.activeCaptionBorder);
-				southPanel.setBounds(78, 125, 417, 118);
-				southPanel.setLayout(null);
-				playButton = new JButton("Play");
-				playButton.setBounds(63, 63, 74, 44);
-				southPanel.add(playButton);
-				quitButton = new JButton("Quit");
-				quitButton.setBounds(263, 63, 69, 44);
-				southPanel.add(quitButton);
-				c.add(southPanel);
-				playButton.setFocusable(false);
-				
-				txtReady = new JTextField();
-				txtReady.setFont(new Font("Showcard Gothic", Font.PLAIN, 16));
-				txtReady.setHorizontalAlignment(SwingConstants.CENTER);
-				txtReady.setText("Ready?");
-				txtReady.setBounds(134, 11, 138, 41);
-				southPanel.add(txtReady);
-				txtReady.setColumns(10);
-				playButton.addActionListener(this);
-				quitButton.addActionListener(this);
+			    southPanel.setBounds(25, 95, 548, 129);
+			    getContentPane().add(southPanel);
+			    southPanel.setBackground(SystemColor.activeCaptionBorder);
+			    southPanel.setLayout(null);
+			    playButton = new JButton("Play");
+			    playButton.setBounds(125, 63, 74, 44);
+			    southPanel.add(playButton);
+			    quitButton = new JButton("Quit");
+			    quitButton.setBounds(337, 63, 69, 44);
+			    southPanel.add(quitButton);
+			    playButton.setFocusable(false);
+			    
+			    txtReady = new JTextField();
+			    txtReady.setFont(new Font("Showcard Gothic", Font.PLAIN, 16));
+			    txtReady.setHorizontalAlignment(SwingConstants.CENTER);
+			    txtReady.setText("Ready?");
+			    txtReady.setBounds(196, 11, 138, 41);
+			    southPanel.add(txtReady);
+			    txtReady.setColumns(10);
+			    
+			    playButton.addActionListener(this);
+			    quitButton.addActionListener(this);
+			    
+			    
 
 		c.add(gamePanel);
 
 		gamePanel.addMouseListener(this);
 		gamePanel.setFocusable(true);
-		gamePanel.addKeyListener(this);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 331, 583, 129);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		arrowToggle = new JToggleButton("\r\n");
+		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
+		arrowToggle.setEnabled(false);
+		arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
+		arrowToggle.setBounds(83, 0, 173, 88);
+		//redToggle.setIcon(new ImageIcon (imagePath + separator + "images" + separator + "BlueTower.png"));
+		arrowToggle.addActionListener(this);
+		panel.add(arrowToggle);
+		
+		blueToggle = new JToggleButton("");
+		blueToggle.setEnabled(false);
+		blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
+		blueToggle.setBounds(307, 0, 173, 88);
+		blueToggle.addActionListener(this);
+		panel.add(blueToggle);
+		
+		muteButton = new JToggleButton("");
+		muteButton.setBounds(529, 11, 44, 45);
+		muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
+		muteButton.addActionListener(this);
+		panel.add(muteButton);
+		
+		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setBounds(101, 87, 155, 31);
+		panel.add(lblNewLabel);
+		
+		JLabel lblBlueTowerCost = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
+		lblBlueTowerCost.setVerticalAlignment(SwingConstants.TOP);
+		lblBlueTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBlueTowerCost.setBounds(317, 87, 155, 31);
+		panel.add(lblBlueTowerCost);
+		
+		
+		
 
 	}
 
@@ -165,10 +228,42 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		if (e.getSource() == playButton) {
 			southPanel.setVisible(false);
 			southPanel.setEnabled(false);
+			blueToggle.setEnabled(true);
+			arrowToggle.setEnabled(true);
 			gamePanel.startGame();
 
 		} else if (e.getSource() == quitButton) {
 			animator.running = false;
+		}
+		
+		else if(e.getSource() == arrowToggle)
+		{
+			ArrowPlaceable = true;
+			BluePlaceable = false;
+			blueToggle.setSelected(false);
+		}
+		
+		else if (e.getSource() == blueToggle)
+		{
+			if(blueToggle.isSelected())
+			{
+				BluePlaceable = true;
+				ArrowPlaceable = false;
+				arrowToggle.setSelected(false);
+				//arrowToggle.setSelected(true);
+			}
+		}
+		
+		else if(e.getSource() == muteButton)
+		{
+			if(muteButton.isSelected())
+			{
+				AudioPlayer.stop("background");
+			}
+			 
+			else {
+				AudioPlayer.play("background", true);
+			}
 		}
 	}
 
@@ -189,14 +284,16 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			gameData.resetCreepCount();
 		}
 
-		if (x >= 520 && x <= 590 && y >= 250 && y <= 320) {
-			BluePlaceable = true;
-		}
+		//if (x >= 520 && x <= 590 && y >= 250 && y <= 320) { //originally for blueTower placement
 
-		if (x >= 440 && x <= 530 && y >= 250 && y <= 320) {
-			ArrowPlaceable = true;
-		}
 
+		//if (x >= 440 && x <= 530 && y >= 250 && y <= 320) { //originally for arrowTower placement
+			
+		
+		
+		
+
+		/*Commented out for new JToggle muteButton
 		if(x >= 10 && x <= 40 && y >= 295 && y <= 320) {
 			muteCount++;
 			if(muteCount % 2 != 0){
@@ -205,6 +302,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 				AudioPlayer.play("background", true);
 			}
 		}
+		*/
 		
 		// Only allow the placement of towers if we have enough money and have
 		// clicked the tower
@@ -217,6 +315,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					BlueTower = new BlueTower(x - 25, y - 50, gameData);
 					gameData.figures.add(BlueTower);
 					BluePlaceable = false;
+					blueToggle.setSelected(false);
 				}
 			}
 		} else if (gameData.money >= 50 && ArrowPlaceable == true) {
@@ -227,9 +326,20 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					ArrowTower = new ArrowTower(x - 25, y - 50, gameData);
 					gameData.figures.add(ArrowTower);
 					ArrowPlaceable = false;
+					arrowToggle.setSelected(false);
 				}
 			}
 		}
+	}
+	
+	public void enableArrowToggle(boolean b)
+	{
+		this.arrowToggle.setEnabled(b);
+	}
+	
+	public void enableBlueToggle(boolean b)
+	{
+		this.blueToggle.setEnabled(b);
 	}
 
 	@Override

@@ -546,10 +546,10 @@ public class GamePanel extends JPanel {
 		mapImage = getImage(imagePath + separator + "images" + separator + "map.png");
 		// Adds the Regular Tower image from the images director with a distinct
 		// seperator and path
-		ArrowTowerImage = getImage(imagePath + separator + "images" + separator + "ArrowTower.png");
+		//ArrowTowerImage = getImage(imagePath + separator + "images" + separator + "ArrowTower.png");
 		// Adds the Blue Tower image from the images director with a distinct
 		// seperator and path
-		BlueTowerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
+		//BlueTowerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
 
 		RegularMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster1.png");
 
@@ -557,7 +557,7 @@ public class GamePanel extends JPanel {
 
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
 		
-		mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
+		//mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
 		
 		AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
 		///////////////////////////////
@@ -652,44 +652,61 @@ public class GamePanel extends JPanel {
 			g2.setFont(new Font("Serif", Font.PLAIN, 20));
 			g2.drawString("Lives: " + gameData.getLives(), 375, 60);
 			g2.drawString("Gold: " + gameData.getMoney(), 470, 60);
+			if(gameData.getMoney() < 50)
+			{
+				this.gamescreen.enableArrowToggle(false);
+				this.gamescreen.enableBlueToggle(false);
+			}
+			
+			else if(gameData.getMoney() >= 50 && gameData.getMoney() < 100)
+			{
+				this.gamescreen.enableArrowToggle(true);
+				this.gamescreen.enableBlueToggle(false);
+			}
+			
+			else
+			{
+				this.gamescreen.enableArrowToggle(true);
+				this.gamescreen.enableBlueToggle(true);
+			}
 
 			///////////////////////////////
 			// Creates white box. Puts the image of the Regular Tower in it
-			// BUTTON
+			/* BUTTON
 			Graphics2D g3 = (Graphics2D) graphics;
 			g3.setColor(Color.WHITE);
 			g3.fillRect(440, 250, 70, 70);
 			g3.drawImage(ArrowTowerImage, 450, 250, this);
-			///////////////////////////////
+			/////////////////////////////*/
 
 			///////////////////////////////
 			// Creates white box. Puts the image of the Blue Tower in it
-			// BUTTON
+			/* BUTTON
 			Graphics2D g4 = (Graphics2D) graphics;
 			g4.setColor(Color.WHITE);
 			g4.fillRect(520, 250, 70, 70);
 			g4.drawImage(BlueTowerImage, 530, 250, this);
-			///////////////////////////////
+			/////////////////////////////*/
 
 			///////////////////////////////
 			// Creates Red Text with the name and price for the Regular Tower
-			// Info Text
+			/* Info Text
 			Graphics2D g5 = (Graphics2D) graphics;
 			g5.setColor(Color.RED);
 			g5.setFont(new Font("Serif", Font.PLAIN, 16));
 			g5.drawString("Tower 1", 450, 240);
 			g5.drawString("50 Gold", 450, 330);
-			///////////////////////////////
+			/////////////////////////////*/
 
 			///////////////////////////////
 			// Creates Red Text with the name and price for the Regular Tower
-			// Info Text
+			/* Info Text
 			Graphics2D g6 = (Graphics2D) graphics;
 			g6.setColor(Color.RED);
 			g6.setFont(new Font("Serif", Font.PLAIN, 16));
 			g6.drawString("Tower 2", 530, 240);
 			g6.drawString("100 Gold", 530, 330);
-			///////////////////////////////
+			/////////////////////////////*/
 
 			///////////////////////////////
 			// Creates a Yellow box
