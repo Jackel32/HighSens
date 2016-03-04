@@ -233,7 +233,6 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 	}
 
 	@Override
-<<<<<<< HEAD
 	public float getXofMissileShoot() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -241,7 +240,7 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 
 	@Override
 	public float getYofMissileShoot() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubs
 		return 0;
 	}
 
@@ -249,7 +248,8 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 	public boolean contains(int x, int y) {
 		// TODO Auto-generated method stub
 		return false;
-=======
+	}
+	
 	public void setLevel(int level) {
 		// TODO Auto-generated method stub
 
@@ -259,6 +259,5 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 	public int getLevel() {
 		// TODO Auto-generated method stub
 		return 0;
->>>>>>> origin/master
 	}
 }

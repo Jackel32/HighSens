@@ -154,6 +154,20 @@ public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
 		return false;
 	}
 
+
+	@Override
+	public int getLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public void setLevel(int level) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }

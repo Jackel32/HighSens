@@ -80,7 +80,7 @@ public class SellManager implements GameFigure {
 		// TODO Auto-generated method stub
 		return false;
 	}
-<<<<<<< HEAD
+
 	@Override
 	public float getXofMissileShoot() {
 		// TODO Auto-generated method stub
@@ -97,19 +97,19 @@ public class SellManager implements GameFigure {
 		return false;
 	}
 	
-=======
 
-	@Override
+
+
 	public void setLevel(int level) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+
 	public int getLevel() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
->>>>>>> origin/master
+
 }
