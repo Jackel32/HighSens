@@ -22,7 +22,6 @@ import com.highsens.game.monster.RegularMonster;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
 
-
 ///////////////////////////////
 // *** New Class ***
 // Implements IStrategy, which is an abstract class
@@ -30,12 +29,12 @@ import com.highsens.game.tower.BlueTower;
 public class GameData implements IStrategy {
 
 	///////////////////////////////
-	// Creates a List of object GameFigures
-	final List<GameFigure> figures;
+	// Creates a List of object Gamefigures
+	static List<GameFigure> figures;
 	///////////////////////////////
 
 	final List<SellManager> sellFigures;
-	
+
 	////////////////////////////////
 	// Instantiates each of these classes
 	ArrowTower ArrowT;
@@ -70,11 +69,11 @@ public class GameData implements IStrategy {
 
 	// global variable for the amount of creep per wave
 	int creepCount = 0;
-	
+
 	int regularMonsterCount = 0;
-	
+
 	int fastMonsterCount = 0;
-	
+
 	int bossCount = 0;
 	
 	int bloonMonsterCount = 0;
@@ -105,7 +104,7 @@ public class GameData implements IStrategy {
 		// Returns a synchronized (thread-safe) list backed by the specified
 		// list.
 		figures = Collections.synchronizedList(new ArrayList<GameFigure>());
-		
+
 		sellFigures = Collections.synchronizedList(new ArrayList<SellManager>());
 	}
 
@@ -208,6 +207,10 @@ public class GameData implements IStrategy {
 	}
 	///////////////////////////////
 
+	public static List<GameFigure> returnList() {
+		return figures;
+	}
+
 	///////////////////////////////
 	// Manages the money within the game.
 	public void moneyManager(String val, int money) {
@@ -223,7 +226,7 @@ public class GameData implements IStrategy {
 			break;
 		case "fastKill":
 			money += 10;
-			break; 
+			break;
 		case "bossKill":
 			money += 50;
 			break;
@@ -240,8 +243,7 @@ public class GameData implements IStrategy {
 		setMoney(money);
 	}
 	///////////////////////////////
-	
-	
+
 	public void monsterManager(String val) {
 		switch (val) {
 		case "regularKill":
@@ -258,6 +260,7 @@ public class GameData implements IStrategy {
 			break;
 		}
 	}
+
 	//////////////////////////////////
 	public int getRegularMonsterCount() {
 		return regularMonsterCount;
@@ -266,7 +269,7 @@ public class GameData implements IStrategy {
 	public void setRegularMonsterCount(int regularMonsterCount) {
 		this.regularMonsterCount = regularMonsterCount;
 	}
-	
+
 	public int getFastMonsterCount() {
 		return fastMonsterCount;
 	}
@@ -274,7 +277,7 @@ public class GameData implements IStrategy {
 	public void setFastMonsterCount(int fastMonsterCount) {
 		this.fastMonsterCount = fastMonsterCount;
 	}
-	
+
 	public void setBloonMonsterCount(int bloonMonsterCount) {
 		this.bloonMonsterCount = bloonMonsterCount;
 	}
@@ -290,9 +293,9 @@ public class GameData implements IStrategy {
 	public void setBossCount(int bossCount) {
 		this.bossCount = bossCount;
 	}
-	
+
 	///////////////////////////////
-	
+
 	public void resetCreepCount() {
 		creepCount = 0;
 	}
@@ -751,7 +754,7 @@ public class GameData implements IStrategy {
 							figures.get(i).updateHealth();
 						}
 					}
-					
+
 				}
 			}
 		}

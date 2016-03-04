@@ -25,10 +25,10 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	public float x, y;
 
 	int buffCount = 0;
-	
+
 	String imagePath = System.getProperty("user.dir");
 	String separator = System.getProperty("file.separator");
-	
+
 	Image BlueMonsterImage = getImage(imagePath + separator + "images" + separator + "BlueMonster.png");
 	Image GreenMonsterImage = getImage(imagePath + separator + "images" + separator + "GreenMonster.png");
 	Image OrangeMonsterImage = getImage(imagePath + separator + "images" + separator + "OrangeMonster.png");
@@ -41,8 +41,8 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		this.maxHealth = 100;
 		this.health = maxHealth;
 		this.speed = 8;
-		//String imagePath = System.getProperty("user.dir");
-		//String separator = System.getProperty("file.separator");
+		// String imagePath = System.getProperty("user.dir");
+		// String separator = System.getProperty("file.separator");
 		AudioPlayer.loadClip("pop", "sounds/pop.wav");
 	}
 
@@ -64,13 +64,12 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 			g.drawImage(BlueMonsterImage, (int) x, (int) y, null);
 		} else if (health > 25 && health <= 50) {
 			g.drawImage(OrangeMonsterImage, (int) x, (int) y, null);
-		}else if (health > 50 && health <= 75) {
+		} else if (health > 50 && health <= 75) {
 			g.drawImage(GreenMonsterImage, (int) x, (int) y, null);
 		} else if (health > 75 && health <= 100) {
 			g.drawImage(BlueMonsterImage, (int) x, (int) y, null);
 		}
 	}
-
 
 	@Override
 	public void update() {
@@ -208,12 +207,12 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		if (health <= 0) {
 			state = STATE_DONE;
 		}
-		//else if ((health >= (health / 4) && (health <= (health / 4) + 5))) {
-			//if (buffCount < 1) {
-			//	getAngry();
-			//}
-			//buffCount++;
-		//}
+		// else if ((health >= (health / 4) && (health <= (health / 4) + 5))) {
+		// if (buffCount < 1) {
+		// getAngry();
+		// }
+		// buffCount++;
+		// }
 	}
 
 	public void getAngry() {
@@ -241,8 +240,21 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	}
 
 	@Override
+	public int getLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setLevel(int level) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public void setY(float y) {
-		this.y = y;
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override

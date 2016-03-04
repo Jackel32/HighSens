@@ -1,7 +1,11 @@
 package com.highsens.game;
 
+import static com.highsens.game.AudioPlayer.play;
+import static com.highsens.game.AudioPlayer.stop;
+
 import java.awt.Container;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,13 +39,21 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	public ArrayList TowerPosition;
 	boolean ArrowPlaceable = false;
 	boolean BluePlaceable = false;
+	private boolean menuVisible;
 	private int sellPosition = 0;
-
+	private String imagePath = System.getProperty("user.dir");
+	private String separator = System.getProperty("file.separator");
+	Label LevelPanel = new Label();
+	Label RangePanel = new Label();
+	Label imageLabel = new Label();
+	Label imageLabel2 = new Label();
+	Label imageLabel3 = new Label();
 	int muteCount = 0;
-	
+	private JButton menuCloseButton;
+
 	public Main() {
 		TowerPosition = new ArrayList();
-		setSize(600, 400);
+		setSize(800, 400);
 		Container c = getContentPane();
 		animator = new Animator();
 		gameData = new GameData();
@@ -55,6 +67,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		playButton = new JButton("Play");
 		southPanel.add(playButton);
 		quitButton = new JButton("Quit");
+		menuCloseButton = new JButton("Cancel");
 		southPanel.add(quitButton);
 		c.add(southPanel, "South");
 
@@ -64,64 +77,94 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		gamePanel.addKeyListener(this);
 		playButton.addActionListener(this);
 		quitButton.addActionListener(this);
-
+		menuCloseButton.addActionListener(this);
 	}
 
-	private void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {
-		Iterator<GameFigure> iterator = gameData.figures.iterator();
-		int countPosition = 0;
-		boolean isCleanofSellBox = true;
-		boolean flag = false;
+	private synchronized void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {
+		synchronized (gameData.figures) {
+			Iterator<GameFigure> iterator = gameData.figures.iterator();
+			int countPosition = 0;
+			boolean isCleanofSellBox = true;
+			boolean flag = false;
 
-		while (iterator.hasNext()) {
-			GameFigure gameFigure = iterator.next();
-			if (gameFigure instanceof AbstractTower) {
-				AbstractTower abstractTowerGameFigure = (AbstractTower) gameFigure;
-				if (abstractTowerGameFigure.collision(pressedXposition, pressedYposition)) {
-					//System.out.println("YOU CLICKED ON THE TOWER");
-					abstractTowerGameFigure.changeRange();
-					flag = true;
-					String imagePath = System.getProperty("user.dir");
-					String separator = System.getProperty("file.separator");
-					Image newImage = getImage(imagePath + separator + "images" + separator + "RedTower.png");
-					
-					abstractTowerGameFigure.setTowerImage(newImage);
-					
-					gameData.sellFigures.clear();
-					gameData.sellFigures.add(new SellManager(gameData.figures.get(countPosition).getX(),gameData.figures.get(countPosition).getY()));
-					sellPosition = countPosition;
-					isCleanofSellBox = false;
-					
-				}else if (!gameData.sellFigures.isEmpty() && isCleanofSellBox){
-					
-					if (gameData.sellFigures.get(0).collisionManager(pressedXposition,pressedYposition)){
-						
-						gameData.figures.get(sellPosition).setState(0);
-						gameData.sellFigures.clear();
+			while (iterator.hasNext()) {
+				GameFigure gameFigure = iterator.next();
+				if (gameFigure instanceof AbstractTower) {
+					AbstractTower abstractTowerGameFigure = (AbstractTower) gameFigure;
 
-						
-					}else{
-						
+					if (abstractTowerGameFigure.collision(pressedXposition, pressedYposition)) {
+						if (!menuVisible) {
+							drawMenuForTower(abstractTowerGameFigure);
+						} else {
+							menuVisible = true;
+						}
+
+						abstractTowerGameFigure.upgradeTower();
+
+						Image newImage = getImage(imagePath + separator + "images" + separator + "RedTower.png");
+
+						abstractTowerGameFigure.setTowerImage(newImage);
+
 						gameData.sellFigures.clear();
+						gameData.sellFigures.add(new SellManager(gameData.figures.get(countPosition).getX(),
+								gameData.figures.get(countPosition).getY()));
+						sellPosition = countPosition;
+						isCleanofSellBox = false;
+						flag = true;
+					} else if (!gameData.sellFigures.isEmpty() && isCleanofSellBox) {
+
+						if (gameData.sellFigures.get(0).collisionManager(pressedXposition, pressedYposition)) {
+
+							gameData.figures.get(sellPosition).setState(0);
+							gameData.sellFigures.clear();
+
+						} else {
+
+							gameData.sellFigures.clear();
+						}
+
 					}
-					
 				}
+
+				if (gameFigure instanceof ArrowMissile && flag) {
+					ArrowMissile abstractArrowMissileFigure = (ArrowMissile) gameFigure;
+					abstractArrowMissileFigure.setUNIT_TRAVEL_DISTANCE();
+					flag = false;
+				} else if (gameFigure instanceof Missile && flag) {
+					Missile abstractMissileFigure = (Missile) gameFigure;
+					abstractMissileFigure.setUNIT_TRAVEL_DISTANCE();
+					flag = false;
+				}
+				countPosition++;
 			}
-			
-			if(gameFigure instanceof ArrowMissile && flag){
-				ArrowMissile abstractArrowMissileFigure = (ArrowMissile) gameFigure;
-				abstractArrowMissileFigure.setUNIT_TRAVEL_DISTANCE();
-				flag = false;
-			}
-			else if(gameFigure instanceof Missile && flag){
-				Missile abstractMissileFigure = (Missile) gameFigure;
-				abstractMissileFigure.setUNIT_TRAVEL_DISTANCE();
-				flag = false;
-			}
-			countPosition++;
 		}
 	}
 
+	public void drawMenuForTower(AbstractTower abstractTowerGameFigure) {
+
+		RangePanel.setText("Range: " + abstractTowerGameFigure.getRange());
+		RangePanel.setBounds(700, 100, 200, 100);
+		LevelPanel.setText("Level: " + abstractTowerGameFigure.getLevel());
+		LevelPanel.setBounds(700, 0, 100, 100);
+
+		imageLabel.setText("image: " + abstractTowerGameFigure.getLevel());
+		imageLabel.setBounds(600, 0, 100, 100);
+
+		// Image newImage = getImage(imagePath + separator + "images" +
+		// separator + "RedTower.png");
+
+		imageLabel2.setText("image2: " + abstractTowerGameFigure.getLevel());
+		imageLabel2.setBounds(600, 100, 100, 100);
+
+		imageLabel3.setText("image3: " + abstractTowerGameFigure.getLevel());
+		imageLabel3.setBounds(600, 200, 100, 100);
+
+		gamePanel.add(imageLabel);
+		gamePanel.add(imageLabel2);
+		gamePanel.add(imageLabel3);
+		gamePanel.add(RangePanel);
+		gamePanel.add(LevelPanel);
+	}
 
 	public Image getImage(String fileName) {
 		Image image = null;
@@ -140,8 +183,16 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 			playButton.setEnabled(false);
 			gamePanel.startGame();
 
-		} else if (e.getSource() == quitButton) {
+		}
+
+		else if (e.getSource() == quitButton) {
 			animator.running = false;
+		}
+
+		if (e.getSource() == menuCloseButton) {
+			Label closed = new Label("ZZZZZZZZZZZZZZZZZ");
+			closed.setBounds(0, 0, 600, 400);
+			gamePanel.add(closed);
 		}
 	}
 
@@ -149,12 +200,11 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	public void mousePressed(MouseEvent me) {
 		int x = me.getX();
 		int y = me.getY();
-	
 
 		increaseSizeOfTowerRangeWhenOverlapped(x, y);
 
-		 //System.out.println("X: " + x);
-		 //System.out.println("Y: " + y);
+		// System.out.println("X: " + x);
+		// System.out.println("Y: " + y);
 
 		// Limits the clickable range to the button
 		if (x >= 250 && x <= 350 && y >= 295 && y <= 325) {
@@ -170,15 +220,15 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 			ArrowPlaceable = true;
 		}
 
-		if(x >= 10 && x <= 40 && y >= 295 && y <= 320) {
+		if (x >= 10 && x <= 40 && y >= 295 && y <= 320) {
 			muteCount++;
-			if(muteCount % 2 != 0){
-				sound.stop("background");
+			if (muteCount % 2 != 0) {
+				stop("background");
 			} else {
-				AudioPlayer.play("background", true);
+				play("background", true);
 			}
 		}
-		
+
 		// Only allow the placement of towers if we have enough money and have
 		// clicked the tower
 		// Additionally only allow the placement of towers on any buttons.

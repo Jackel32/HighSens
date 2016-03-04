@@ -4,134 +4,152 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
+
 import javax.vecmath.Vector2f;
 
 public class Missile extends Ellipse2D.Float implements GameFigure {
 
-    static int SIZE = 2;
-    Color color;
-    Point2D.Float target;
-    private int state = STATE_TRAVELING;
-   // private static final int UNIT_TRAVEL_DISTANCE = 5;  Original
-    private static int UNIT_TRAVEL_DISTANCE = 5;    // test
-    private int explosionSize = SIZE;
-    private int explosionMaxSize;
-    long ElapsedTime;
-    long Start, End;
-    public boolean targetReached = false;
-    
-    public void setUNIT_TRAVEL_DISTANCE(){
-    	UNIT_TRAVEL_DISTANCE += 2;
-    }
+	static int SIZE = 2;
+	Color color;
+	Point2D.Float target;
+	private int state = STATE_TRAVELING;
+	// private static final int UNIT_TRAVEL_DISTANCE = 5; Original
+	private static int UNIT_TRAVEL_DISTANCE = 5; // test
+	private int explosionSize = SIZE;
+	private int explosionMaxSize;
+	long ElapsedTime;
+	long Start, End;
+	public boolean targetReached = false;
 
+	public void setUNIT_TRAVEL_DISTANCE() {
+		UNIT_TRAVEL_DISTANCE += 2;
+	}
 
-    public boolean isTargetReached() {
-        return targetReached;
-    }
+	public boolean isTargetReached() {
+		return targetReached;
+	}
 
-    public void setTargetReached(boolean targetReached) {
-        this.targetReached = targetReached;
-    }
+	public void setTargetReached(boolean targetReached) {
+		this.targetReached = targetReached;
+	}
 
-    public Missile(float x, float y, Color color) {
-        setFrameFromCenter(x, y, x + SIZE, y + SIZE);
-        Start = System.currentTimeMillis();
-        this.color = color;
-    }
+	public Missile(float x, float y, Color color) {
+		setFrameFromCenter(x, y, x + SIZE, y + SIZE);
+		Start = System.currentTimeMillis();
+		this.color = color;
+	}
 
-    public void setTarget(float x, float y) {
-        target = new Point2D.Float(x, y);
-    }
-    
-    public void setExplosionMaxSize(int size) {
-        explosionMaxSize = size;
-    }
+	public void setTarget(float x, float y) {
+		target = new Point2D.Float(x, y);
+	}
 
-    @Override
-    public void render(Graphics g) {
-        g.setColor(color);
-        g.fillOval((int)super.x, (int)super.y, (int)super.width, (int)super.height);
-    }
+	public void setExplosionMaxSize(int size) {
+		explosionMaxSize = size;
+	}
 
-    @Override
-    public void update() {
-        updateState();
-        if (state == STATE_TRAVELING) {
-            updateLocation();
-            ElapsedTime = (End - Start) * 2;
-        } else if (state == STATE_EXPLODING) {
-            updateSize();
-        }
-    }
+	@Override
+	public void render(Graphics g) {
+		g.setColor(color);
+		g.fillOval((int) super.x, (int) super.y, (int) super.width, (int) super.height);
+	}
 
-    // Vector arithmetic
-    // A: current position
-    // B: target position
-    // d: distance to travel along the line from A to B
-    //     A_moved = A + |B - A| * d where |  | represents 'norm'
-    public void updateLocation() {
-        Vector2f currentLoc = new Vector2f((float) getCenterX(), (float) getCenterY());
-        Vector2f update = new Vector2f(target.x, target.y);
-        update.sub(currentLoc); // B - A
-        update.normalize(); // |B - A|
-        update.scale(UNIT_TRAVEL_DISTANCE * 2); // |B - A| x dist
-        
-        currentLoc.add(update) ; // A + |B - A| x d
+	@Override
+	public void update() {
+		updateState();
+		if (state == STATE_TRAVELING) {
+			updateLocation();
+			ElapsedTime = (End - Start) * 2;
+		} else if (state == STATE_EXPLODING) {
+			updateSize();
+		}
+	}
 
-        
-        setFrameFromCenter(currentLoc.x, currentLoc.y,
-        currentLoc.x + SIZE, currentLoc.y + SIZE);
-        setTargetReached(true);
-    }
+	// Vector arithmetic
+	// A: current position
+	// B: target position
+	// d: distance to travel along the line from A to B
+	// A_moved = A + |B - A| * d where | | represents 'norm'
+	public void updateLocation() {
+		Vector2f currentLoc = new Vector2f((float) getCenterX(), (float) getCenterY());
+		Vector2f update = new Vector2f(target.x, target.y);
+		update.sub(currentLoc); // B - A
+		update.normalize(); // |B - A|
+		update.scale(UNIT_TRAVEL_DISTANCE * 2); // |B - A| x dist
 
-    public void updateSize() {
-        double x = target.getX();
-        double y = target.getY();
-        explosionSize += 2;
-        setFrameFromCenter(x, y, x + explosionSize, y + explosionSize);
-    }
+		currentLoc.add(update); // A + |B - A| x d
 
-    public void updateState() {
-        if (state == STATE_TRAVELING) {
-            double distance = target.distance(getCenterX(), getCenterY());
-            boolean targetReached = distance <= 2.0 ? true : false;
-            End = System.currentTimeMillis();
-            if (targetReached) {
-                state = STATE_EXPLODING;
-            } else if (!targetReached && ElapsedTime > 1300)
-            {
-                state = STATE_DONE;
-            }
-        } else if (state == STATE_EXPLODING) {
-            if (explosionSize >= explosionMaxSize) {
-                state = STATE_DONE;
-            }
-        }
-    }
+		setFrameFromCenter(currentLoc.x, currentLoc.y, currentLoc.x + SIZE, currentLoc.y + SIZE);
+		setTargetReached(true);
+	}
 
-    public int getState() {
-        return state;
-    }
+	public void updateSize() {
+		double x = target.getX();
+		double y = target.getY();
+		explosionSize += 2;
+		setFrameFromCenter(x, y, x + explosionSize, y + explosionSize);
+	}
 
-    @Override
-    public void setState(int state) {
-        this.state = state;
-    }
+	public void updateState() {
+		if (state == STATE_TRAVELING) {
+			double distance = target.distance(getCenterX(), getCenterY());
+			boolean targetReached = distance <= 2.0 ? true : false;
+			End = System.currentTimeMillis();
+			if (targetReached) {
+				state = STATE_EXPLODING;
+			} else if (!targetReached && ElapsedTime > 1300) {
+				state = STATE_DONE;
+			}
+		} else if (state == STATE_EXPLODING) {
+			if (explosionSize >= explosionMaxSize) {
+				state = STATE_DONE;
+			}
+		}
+	}
 
-    @Override
-    public void updateHealth() {
+	public int getState() {
+		return state;
+	}
 
-    }
+	@Override
+	public void setState(int state) {
+		this.state = state;
+	}
 
-    @Override
-    public boolean collision(GameFigure m) {
-        return false;
-    }
+	@Override
+	public void updateHealth() {
 
-    @Override
-    public int getHealth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	}
+
+	@Override
+	public boolean collision(GameFigure m) {
+		return false;
+	}
+
+	@Override
+	public int getHealth() {
+		throw new UnsupportedOperationException("Not supported yet."); // To
+																		// change
+																		// body
+																		// of
+																		// generated
+																		// methods,
+																		// choose
+																		// Tools
+																		// |
+																		// Templates.
+	}
+
+	@Override
+	public void setLevel(int level) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int getLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 	@Override

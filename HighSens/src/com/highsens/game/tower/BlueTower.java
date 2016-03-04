@@ -9,7 +9,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import com.highsens.game.AudioPlayer;
 import com.highsens.game.GameData;
 import com.highsens.game.GameFigure;
 import com.highsens.game.Monster;
@@ -20,7 +19,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	float x, y;
 	Point2D.Float target;
 	private int state = STATE_IDLE;
-	
+
 	Monster m;
 	GameData gd;
 
@@ -31,7 +30,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
 		towerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
-		boudingBox = new BoundingBox((int) x, (int) x + 50, (int) y, (int) y + 69);
+		boundingBox = new BoundingBox((int) x, (int) x + 50, (int) y, (int) y + 69);
 		range = 200;
 		radius = new Ellipse2D.Double((this.x + 50) - 175, (this.y + 69) - 175, 300, 300);
 	}
@@ -66,15 +65,14 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public void updateState() {
-		
-		
+
 	}
 
 	@Override
 	public void update() {
-		
+
 		switch (state) {
-		
+
 		case STATE_DONE:
 			gd.moneyManager("sellBlueTower", gd.getMoney());
 			break;
@@ -132,8 +130,14 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean contains(int x, int y) {
 		// TODO Auto-generated method stub
 		return false;
+=======
+	public void setLevel(int level) {
+		// TODO Auto-generated method stub
+
+>>>>>>> origin/master
 	}
 }

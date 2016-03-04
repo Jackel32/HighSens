@@ -7,13 +7,17 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 
+import com.highsens.game.GameData;
+
 public abstract class AbstractTower {
 
-	public Image towerImage;
+	public GameData data;
 	public Ellipse2D.Double radius;
-	public BoundingBox boudingBox;
-	public int range;
-	private int xOffset = 75;
+	public BoundingBox boundingBox;
+	public Image towerImage;
+	public int level;
+	private int xOffset = 80;
+	protected int range;
 	private int yOffset = 80;
 
 	/**
@@ -26,25 +30,45 @@ public abstract class AbstractTower {
 		g2d.drawOval((int) x - xOffset, (int) y - yOffset, range, range);
 	}
 
-	/**
-	 * Return true if x and y postion has a collision with the tower.
-	 */
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public boolean collision(int xPosition, int yPosition) {
-		if (boudingBox.getxMin() <= xPosition && xPosition <= boudingBox.getxMax() && boudingBox.getyMin() <= yPosition
-				&& yPosition <= boudingBox.getyMax()) {
+		if (boundingBox.getxMin() <= xPosition && xPosition <= boundingBox.getxMax()
+				&& boundingBox.getyMin() <= yPosition && yPosition <= boundingBox.getyMax()) {
 			return true;
 		}
 		return false;
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void changeRange() {
-		range = (int) (range * 1.5);
-		xOffset = (int) (xOffset * 1.5);
-		yOffset = (int) (yOffset * 1.5);
+	public void upgradeTower() {
+		level++;
+		changeRange();
+	}
+
+	private void changeRange() {
+		range = (int) (range * 1.15);
+		xOffset = (int) (xOffset * 1.15);
+		yOffset = (int) (yOffset * 1.15);
 	}
 
 	public void setTowerImage(Image towerImage) {
 		this.towerImage = towerImage;
+	}
+
+	public Image getTowerImage() {
+		return towerImage;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getRange() {
+		return range;
 	}
 
 }
