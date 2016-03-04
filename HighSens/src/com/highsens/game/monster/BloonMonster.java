@@ -189,13 +189,14 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	}
 
 	public boolean contains(float x, float y) {
+		System.out.println("X: " + x + ", Y: " + y);
 		if (x < this.x)
 			return false;
-		if (x > this.x + 47)
+		if (x > this.x + 27)
 			return false;
 		if (y < this.y)
 			return false;
-		if (y > this.y + 37)
+		if (y > this.y + 20)
 			return false;
 
 		return true;
@@ -242,5 +243,23 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	@Override
 	public void setY(float y) {
 		this.y = y;
+	}
+
+	@Override
+	public float getXofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getYofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean contains(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

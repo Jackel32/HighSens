@@ -73,5 +73,20 @@ public class SellManager implements GameFigure {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public float getXofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public float getYofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public boolean contains(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

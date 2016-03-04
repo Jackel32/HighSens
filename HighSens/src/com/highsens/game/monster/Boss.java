@@ -227,4 +227,22 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	public void setY(float y) {
 		this.y = y;
 	}
+
+	@Override
+	public float getXofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getYofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean contains(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -133,6 +133,27 @@ public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
+	@Override
+	public float getXofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public float getYofMissileShoot() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public boolean contains(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 	
 }

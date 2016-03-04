@@ -12,7 +12,9 @@ public interface GameFigure {
     public void updateHealth();
     public int getHealth();
     public boolean collision(GameFigure m);
-    
+	public float getXofMissileShoot();
+	public float getYofMissileShoot();
+	public boolean contains(int x, int y);
     
     //missle states --------------
     static final int STATE_TRAVELING = 1;
@@ -35,5 +37,6 @@ public interface GameFigure {
     static final int STATE_DONE = 0;
     static final int LIFE_LOST = 17;
     static final int STATE_KILLED = 18;
+
 
 }
