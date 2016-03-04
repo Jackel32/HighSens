@@ -98,13 +98,13 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 			break;
 		case STATE_DONE:
 			AudioPlayer.play("pop", false);
-			gd.moneyManager("kill2", gd.getMoney());
-			gd.monsterManager("kill2");
+			gd.moneyManager("bloonKill", gd.getMoney());
+			gd.monsterManager("bloonKill");
 			break;
 		case LIFE_LOST:
 			updateLives();
 			state = STATE_DONE;
-			gd.monsterManager("kill2");
+			gd.monsterManager("bloonKill");
 			break;
 		}
 	}
@@ -188,7 +188,7 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	}
 
 	public boolean contains(float x, float y) {
-		System.out.println("X: " + x + ", Y: " + y);
+		//System.out.println("X: " + x + ", Y: " + y);
 		if (x < this.x)
 			return false;
 		if (x > this.x + 27)
@@ -203,7 +203,7 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 
 	@Override
 	public void updateHealth() {
-		health -= 1;
+		health -= 15;
 		if (health <= 0) {
 			state = STATE_DONE;
 		}
@@ -269,9 +269,4 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		return 0;
 	}
 
-	@Override
-	public boolean contains(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

@@ -128,15 +128,15 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	public double getY() {
 		return y;
 	}
-
-	@Override
-	public boolean contains(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public void setLevel(int level) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public boolean contains(float f, float g) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -165,9 +165,8 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
 		return 0;
 	}
 
-
 	@Override
-	public boolean contains(int x, int y) {
+	public boolean contains(float f, float g) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -239,12 +239,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public boolean contains(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	@Override
 	public void setLevel(int level) {
 		// TODO Auto-generated method stub

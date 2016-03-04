@@ -136,8 +136,9 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 	}
 
 	@Override
-	public boolean contains(int x, int y) {
+	public boolean contains(float f, float g) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 }

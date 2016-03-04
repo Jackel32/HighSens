@@ -149,13 +149,6 @@ public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
 
 
 	@Override
-	public boolean contains(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
 	public int getLevel() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -166,6 +159,13 @@ public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
 	public void setLevel(int level) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public boolean contains(float f, float g) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

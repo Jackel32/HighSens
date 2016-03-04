@@ -85,13 +85,13 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 			break;
 		case STATE_DONE:
 			AudioPlayer.play("pop", false);
-			gd.moneyManager("kill1", gd.getMoney());
-			gd.monsterManager("kill1");
+			gd.moneyManager("regularKill", gd.getMoney());
+			gd.monsterManager("regularKill");
 			break;
 		case LIFE_LOST:
 			updateLives();
 			state = STATE_DONE;
-			gd.monsterManager("kill1");
+			gd.monsterManager("regularKill");
 			break;
 		}
 	}
@@ -244,11 +244,6 @@ public class RegularMonster extends AbstractMonster implements Monster, GameFigu
 		return 0;
 	}
 
-	@Override
-	public boolean contains(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public void setLevel(int level) {
 		// TODO Auto-generated method stub

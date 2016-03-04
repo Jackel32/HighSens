@@ -14,7 +14,7 @@ public interface GameFigure {
     public boolean collision(GameFigure m);
 	public float getXofMissileShoot();
 	public float getYofMissileShoot();
-	public boolean contains(int x, int y);
+	public boolean contains(float f, float g);
 	public int getLevel();
 	public void setLevel(int level);
     

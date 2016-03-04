@@ -92,7 +92,7 @@ public class SellManager implements GameFigure {
 		return 0;
 	}
 	@Override
-	public boolean contains(int x, int y) {
+	public boolean contains(float x, float y) {
 		// TODO Auto-generated method stub
 		return false;
 	}

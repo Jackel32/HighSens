@@ -87,13 +87,13 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 			break;
 		case STATE_DONE:
 			AudioPlayer.play("pop", false);
-			gd.moneyManager("kill2", gd.getMoney());
-			gd.monsterManager("kill2");
+			gd.moneyManager("fastKill", gd.getMoney());
+			gd.monsterManager("fastKill");
 			break;
 		case LIFE_LOST:
 			updateLives();
 			state = STATE_DONE;
-			gd.monsterManager("kill2");
+			gd.monsterManager("fastKill");
 			break;
 		}
 	}
@@ -246,11 +246,6 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 		return 0;
 	}
 
-	@Override
-	public boolean contains(int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public void setLevel(int level) {
 		// TODO Auto-generated method stub
