@@ -49,9 +49,11 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	Label imageLabel2 = new Label();
 	Label imageLabel3 = new Label();
 	int muteCount = 0;
+	public boolean nextWaveClicked;
 	private JButton menuCloseButton;
 
 	public Main() {
+		nextWaveClicked = false;
 		TowerPosition = new ArrayList();
 		setSize(800, 400);
 		Container c = getContentPane();
@@ -208,6 +210,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 
 		// Limits the clickable range to the button
 		if (x >= 250 && x <= 350 && y >= 295 && y <= 325) {
+			nextWaveClicked = true;
 			gameData.setWaves(gameData.wave = gameData.wave + 1);
 			gameData.resetCreepCount();
 		}

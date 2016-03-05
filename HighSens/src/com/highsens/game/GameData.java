@@ -51,8 +51,8 @@ public class GameData implements IStrategy {
 	///////////////////////////////
 	// Variables for the players Score, Lives, and Money
 	public int score;
-	public int lives = 10;
-	public int money = 100;
+	public int lives = 100;
+	public int money = 1000;
 	///////////////////////////////
 
 	// Variables for an objects position
@@ -314,7 +314,7 @@ public class GameData implements IStrategy {
 			switch (n) {
 			case 1:
 				// How many monsters
-				waveSize = 5;
+				waveSize = 1000;
 
 				// this staggers the monster creation
 				while (monsterElapsedTime > 1000) {
@@ -351,6 +351,10 @@ public class GameData implements IStrategy {
 				if (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
+						figures.add(new BloonMonster(-50, 200, this));
+						creepCount++;
+						bloonMonsterCount++;
+					/*if (creepCount <= waveSize) {
 						if (creepCount < waveSize / 2) {
 							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
@@ -367,7 +371,7 @@ public class GameData implements IStrategy {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
 							bossCount++;
-						}
+						}*/
 					}
 				}
 				break;
@@ -641,10 +645,5 @@ public class GameData implements IStrategy {
 			}
 			figures.removeAll(remove);
 		}
-	}
-
-	private void collision(GameFigure gameFigure) {
-		// TODO Auto-generated method stub
-		
 	}
 }

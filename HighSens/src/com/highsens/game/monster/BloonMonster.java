@@ -32,6 +32,7 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	Image BlueMonsterImage = getImage(imagePath + separator + "images" + separator + "BlueMonster.png");
 	Image GreenMonsterImage = getImage(imagePath + separator + "images" + separator + "GreenMonster.png");
 	Image OrangeMonsterImage = getImage(imagePath + separator + "images" + separator + "OrangeMonster.png");
+	Image YellowMonsterImage = getImage(imagePath + separator + "images" + separator + "YellowMonster.png");
 
 	public BloonMonster(float x, float y, GameData gd) {
 		this.gd = gd;
@@ -61,7 +62,7 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	public void render(Graphics g) {
 		drawHealthBar(g, x, y);
 		if (health > 0 && health <= 25) {
-			g.drawImage(BlueMonsterImage, (int) x, (int) y, null);
+			g.drawImage(YellowMonsterImage, (int) x, (int) y, null);
 		} else if (health > 25 && health <= 50) {
 			g.drawImage(OrangeMonsterImage, (int) x, (int) y, null);
 		} else if (health > 50 && health <= 75) {
@@ -203,7 +204,7 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 
 	@Override
 	public void updateHealth() {
-		health -= 15;
+		health -= 8;
 		if (health <= 0) {
 			state = STATE_DONE;
 		}
