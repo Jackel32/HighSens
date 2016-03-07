@@ -2,12 +2,14 @@ package com.highsens.game;
 
 import javax.swing.JFrame;
 
-public class GUIManager {
+public class ScreenManager {
 	
 	private static Splash splashscreen = new Splash();
 	private static MainScreen mainscreen = new MainScreen();
 	private static LevelSelectScreen levelselectscreen = new LevelSelectScreen();
 	private static GameoverScreen gameoverscreen = new GameoverScreen(0, 0);
+	private static GameScreen game = new GameScreen();
+	private static StoreScreen store = new StoreScreen();
 	private JFrame currentScreen;
 	
 	public void displaySplashScreen()

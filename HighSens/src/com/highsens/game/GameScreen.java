@@ -53,7 +53,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private final JPanel southPanel;
 	private static ArrowTower ArrowTower;
 	private static BlueTower BlueTower;
-	public static GUIManager GUI;
+	public static ScreenManager GUI;
 	private AudioPlayer sound;
 	public ArrayList TowerPosition;
 	boolean ArrowPlaceable = false;
