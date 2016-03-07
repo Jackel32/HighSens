@@ -66,11 +66,16 @@ public class MainScreen extends JFrame {
 		btnStore.setBounds(50, 278, 112, 46);
 		btnStore.setContentAreaFilled(false);
 		btnStore.setOpaque(true);
+		StoreAnimator animator = new StoreAnimator();
 		btnStore.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				final StoreScreen storeScreen = new StoreScreen();
-				storeScreen.setVisible(true);
+				GameData gamedata = new GameData();
+				final StorePanel store = new StorePanel(animator, gamedata);
+				store.setVisible(true);
 				setVisible(false);
+				//final StoreScreen storeScreen = new StoreScreen();
+				//storeScreen.setVisible(true);
+				//setVisible(false);
 			}
 		});
 		

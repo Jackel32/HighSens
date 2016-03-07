@@ -51,6 +51,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	int muteCount = 0;
 	public boolean nextWaveClicked;
 	private JButton menuCloseButton;
+	private GameScreen game = new GameScreen();
 
 	public Main() {
 		nextWaveClicked = false;
@@ -59,7 +60,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		Container c = getContentPane();
 		animator = new Animator();
 		gameData = new GameData();
-		gamePanel = new GamePanel(animator, gameData, this);
+		gamePanel = new GamePanel(animator, gameData, game);
 		animator.setGamePanel(gamePanel);
 		animator.setGameData(gameData);
 
@@ -168,6 +169,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 		gamePanel.add(LevelPanel);
 	}
 
+//<<<<<<< HEAD
 	public Image getImage(String fileName) {
 		Image image = null;
 		try {
@@ -289,17 +291,12 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	public void keyReleased(KeyEvent ke) {
 	}
 
-	public static void main(String[] args) {
-		final Splash splash = new Splash();
-		splash.showSplash();
-		final MainScreen mainScreen = new MainScreen();
-		mainScreen.setVisible(true);
-
-		/*
-		 * JFrame game = new Main(); game.setTitle("Tower Defense");
-		 * game.setResizable(false); game.setLocationRelativeTo(null);
-		 * game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 * game.setVisible(true);
-		 */
-	}
+public static void main(String[] args) {
+	final Splash splash = new Splash();
+	splash.showSplash();
+	final MainScreen mainScreen = new MainScreen();
+	mainScreen.setVisible(true);
 }
+}
+
+

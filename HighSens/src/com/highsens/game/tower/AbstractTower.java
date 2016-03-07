@@ -45,7 +45,7 @@ public abstract class AbstractTower {
 		changeRange();
 	}
 
-	private void changeRange() {
+	public void changeRange() {
 		range = (int) (range * 1.15);
 		xOffset = (int) (xOffset * 1.15);
 		yOffset = (int) (yOffset * 1.15);
