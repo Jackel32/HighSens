@@ -1,0 +1,39 @@
+﻿Merge branch 'KennethSprint3'
+
+# Conflicts:
+#	HighSens/src/com/highsens/game/GameData.java
+#	HighSens/src/com/highsens/game/GamePanel.java
+#	HighSens/src/com/highsens/game/Main.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
+#   (use "git pull" to update your local branch)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	deleted:    GameData.java
+#	modified:   GamePanel.java
+#	new file:   GameScreen.java
+#	modified:   LevelSelectScreen.java
+#	modified:   Main.java
+#	modified:   MainScreen.java
+#	new file:   ScreenManager.java
+#
+# Changes not staged for commit:
+#	modified:   tower/AbstractTower.java
+#
+# Untracked files:
+#	GameData.java
+#	Player.java
+#	monster/BloonMonster.java~KennethSprint3
+#
+

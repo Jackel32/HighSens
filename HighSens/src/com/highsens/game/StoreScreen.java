@@ -61,7 +61,7 @@ public class StoreScreen extends JFrame {
 	    cashPane.setLocation(388,277);
 	    cashPane.setOpaque(false);
 	    cashPane.setForeground(Color.WHITE);
-	    cashPane.setText("Game Cash: $" + player.getGameCash());
+	   // cashPane.setText("Game Cash: $" + player.getGameCash());
 	    
 	    (firstButton = generateJButton(29,18)).addActionListener(new ActionListener(){
 			@Override
