@@ -162,7 +162,7 @@ public class GamePanel extends JPanel {
 			Graphics2D g5 = (Graphics2D) graphics;
 			g5.setColor(Color.RED);
 			g5.setFont(new Font("Serif", Font.PLAIN, 16));
-			g5.drawString("Tower 1", 450, 240);
+			g5.drawString("ARCANE", 450, 240);
 			g5.drawString("50 Gold", 450, 330);
 			/////////////////////////////*/
 
@@ -172,7 +172,7 @@ public class GamePanel extends JPanel {
 			Graphics2D g6 = (Graphics2D) graphics;
 			g6.setColor(Color.RED);
 			g6.setFont(new Font("Serif", Font.PLAIN, 16));
-			g6.drawString("Tower 2", 530, 240);
+			g6.drawString("MAGIC", 530, 240);
 			g6.drawString("100 Gold", 530, 330);
 			/////////////////////////////*/
 
@@ -181,7 +181,7 @@ public class GamePanel extends JPanel {
 			/*
 			BUTTON
 			Graphics2D g7 = (Graphics2D) graphics;
-			g7.setColor(Color.yellow);
+			g7.setColor(Color.WHITE);
 			g7.fillRect(250, 295, 100, 30);
 			*//////////////////////////////
 
@@ -288,6 +288,7 @@ public class GamePanel extends JPanel {
 				gameoverScreen.setVisible(true);
 
 				gamescreen.setVisible(false);
+				main.setVisible(false);
 				//main.dispose();
 
 				gameover = false;

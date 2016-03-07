@@ -79,7 +79,7 @@ public class GameData implements IStrategy {
 	int fastMonsterCount = 0;
 
 	int bossCount = 0;
-	
+
 	int bloonMonsterCount = 0;
 
 	// Time variable to keep track of the bullet speed
@@ -95,45 +95,17 @@ public class GameData implements IStrategy {
 	///////////////////////////////
 	//
 	public GameData() {
-
-		///////////////////////////////
-		// Starts the timers for the Monsters and the Bullets
-		// currentTimeMillis();
-		// Returns the difference, measured in milliseconds, between the current
-		/////////////////////////////// time and midnight, January 1, 1970 UTC.
 		mStart = System.currentTimeMillis();
 		bStart = System.currentTimeMillis();
-		///////////////////////////////
-
-		// Returns a synchronized (thread-safe) list backed by the specified
-		// list.
 		figures = Collections.synchronizedList(new ArrayList<GameFigure>());
-
 		sellFigures = Collections.synchronizedList(new ArrayList<SellManager>());
 	}
 
-	///////////////////////////////
-	// An instance method in a subclass with the same signature (name, plus the
-	/////////////////////////////// number and the type of its parameters)
-	// and return type as an instance method in the superclass overrides the
-	/////////////////////////////// superclass's method.
 	@Override
-
-	///////////////////////////////
-	// This function is designed return a score based on the amount of lives the
-	/////////////////////////////// user has left at the end.
-	// **********BUG*********
-	// As a result of the end condition being (lives <= 0): Score will always be
-	/////////////////////////////// 0.
 	public int getScore() {
-		// Commented Out:
-		// score = lives * 5; <------------- BUG
 		return score;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
-	// Grants the Reguler Tower the ability to shoot.
 	public void shoot(GameFigure tower, GameFigure monster, int bulletCount) {
 		if(tower instanceof BlueTower){
 			shoot((BlueTower)tower, monster, ((BlueTower) tower).getBulletCount());
@@ -156,10 +128,7 @@ public class GameData implements IStrategy {
 			figures.add(f);
 		}
 	}
-	///////////////////////////////
 
-	///////////////////////////////
-	// Grants the Blue Tower the ability to shoot.
 	public void shoot(BlueTower tower, GameFigure monster, int bulletCount) {
 		// Instantiates a new Missile at the x and y location of the Blue Tower,
 		// color is blue
@@ -198,35 +167,23 @@ public class GameData implements IStrategy {
 		// Returns the current amount of lives
 		return lives;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public void setLives(int lives) {
-		// Sets the amount of lives with the paramater amount.
 		this.lives = lives;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public int getWaves() {
-		// Returns the current wave
 		return wave;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public void setWaves(int waves) {
-		// Sets the amount of waves with the parameter amount.
 		this.wave = waves;
 	}
-	///////////////////////////////
 
 	public static List<GameFigure> returnList() {
 		return figures;
 	}
 
-	///////////////////////////////
-	// Manages the money within the game.
 	public void moneyManager(String val, int money) {
 		switch (val) {
 		case "RegularTower":
@@ -299,11 +256,11 @@ public class GameData implements IStrategy {
 	public void setBloonMonsterCount(int bloonMonsterCount) {
 		this.bloonMonsterCount = bloonMonsterCount;
 	}
-	
+
 	public int getBloonMonsterCount() {
 		return bloonMonsterCount;
 	}
-	
+
 	public int getBossCount() {
 		return bossCount;
 	}
@@ -341,26 +298,6 @@ public class GameData implements IStrategy {
 						figures.add(new BloonMonster(-50, 320, this));
 						creepCount++;
 						bloonMonsterCount++;
-						// This part is limits regular monsters to half the wave
-						// size
-/*						if (creepCount < waveSize / 2) {
-							// Adds a monster to the screen
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 250, this));
-							creepCount++;
-							bossCount++;
-						}*/
 					}
 				}
 				break;

@@ -27,7 +27,7 @@ public abstract class AbstractTower {
 	protected void drawRange(Graphics g, float x, float y) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setPaint(Color.green);
+		g2d.setPaint(Color.BLUE);
 		g2d.drawOval((int) x - xOffset, (int) y - yOffset, range, range);
 	}
 
