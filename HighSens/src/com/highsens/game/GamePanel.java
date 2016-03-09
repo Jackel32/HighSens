@@ -178,26 +178,27 @@ public class GamePanel extends JPanel {
 
 			///////////////////////////////
 			// Creates a Yellow box
-			// BUTTON
+			/*
+			BUTTON
 			Graphics2D g7 = (Graphics2D) graphics;
 			g7.setColor(Color.yellow);
 			g7.fillRect(250, 295, 100, 30);
-			///////////////////////////////
+			*//////////////////////////////
 
 			///////////////////////////////
-			// Creates text for the Yellow Button
+			/* Creates text for the Yellow Button
 			Graphics2D g8 = (Graphics2D) graphics;
 			g8.setColor(Color.BLACK);
 			g8.setFont(new Font("Serif", Font.PLAIN, 20));
 			//if(main.nextWaveClicked == false) {g8.drawString("Start Game", 255, 317); }
 			//else {g8.drawString("Next Wave", 255, 317);}
-			///////////////////////////////
+			*///////////////////////////////
 
 			///////////////////////////////
-			// Creates the mute button
+			/* Creates the mute button
 			Graphics2D g16 = (Graphics2D) graphics;
 			g16.drawImage(mute, 10, 295, this);
-			///////////////////////////////
+			*//////////////////////////////
 
 			//////////////////////////////
 			Graphics2D g12 = (Graphics2D) graphics;

@@ -113,7 +113,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		gamePanel.setFocusable(true);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 331, 573, 131);
+		panel.setBounds(0, 336, 573, 131);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -121,7 +121,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		arrowToggle.setEnabled(false);
 		arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
-		arrowToggle.setBounds(83, 0, 173, 88);
+		arrowToggle.setBounds(138, 24, 91, 77);
 		//redToggle.setIcon(new ImageIcon (imagePath + separator + "images" + separator + "BlueTower.png"));
 		arrowToggle.addActionListener(this);
 		panel.add(arrowToggle);
@@ -129,7 +129,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		blueToggle = new JToggleButton("");
 		blueToggle.setEnabled(false);
 		blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
-		blueToggle.setBounds(307, 0, 173, 88);
+		blueToggle.setBounds(357, 24, 77, 77);
 		blueToggle.addActionListener(this);
 		panel.add(blueToggle);
 		
@@ -142,14 +142,24 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setBounds(101, 87, 155, 31);
+		lblNewLabel.setBounds(104, 100, 155, 31);
 		panel.add(lblNewLabel);
 		
 		JLabel lblBlueTowerCost = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
 		lblBlueTowerCost.setVerticalAlignment(SwingConstants.TOP);
 		lblBlueTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBlueTowerCost.setBounds(317, 87, 155, 31);
+		lblBlueTowerCost.setBounds(320, 100, 155, 31);
 		panel.add(lblBlueTowerCost);
+		
+		JButton btnWave = new JButton("Next Wave");
+		btnWave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gameData.setWaves(gameData.wave = gameData.wave + 1);
+				gameData.resetCreepCount();
+			}
+		});
+		btnWave.setBounds(231, 0, 110, 23);
+		panel.add(btnWave);
 		
 		
 		
