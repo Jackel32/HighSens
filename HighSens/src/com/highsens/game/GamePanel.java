@@ -32,7 +32,6 @@ public class GamePanel extends JPanel {
 	private Image BloonMonsterImage;
 	private Image BossImage;
 	private Image mute;
-	public Main main;
 
 	public GamePanel(Animator animator, GameData gameData, GameScreen gameScreen) {
 		///////////////////////////////

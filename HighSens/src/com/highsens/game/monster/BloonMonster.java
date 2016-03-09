@@ -42,8 +42,8 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		this.maxHealth = 100;
 		this.health = maxHealth;
 		this.speed = 8;
-		// String imagePath = System.getProperty("user.dir");
-		// String separator = System.getProperty("file.separator");
+		String imagePath = System.getProperty("user.dir");
+		String separator = System.getProperty("file.separator");
 		AudioPlayer.loadClip("pop", "sounds/pop.wav");
 	}
 

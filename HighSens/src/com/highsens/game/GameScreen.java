@@ -23,21 +23,15 @@ import javax.swing.JPanel;
 import com.highsens.game.tower.AbstractTower;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
-import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import java.awt.Color;
 import java.awt.SystemColor;
-import javax.swing.JToolBar;
-import javax.swing.UIManager;
 import javax.swing.JMenuBar;
 import java.awt.FlowLayout;
 import javax.swing.JToggleButton;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.Label;
+
 import javax.swing.JLabel;
 
 public class GameScreen extends JFrame implements ActionListener, MouseListener, KeyListener {
@@ -51,6 +45,14 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private final JToggleButton blueToggle;
 	private final JToggleButton muteButton;
 	private final JPanel southPanel;
+	private boolean menuVisible;
+	private String imagePath = System.getProperty("user.dir");
+	private String separator = System.getProperty("file.separator");
+	Label LevelPanel = new Label();
+	Label RangePanel = new Label();
+	Label imageLabel = new Label();
+	Label imageLabel2 = new Label();
+	Label imageLabel3 = new Label();
 	private static ArrowTower ArrowTower;
 	private static BlueTower BlueTower;
 	public static ScreenManager GUI;
@@ -60,19 +62,20 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	boolean BluePlaceable = false;
 	private int sellPosition = 0;
 	private Image mute;
-	
-
+	public boolean nextWaveClicked;
+	private JButton menuCloseButton;
 	int muteCount = 0;
 	private JTextField txtReady;
 	
 	public GameScreen() {
+		nextWaveClicked = false;
 		TowerPosition = new ArrayList();
-		setSize(599, 498);
+		setSize(800, 511);
 		Container c = getContentPane();
 		animator = new Animator();
 		gameData = new GameData();
 		gamePanel = new GamePanel(animator, gameData, this);
-		gamePanel.setBounds(0, 0, 584, 329);
+		gamePanel.setBounds(0, 0, 573, 325);
 		animator.setGamePanel(gamePanel);
 		animator.setGameData(gameData);
 		getContentPane().setLayout(null);
@@ -80,7 +83,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		String separator = System.getProperty("file.separator");
 		
 			    southPanel = new JPanel();
-			    southPanel.setBounds(25, 95, 548, 129);
+			    southPanel.setBounds(25, 95, 531, 131);
 			    getContentPane().add(southPanel);
 			    southPanel.setBackground(SystemColor.activeCaptionBorder);
 			    southPanel.setLayout(null);
@@ -102,8 +105,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			    
 			    playButton.addActionListener(this);
 			    quitButton.addActionListener(this);
-			    
-			    
+			    menuCloseButton = new JButton("Cancel");	    
 
 		c.add(gamePanel);
 
@@ -111,7 +113,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		gamePanel.setFocusable(true);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 331, 583, 129);
+		panel.setBounds(0, 331, 573, 131);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -132,7 +134,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		panel.add(blueToggle);
 		
 		muteButton = new JToggleButton("");
-		muteButton.setBounds(529, 11, 44, 45);
+		muteButton.setBounds(512, 11, 44, 45);
 		muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
 		muteButton.addActionListener(this);
 		panel.add(muteButton);
@@ -154,62 +156,91 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 
 	}
 
-	private void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {
-		Iterator<GameFigure> iterator = gameData.figures.iterator();
-		int countPosition = 0;
-		boolean isCleanofSellBox = true;
-		boolean flag = false;
+	private synchronized void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {
+		synchronized (gameData.figures) {
+			Iterator<GameFigure> iterator = gameData.figures.iterator();
+			int countPosition = 0;
+			boolean isCleanofSellBox = true;
+			boolean flag = false;
 
-		while (iterator.hasNext()) {
-			GameFigure gameFigure = iterator.next();
-			if (gameFigure instanceof AbstractTower) {
-				AbstractTower abstractTowerGameFigure = (AbstractTower) gameFigure;
-				if (abstractTowerGameFigure.collision(pressedXposition, pressedYposition)) {
-					//System.out.println("YOU CLICKED ON THE TOWER");
-					abstractTowerGameFigure.changeRange();
-					flag = true;
-					String imagePath = System.getProperty("user.dir");
-					String separator = System.getProperty("file.separator");
-					Image newImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
-					abstractTowerGameFigure.setTowerImage(newImage);
-					
-					gameData.sellFigures.clear();
-					gameData.sellFigures.add(new SellManager(gameData.figures.get(countPosition).getX(),gameData.figures.get(countPosition).getY()));
-					sellPosition = countPosition;
-					isCleanofSellBox = false;
-					
-				}else if (!gameData.sellFigures.isEmpty() && isCleanofSellBox){
-					
-					if (gameData.sellFigures.get(0).collisionManager(pressedXposition,pressedYposition)){
-						
-						gameData.figures.get(sellPosition).setState(0);
-						gameData.sellFigures.clear();
+			while (iterator.hasNext()) {
+				GameFigure gameFigure = iterator.next();
+				if (gameFigure instanceof AbstractTower) {
+					AbstractTower abstractTowerGameFigure = (AbstractTower) gameFigure;
 
-						
-					}else{
-						
+					if (abstractTowerGameFigure.collision(pressedXposition, pressedYposition)) {
+						if (!menuVisible) {
+							drawMenuForTower(abstractTowerGameFigure);
+						} else {
+							menuVisible = true;
+						}
+
+						abstractTowerGameFigure.upgradeTower();
+
+						Image newImage = getImage(imagePath + separator + "images" + separator + "RedTower.png");
+
+						abstractTowerGameFigure.setTowerImage(newImage);
+
 						gameData.sellFigures.clear();
+						gameData.sellFigures.add(new SellManager(gameData.figures.get(countPosition).getX(),
+								gameData.figures.get(countPosition).getY()));
+						sellPosition = countPosition;
+						isCleanofSellBox = false;
+						flag = true;
+					} else if (!gameData.sellFigures.isEmpty() && isCleanofSellBox) {
+
+						if (gameData.sellFigures.get(0).collisionManager(pressedXposition, pressedYposition)) {
+
+							gameData.figures.get(sellPosition).setState(0);
+							gameData.sellFigures.clear();
+
+						} else {
+
+							gameData.sellFigures.clear();
+						}
+
 					}
-					
 				}
-			}
-			
-			if(gameFigure instanceof ArrowMissile && flag){
-				ArrowMissile abstractArrowMissileFigure = (ArrowMissile) gameFigure;
-				abstractArrowMissileFigure.setUNIT_TRAVEL_DISTANCE();
-				flag = false;
-			}
-			else if(gameFigure instanceof Missile && flag){
-				Missile abstractMissileFigure = (Missile) gameFigure;
-				abstractMissileFigure.setUNIT_TRAVEL_DISTANCE();
-				flag = false;
-			}
-			
-			countPosition++;
-		}
 
+				if (gameFigure instanceof ArrowMissile && flag) {
+					ArrowMissile abstractArrowMissileFigure = (ArrowMissile) gameFigure;
+					abstractArrowMissileFigure.setUNIT_TRAVEL_DISTANCE();
+					flag = false;
+				} else if (gameFigure instanceof Missile && flag) {
+					Missile abstractMissileFigure = (Missile) gameFigure;
+					abstractMissileFigure.setUNIT_TRAVEL_DISTANCE();
+					flag = false;
+				}
+				countPosition++;
+			}
+		}
 	}
 
+	public void drawMenuForTower(AbstractTower abstractTowerGameFigure) {
+
+		RangePanel.setText("Range: " + abstractTowerGameFigure.getRange());
+		RangePanel.setBounds(700, 100, 200, 100);
+		LevelPanel.setText("Level: " + abstractTowerGameFigure.getLevel());
+		LevelPanel.setBounds(700, 0, 100, 100);
+
+		imageLabel.setText("image: " + abstractTowerGameFigure.getLevel());
+		imageLabel.setBounds(600, 0, 100, 100);
+
+		// Image newImage = getImage(imagePath + separator + "images" +
+		// separator + "RedTower.png");
+
+		imageLabel2.setText("image2: " + abstractTowerGameFigure.getLevel());
+		imageLabel2.setBounds(600, 100, 100, 100);
+
+		imageLabel3.setText("image3: " + abstractTowerGameFigure.getLevel());
+		imageLabel3.setBounds(600, 200, 100, 100);
+
+		gamePanel.add(imageLabel);
+		gamePanel.add(imageLabel2);
+		gamePanel.add(imageLabel3);
+		gamePanel.add(RangePanel);
+		gamePanel.add(LevelPanel);
+	}
 
 
 	public Image getImage(String fileName) {
@@ -235,6 +266,12 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		} else if (e.getSource() == quitButton) {
 			animator.running = false;
 		}
+		
+		if (e.getSource() == menuCloseButton) {
+			Label closed = new Label("ZZZZZZZZZZZZZZZZZ");
+			closed.setBounds(0, 0, 600, 400);
+		}
+			
 		
 		else if(e.getSource() == arrowToggle)
 		{

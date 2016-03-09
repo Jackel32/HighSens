@@ -73,8 +73,8 @@ public class MainScreen extends JFrame {
 				final StorePanel store = new StorePanel(animator, gamedata);
 				store.setVisible(true);
 				setVisible(false);
-				//final StoreScreen storeScreen = new StoreScreen();
-				//storeScreen.setVisible(true);
+				final StoreScreen storeScreen = new StoreScreen();
+				storeScreen.setVisible(true);
 				//setVisible(false);
 			}
 		});
