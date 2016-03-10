@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -66,6 +67,9 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private JButton menuCloseButton;
 	int muteCount = 0;
 	private JTextField txtReady;
+	ImageIcon arrowTowerIcon = createImageIcon("ArrowTower.png");
+	ImageIcon blueTowerIcon = createImageIcon("BlueTower.png");
+	ImageIcon muteButtonIcon = createImageIcon("mute.png");
 	
 	public GameScreen() {
 		nextWaveClicked = false;
@@ -117,25 +121,25 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		arrowToggle = new JToggleButton("");
+		arrowToggle = new JToggleButton("", arrowTowerIcon);
 		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		arrowToggle.setEnabled(false);
-		arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
+		//arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
 		arrowToggle.setBounds(138, 24, 91, 77);
 		//redToggle.setIcon(new ImageIcon (imagePath + separator + "images" + separator + "BlueTower.png"));
 		arrowToggle.addActionListener(this);
 		panel.add(arrowToggle);
 		
-		blueToggle = new JToggleButton("");
+		blueToggle = new JToggleButton("", blueTowerIcon);
 		blueToggle.setEnabled(false);
-		blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
+		//blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
 		blueToggle.setBounds(357, 24, 77, 77);
 		blueToggle.addActionListener(this);
 		panel.add(blueToggle);
 		
-		muteButton = new JToggleButton("");
+		muteButton = new JToggleButton("", muteButtonIcon);
 		muteButton.setBounds(512, 11, 44, 45);
-		muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
+		//muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
 		muteButton.addActionListener(this);
 		panel.add(muteButton);
 		
@@ -165,6 +169,11 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		
 		
 
+	}
+
+	private ImageIcon createImageIcon(String path) {
+		java.net.URL imgURL = GameScreen.class.getResource(path);
+	    return new ImageIcon(imgURL);
 	}
 
 	private synchronized void increaseSizeOfTowerRangeWhenOverlapped(int pressedXposition, int pressedYposition) {

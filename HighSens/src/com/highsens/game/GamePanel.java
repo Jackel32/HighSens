@@ -58,7 +58,7 @@ public class GamePanel extends JPanel {
 		RegularMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster1.png");
 		FastMonsterImage = getImage(imagePath + separator + "images" + separator + "fastMonster1.png");
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
-		mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
+		//mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
 
 		AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
 	}
