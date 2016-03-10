@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 
@@ -75,19 +76,19 @@ public class AudioPlayer {
 		try {
 			// convert the AudioInputStream to PCM format -- needed for loading
 			// mp3 files and files in other formats
-			// audioInputStream = convertToPCM(audioInputStream);
+			 audioInputStream = convertToPCM(audioInputStream);
 
 			// get a line for the Clip and load the audio from the input stream
-			// DataLine.Info info = new DataLine.Info(Clip.class,
-			// audioInputStream.getFormat());
-			// Clip clip = (Clip) AudioSystem.getLine(info);
-			// clip.open(audioInputStream);
+			 DataLine.Info info = new DataLine.Info(Clip.class,
+			 audioInputStream.getFormat());
+			 Clip clip = (Clip) AudioSystem.getLine(info);
+			 clip.open(audioInputStream);
 
-			// AudioData ad = new AudioData();
-			// ad.audioInputStream = audioInputStream;
-			// ad.dataLine = clip;
-			//
-			// soundMap.put(soundName, ad);
+			 AudioData ad = new AudioData();
+			 ad.audioInputStream = audioInputStream;
+			 ad.dataLine = clip;
+			
+			 soundMap.put(soundName, ad);
 		} catch (Exception e) {
 			e.printStackTrace();
 			retVal = false;
@@ -220,28 +221,27 @@ public class AudioPlayer {
 	 *            <code>false</code> if the sound should play once
 	 */
 	public static void play(String soundName, boolean loop) {
-		// AudioData ad = soundMap.get(soundName);
-		// if (ad != null) {
-		// if ((ad.thread == null) || (!ad.thread.isAlive())) {
-		// if (ad.dataLine instanceof SourceDataLine) {
-		// PlayStreamThread pt = new PlayStreamThread(ad.audioInputStream,
-		// (SourceDataLine) ad.dataLine);
-		// ad.thread = pt;
-		// } else if (ad.dataLine instanceof Clip) {
-		// PlayClipThread pt = new PlayClipThread((Clip) ad.dataLine);
-		// ad.thread = pt;
-		// } else {
-		// return;
-		// }
-		//
-		// ad.thread.setLooping(loop);
-		// ad.thread.start();
-		// } else {
-		// ad.thread.stopSound();
-		// ad.thread.setLooping(loop);
-		// ad.thread.playSound();
-		// }
-		// }
+		AudioData ad = soundMap.get(soundName);
+		if (ad != null) {
+			if ((ad.thread == null) || (!ad.thread.isAlive())) {
+				if (ad.dataLine instanceof SourceDataLine) {
+					PlayStreamThread pt = new PlayStreamThread(ad.audioInputStream, (SourceDataLine) ad.dataLine);
+					ad.thread = pt;
+				} else if (ad.dataLine instanceof Clip) {
+					PlayClipThread pt = new PlayClipThread((Clip) ad.dataLine);
+					ad.thread = pt;
+				} else {
+					return;
+				}
+
+				ad.thread.setLooping(loop);
+				ad.thread.start();
+			} else {
+				ad.thread.stopSound();
+				ad.thread.setLooping(loop);
+				ad.thread.playSound();
+			}
+		}
 	}
 
 	/**

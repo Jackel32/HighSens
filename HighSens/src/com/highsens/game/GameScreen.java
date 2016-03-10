@@ -117,7 +117,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		arrowToggle = new JToggleButton("\r\n");
+		arrowToggle = new JToggleButton("");
 		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		arrowToggle.setEnabled(false);
 		arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
@@ -151,11 +151,12 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		lblBlueTowerCost.setBounds(320, 100, 155, 31);
 		panel.add(lblBlueTowerCost);
 		
-		JButton btnWave = new JButton("Next Wave");
+		JButton btnWave = new JButton("Start Wave");
 		btnWave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				gameData.setWaves(gameData.wave = gameData.wave + 1);
 				gameData.resetCreepCount();
+				btnWave.setText("Next Wave");
 			}
 		});
 		btnWave.setBounds(231, 0, 110, 23);
@@ -326,10 +327,10 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		 //System.out.println("Y: " + y);
 
 		// Limits the clickable range to the button
-		if (x >= 250 && x <= 350 && y >= 295 && y <= 325) {
-			gameData.setWaves(gameData.wave = gameData.wave + 1);
-			gameData.resetCreepCount();
-		}
+		//if (x >= 250 && x <= 350 && y >= 295 && y <= 325) {
+		//	gameData.setWaves(gameData.wave = gameData.wave + 1);
+		//	gameData.resetCreepCount();
+		//}
 
 		//if (x >= 520 && x <= 590 && y >= 250 && y <= 320) { //originally for blueTower placement
 
@@ -358,7 +359,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
 					&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
 				if (BluePlaceable == true) {
-					gameData.moneyManager("tower2", gameData.getMoney());
+					gameData.moneyManager("BlueTower", gameData.getMoney());
 					BlueTower = new BlueTower(x - 25, y - 50, gameData);
 					gameData.figures.add(BlueTower);
 					BluePlaceable = false;
@@ -369,7 +370,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
 					&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
 				if (ArrowPlaceable == true) {
-					gameData.moneyManager("tower1", gameData.getMoney());
+					gameData.moneyManager("RegularTower", gameData.getMoney());
 					ArrowTower = new ArrowTower(x - 25, y - 50, gameData);
 					gameData.figures.add(ArrowTower);
 					ArrowPlaceable = false;
