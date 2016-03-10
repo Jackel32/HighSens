@@ -130,37 +130,47 @@ public class GameData implements IStrategy {
 
 	///////////////////////////////
 	// Grants the Reguler Tower the ability to shoot.
-	public void shoot(float x, float y, GameFigure gameFigure) {
-		// Instantiates a new Missile at the x and y location of the Regular
-		// Tower, color is black
-		ArrowMissile f = new ArrowMissile(gameFigure.getXofMissileShoot(), gameFigure.getYofMissileShoot(), Color.BLACK);
-		// Sets the target of the missile via Vector math
-		f.setTarget((int) x, (int) y);
-		// Creates a random seed generator
-		Random RandGen1 = new Random();
-		// Finds a random number between
-		int size = RandGen1.nextInt(15); // int size = (int) (Math.random() *
-											// 10) + 5;
-		// Sets the size of the explosion to the random number
-		f.setExplosionMaxSize(size);
-		// Adds the explosion into the figures arraylist to be rendered.
-		figures.add(f);
+	public void shoot(GameFigure tower, GameFigure monster) {
+		if(tower instanceof BlueTower){
+			shoot((BlueTower)tower, monster);
+		}
+		else{
+			// Instantiates a new Missile at the x and y location of the Regular
+			// Tower, color is black
+			ArrowMissile f = new ArrowMissile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLACK);
+			// Sets the target of the missile via Vector math
+			f.setTarget((int) monster.getX(), (int) monster.getY());
+			// Creates a random seed generator
+			Random RandGen1 = new Random();
+			// Finds a random number between
+			int size = RandGen1.nextInt(15); // int size = (int) (Math.random()
+												// *
+												// 10) + 5;
+			// Sets the size of the explosion to the random number
+			f.setExplosionMaxSize(size);
+			// Adds the explosion into the figures arraylist to be rendered.
+			figures.add(f);
+		}
 	}
 	///////////////////////////////
 
 	///////////////////////////////
 	// Grants the Blue Tower the ability to shoot.
-	public void shoot(float x, float y, BlueTower tower) {
+	public void shoot(BlueTower tower, GameFigure monster) {
 		// Instantiates a new Missile at the x and y location of the Blue Tower,
 		// color is blue
+		if (tower.getCurrentTarget() == null) {
+			tower.setCurrentTarget(monster);
+		}
+
 		Missile f = new Missile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLUE);
 		// Sets the target of the missile via Vector math
-		f.setTarget((int) x, (int) y);
+		f.setTarget((int) tower.getCurrentTarget().getX(), (int) tower.getCurrentTarget().getY());
 		// Creates a random seed generator
 		Random RandGen2 = new Random();
 		// Finds a random number between
 		int size = RandGen2.nextInt(15); // int size = (int) (Math.random() *
-											// 10) + 5;
+		// 10) + 5;
 		// Sets the size of the explosion to the random number
 		f.setExplosionMaxSize(size);
 		// Adds the explosion into the figures arraylist to be rendered.
@@ -613,7 +623,7 @@ public class GameData implements IStrategy {
 						if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
 								figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ){
 							if(figures.get(i).collision(figures.get(j))){
-								shoot((float) figures.get(j).getX(), (float) figures.get(j).getY(), figures.get(i));
+								shoot(figures.get(i), figures.get(j));
 							}
 						}
 					}

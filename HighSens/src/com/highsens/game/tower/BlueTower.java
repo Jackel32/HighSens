@@ -22,6 +22,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 
 	Monster m;
 	GameData gd;
+	private GameFigure currentTarget;
 
 	public BlueTower(float x, float y, GameData gd) {
 		this.gd = gd;
@@ -70,7 +71,11 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public void update() {
-
+		if (currentTarget != null && 
+				(currentTarget.getState() == STATE_DONE ||
+				!this.collision(currentTarget))){
+			currentTarget = null;
+		}
 		switch (state) {
 
 		case STATE_DONE:
@@ -138,5 +143,12 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	public boolean contains(float f, float g) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	public GameFigure getCurrentTarget() {
+		return currentTarget;
+	}
+
+	public void setCurrentTarget(GameFigure currentTarget) {
+		this.currentTarget = currentTarget;
 	}
 }
