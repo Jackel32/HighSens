@@ -70,19 +70,19 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 			moveRight();
 			break;
 		case PATH_1:
-			moveUp();
+			moveRight();
 			break;
 		case PATH_2:
 			moveRight();
 			break;
 		case PATH_3:
-			moveDown();
+			moveRight();
 			break;
 		case PATH_4:
 			moveRight();
 			break;
 		case PATH_5:
-			moveUp();
+			moveRight();
 			break;
 		case PATH_6:
 			moveRight();
@@ -104,31 +104,32 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	public void updateState() {
 		switch (state) {
 		case PATH_0:
-			if (x >= 20)
+			if (x >= 69)
 				state = PATH_1;
 			break;
 		case PATH_1:
-			if (y <= 7)
+			if (x >= 87)
 				state = PATH_2;
 			break;
 		case PATH_2:
-			if (x >= 140)
+			if (x >= 200)
 				state = PATH_3;
 			break;
 		case PATH_3:
-			if (y >= 150)
+			if (x >= 240)
 				state = PATH_4;
 			break;
 		case PATH_4:
-			if (x >= 300)
+			if (x >= 350)
 				state = PATH_5;
 			break;
 		case PATH_5:
-			if (y <= 70)
+			if (x >= 560)
 				state = PATH_6;
 			break;
+			
 		case PATH_6:
-			if (x >= 600)
+			if (x >= 1250)
 				state = LIFE_LOST;
 		}
 	}

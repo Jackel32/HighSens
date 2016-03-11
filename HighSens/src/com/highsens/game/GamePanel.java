@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
 
 	private static final long serialVersionUID = -6235582196874360230L;
-	public static final int PWIDTH = 600;
-	public static final int PHEIGHT = 400;
+	public static final int PWIDTH = 1500;
+	public static final int PHEIGHT = 800;
 	private Animator animator;
 	private GameData gameData;
 	private GameScreen gamescreen;
@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {
 		setBackground(Color.gray);
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
-		mapImage = getImage(imagePath + separator + "images" + separator + "map.png");
+		mapImage = getImage(imagePath + separator + "images" + separator + "map_new.png");
 
 		// Adds the Regular Tower image from the images director with a distinct
 		// seperator and path

@@ -74,12 +74,13 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	public GameScreen() {
 		nextWaveClicked = false;
 		TowerPosition = new ArrayList();
-		setSize(800, 511);
+		setSize(1500, 800);
 		Container c = getContentPane();
 		animator = new Animator();
 		gameData = new GameData();
 		gamePanel = new GamePanel(animator, gameData, this);
-		gamePanel.setBounds(0, 0, 573, 325);
+		//gamePanel.setBounds(0, 0, 573, 325);
+		gamePanel.setBounds(0, 0, 1500, 590);
 		animator.setGamePanel(gamePanel);
 		animator.setGameData(gameData);
 		getContentPane().setLayout(null);
@@ -117,7 +118,8 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		gamePanel.setFocusable(true);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 336, 573, 131);
+		//panel.setBounds(0, 336, 573, 131);
+		panel.setBounds(0, 600, 573, 131);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -365,8 +367,8 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		// clicked the tower
 		// Additionally only allow the placement of towers on any buttons.
 		if (gameData.money >= 100 && BluePlaceable == true) {
-			if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
-					&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
+			//if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
+			//		&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
 				if (BluePlaceable == true) {
 					gameData.moneyManager("BlueTower", gameData.getMoney());
 					BlueTower = new BlueTower(x - 25, y - 50, gameData);
@@ -374,10 +376,10 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					BluePlaceable = false;
 					blueToggle.setSelected(false);
 				}
-			}
+			//}
 		} else if (gameData.money >= 50 && ArrowPlaceable == true) {
-			if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
-					&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
+			//if (!(x >= 520 && x <= 590 && y >= 250 && y <= 320) && !(x >= 250 && x <= 350 && y >= 295 && y >= 325)
+			//		&& !(x >= 440 && x <= 530 && y >= 250 && y <= 320)) {
 				if (ArrowPlaceable == true) {
 					gameData.moneyManager("RegularTower", gameData.getMoney());
 					ArrowTower = new ArrowTower(x - 25, y - 50, gameData);
@@ -385,7 +387,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					ArrowPlaceable = false;
 					arrowToggle.setSelected(false);
 				}
-			}
+			//}
 		}
 	}
 	

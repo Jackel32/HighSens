@@ -330,7 +330,7 @@ public class GameData implements IStrategy {
 				while (monsterElapsedTime > 2000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						figures.add(new Boss(-50, 200, this));
+						figures.add(new BloonMonster(-50, 320, this));
 						creepCount++;
 						bloonMonsterCount++;
 						// This part is limits regular monsters to half the wave
@@ -349,7 +349,7 @@ public class GameData implements IStrategy {
 							creepCount++;
 							bloonMonsterCount++;*/
 						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
+							figures.add(new Boss(-50, 250, this));
 							creepCount++;
 							bossCount++;
 						}
@@ -361,7 +361,7 @@ public class GameData implements IStrategy {
 				if (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						figures.add(new BloonMonster(-50, 200, this));
+						figures.add(new BloonMonster(-50, 320, this));
 						creepCount++;
 						bloonMonsterCount++;
 					/*if (creepCount <= waveSize) {
@@ -391,26 +391,26 @@ public class GameData implements IStrategy {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
 						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
+							figures.add(new RegularMonster(-50, 320, this));
 							creepCount++;
 							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
+							figures.add(new FastMonster(-50, 320, this));
 							creepCount++;
 							fastMonsterCount++;
 						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
+							figures.add(new BloonMonster(-50, 320, this));
 							creepCount++;
 							bloonMonsterCount++;
 						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
+							figures.add(new Boss(-50, 250, this));
 							creepCount++;
 							bossCount++;
 						}
 					}
 				}
 				break;
-			case 4:
+/*			case 4:
 				waveSize = 10;
 				if (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
@@ -595,7 +595,7 @@ public class GameData implements IStrategy {
 						bossCount++;
 					}
 				}
-				break;
+				break;*/
 			}
 		}
 	}

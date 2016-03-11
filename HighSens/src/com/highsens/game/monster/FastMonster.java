@@ -68,19 +68,19 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 			moveRight();
 			break;
 		case PATH_1:
-			moveUp();
+			moveRight();
 			break;
 		case PATH_2:
 			moveRight();
 			break;
 		case PATH_3:
-			moveDown();
+			moveRight();
 			break;
 		case PATH_4:
 			moveRight();
 			break;
 		case PATH_5:
-			moveUp();
+			moveRight();
 			break;
 		case PATH_6:
 			moveRight();
@@ -106,7 +106,7 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 				state = PATH_1;
 			break;
 		case PATH_1:
-			if (y <= 87)
+			if (x >= 87)
 				state = PATH_2;
 			break;
 		case PATH_2:
@@ -114,7 +114,7 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 				state = PATH_3;
 			break;
 		case PATH_3:
-			if (y >= 240)
+			if (x >= 240)
 				state = PATH_4;
 			break;
 		case PATH_4:
@@ -122,11 +122,12 @@ public class FastMonster extends AbstractMonster implements Monster, GameFigure,
 				state = PATH_5;
 			break;
 		case PATH_5:
-			if (y <= 160)
+			if (x >= 560)
 				state = PATH_6;
 			break;
+			
 		case PATH_6:
-			if (x >= 600)
+			if (x >= 1250)
 				state = LIFE_LOST;
 		}
 	}

@@ -56,7 +56,7 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	public Main() {
 		nextWaveClicked = false;
 		TowerPosition = new ArrayList();
-		setSize(800, 400);
+		setSize(1305, 850);
 		Container c = getContentPane();
 		animator = new Animator();
 		gameData = new GameData();
