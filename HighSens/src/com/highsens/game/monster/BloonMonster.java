@@ -270,4 +270,16 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		return 0;
 	}
 
+	@Override
+	public void setIsAngry(boolean t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsAngry() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

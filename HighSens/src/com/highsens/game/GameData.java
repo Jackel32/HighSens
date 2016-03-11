@@ -324,13 +324,13 @@ public class GameData implements IStrategy {
 			switch (n) {
 			case 1:
 				// How many monsters
-				waveSize = 1000;
+				waveSize = 2;
 
 				// this staggers the monster creation
-				while (monsterElapsedTime > 1000) {
+				while (monsterElapsedTime > 2000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						figures.add(new BloonMonster(-50, 200, this));
+						figures.add(new Boss(-50, 200, this));
 						creepCount++;
 						bloonMonsterCount++;
 						// This part is limits regular monsters to half the wave
@@ -347,14 +347,14 @@ public class GameData implements IStrategy {
 						} else if (creepCount <= waveSize) {
 							figures.add(new BloonMonster(-50, 200, this));
 							creepCount++;
-							bloonMonsterCount++;
+							bloonMonsterCount++;*/
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 120, this));
 							creepCount++;
 							bossCount++;
-						}*/
+						}
 					}
-				}
+				//}
 				break;
 			case 2:
 				waveSize = 6;
@@ -623,7 +623,16 @@ public class GameData implements IStrategy {
 						if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
 								figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ){
 							if(figures.get(i).collision(figures.get(j))){
-								shoot(figures.get(i), figures.get(j));
+								if(figures.get(j).getIsAngry()){
+									if(!figures.get(j).collision(figures.get(i))){
+										//shoot(figures.get(i), figures.get(j));
+									}
+									else{
+										shoot(figures.get(i), figures.get(j));
+									}
+								} else {
+									shoot(figures.get(i), figures.get(j));
+								}
 							}
 						}
 					}

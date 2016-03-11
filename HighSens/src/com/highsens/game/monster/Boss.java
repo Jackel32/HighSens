@@ -1,7 +1,10 @@
 package com.highsens.game.monster;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 
 import javax.imageio.ImageIO;
@@ -20,6 +23,9 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	private int state;
 	public float x, y;
 	private int buffCount = 0;
+	private boolean isAngry = false; 
+	public MonsterState curry;
+	public boolean collision;
 
 	public Boss(float x, float y, GameData gd) {
 		this.gd = gd;
@@ -33,6 +39,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 		String separator = System.getProperty("file.separator");
 		bossImage = getImage(imagePath + separator + "images" + separator + "boss.png");
 		AudioPlayer.loadClip("pop", "sounds/pop.wav");
+		curry = new General();
 	}
 
 	@Override
@@ -49,6 +56,8 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 
 	@Override
 	public void render(Graphics g) {
+		
+		curry.render(g, this);
 		drawHealthBar(g, x, y);
 		g.drawImage(bossImage, (int) x, (int) y, null);
 	}
@@ -188,6 +197,8 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	@Override
 	public void updateHealth() {
 		health -= 5;
+		curry.updatehealth(this);
+		
 		if (health <= 0) {
 			state = STATE_DONE;
 		} else if ((health >= (health / 4) && (health <= (health / 4) + 5))) {
@@ -201,6 +212,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	public void getAngry() {
 		health += 1000;
 		speed += 2;
+		setIsAngry(true);
 	}
 
 	public int getScore() {
@@ -208,8 +220,10 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	}
 
 	@Override
-	public boolean collision(GameFigure m) {
-		return false;
+	public boolean collision(GameFigure t) {
+		
+		collision = curry.collision(t);
+		return collision;
 
 	}
 
@@ -227,6 +241,19 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	public void setY(float y) {
 		this.y = y;
 	}
+	
+	
+	@Override
+	public void setIsAngry(boolean angry){
+		
+		this.isAngry = angry;
+	}
+	
+	@Override
+	public boolean getIsAngry(){
+		
+		return isAngry;
+	}
 
 	@Override
 	public float getXofMissileShoot() {
@@ -239,16 +266,17 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	@Override
-	public void setLevel(int level) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public int getLevel() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public void setLevel(int level) {
+		// TODO Auto-generated method stub
+		
+	}
 }
+

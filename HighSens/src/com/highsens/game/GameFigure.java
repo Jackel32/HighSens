@@ -17,6 +17,9 @@ public interface GameFigure {
 	public boolean contains(float f, float g);
 	public int getLevel();
 	public void setLevel(int level);
+    public void setIsAngry(boolean t);
+    public boolean getIsAngry();
+
     
     //missle states --------------
     static final int STATE_TRAVELING = 1;

@@ -141,4 +141,16 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 		return false;
 	}
 
+	@Override
+	public void setIsAngry(boolean t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsAngry() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

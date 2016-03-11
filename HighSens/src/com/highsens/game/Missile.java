@@ -171,4 +171,16 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
 		return false;
 	}
 
+	@Override
+	public void setIsAngry(boolean t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsAngry() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

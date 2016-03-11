@@ -151,4 +151,16 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	public void setCurrentTarget(GameFigure currentTarget) {
 		this.currentTarget = currentTarget;
 	}
+
+	@Override
+	public void setIsAngry(boolean t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean getIsAngry() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
