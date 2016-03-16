@@ -28,6 +28,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 		this.gd = gd;
 		this.x = x;
 		this.y = y;
+		this.bulletCount = 1;
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
 		towerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");

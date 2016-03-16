@@ -19,6 +19,8 @@ public interface GameFigure {
 	public void setLevel(int level);
     public void setIsAngry(boolean t);
     public boolean getIsAngry();
+	public int getBulletCount();
+	public void setBulletCount(int bulletCount);
 
     
     //missle states --------------

@@ -123,5 +123,17 @@ public class SellManager implements GameFigure {
 		return false;
 	}
 
+	@Override
+	public int getBulletCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setBulletCount(int bulletCount) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

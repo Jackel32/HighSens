@@ -63,12 +63,16 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		drawHealthBar(g, x, y);
 		if (health > 0 && health <= 25) {
 			g.drawImage(YellowMonsterImage, (int) x, (int) y, null);
+			this.setSpeed(2);
 		} else if (health > 25 && health <= 50) {
 			g.drawImage(OrangeMonsterImage, (int) x, (int) y, null);
+			this.setSpeed(4);
 		} else if (health > 50 && health <= 75) {
 			g.drawImage(GreenMonsterImage, (int) x, (int) y, null);
+			this.setSpeed(6);
 		} else if (health > 75 && health <= 100) {
 			g.drawImage(BlueMonsterImage, (int) x, (int) y, null);
+			this.setSpeed(8);
 		}
 	}
 
@@ -137,7 +141,6 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 			if (x >= 560)
 				state = PATH_6;
 			break;
-			
 		case PATH_6:
 			if (x >= 1250)
 				state = LIFE_LOST;
@@ -169,6 +172,8 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		this.health = health;
 	}
 
+	
+	
 	public int getHealth() {
 		return health;
 	}
@@ -218,8 +223,9 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	}
 
 	public void getAngry() {
-		health += 50;
-		speed += 4;
+		//had to keep this to keep this... don't care why.
+		health += 0;
+		speed += 0;
 	}
 
 	public int getScore() {
@@ -281,6 +287,18 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	public boolean getIsAngry() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int getBulletCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setBulletCount(int bulletCount) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

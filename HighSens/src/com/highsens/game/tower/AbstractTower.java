@@ -19,6 +19,7 @@ public abstract class AbstractTower {
 	private int xOffset = 80;
 	protected int range;
 	private int yOffset = 80;
+	public int bulletCount;
 
 	/**
 	 * Draws range on x and y coordinates.
@@ -71,4 +72,14 @@ public abstract class AbstractTower {
 		return range;
 	}
 
+	public int getBulletCount() {
+		return bulletCount;
+	}
+
+	public void setBulletCount(int bulletCount) {
+		this.bulletCount = bulletCount;
+	}
+	
+	
+	
 }

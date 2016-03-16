@@ -21,7 +21,7 @@ public class Angry implements MonsterState{
 	private int width = 120;
 	public float x, y;
 	public boolean collision;
-	Rectangle2D.Double tower;
+	Rectangle2D.Double tower, rangeOfFrozen;
 	public GameData gameData;
 	
 	public Angry(){
@@ -36,7 +36,8 @@ public class Angry implements MonsterState{
 	
 	@Override
 	public void render(Graphics g, Boss s){
-		
+		this.x = s.x;
+		this.y = s.y;
 		g.setColor(Color.BLUE);
 		g.drawRect((int) s.x + xOfSet, (int) s.y + yOfSet, width, height);
 		
@@ -47,23 +48,17 @@ public class Angry implements MonsterState{
 
 		boolean collision = false;
 	    tower =  new Rectangle2D.Double ( (int) t.getX(),(int) t.getY(), 50, 69);
+	    rangeOfFrozen = new Rectangle2D.Double(x + xOfSet, y + yOfSet, width, height);
 	    
+	    if (tower.intersects(rangeOfFrozen)){
+	    	collision = true;
+	    	System.out.println("collision: " + collision);
+	    }else{
+	    	collision = false;
+	    }
 
-		if (t.getX() > (x + xOfSet) && t.getX() <  (x + xOfSet + width) && t.getY() > (y + yOfSet) && t.getY() < (y + yOfSet + height)){  
-			collision = true;
-		}else if(t.getX() + 50 > (x + xOfSet) && t.getX() + 50 <  (x + xOfSet + width) && t.getY() > (y + yOfSet) && t.getY() < (y + yOfSet + height)){
-			collision = true;
-		}else if(t.getX() > (x + xOfSet) && t.getX() <  (x + xOfSet + width) && t.getY() + 69 > (y + yOfSet) && t.getY() + 69 < (y + yOfSet + height)){
-			collision = true;
-		}else if(t.getX() + 50 > (x + xOfSet) && t.getX() + 50 <  (x + xOfSet + width) && t.getY() + 69 > (y + yOfSet) && t.getY() + 69 < (y + yOfSet + height)){
-			collision = true;
-		}else{
-			collision = false;
-		}
-		
-		System.out.println("collision: " + collision);
 		return collision;
-		
+	
 	}
 
 }

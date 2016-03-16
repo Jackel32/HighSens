@@ -19,6 +19,7 @@ import com.highsens.game.monster.BloonMonster;
 import com.highsens.game.monster.Boss;
 import com.highsens.game.monster.FastMonster;
 import com.highsens.game.monster.RegularMonster;
+import com.highsens.game.tower.AbstractTower;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
 
@@ -57,6 +58,9 @@ public class GameData implements IStrategy {
 
 	// Variables for an objects position
 	float x, y;
+	
+	//Shooting boolean variable
+	boolean shoot = false;
 
 	// A wave has not started yet.
 	boolean waveStarted = false;
@@ -130,9 +134,9 @@ public class GameData implements IStrategy {
 
 	///////////////////////////////
 	// Grants the Reguler Tower the ability to shoot.
-	public void shoot(GameFigure tower, GameFigure monster) {
+	public void shoot(GameFigure tower, GameFigure monster, int bulletCount) {
 		if(tower instanceof BlueTower){
-			shoot((BlueTower)tower, monster);
+			shoot((BlueTower)tower, monster, ((BlueTower) tower).getBulletCount());
 		}
 		else{
 			// Instantiates a new Missile at the x and y location of the Regular
@@ -141,13 +145,13 @@ public class GameData implements IStrategy {
 			// Sets the target of the missile via Vector math
 			f.setTarget((int) monster.getX(), (int) monster.getY());
 			// Creates a random seed generator
-			Random RandGen1 = new Random();
+			//Random RandGen1 = new Random();
 			// Finds a random number between
-			int size = RandGen1.nextInt(15); // int size = (int) (Math.random()
+			//int size = RandGen1.nextInt(15); // int size = (int) (Math.random()
 												// *
 												// 10) + 5;
 			// Sets the size of the explosion to the random number
-			f.setExplosionMaxSize(size);
+			//f.setExplosionMaxSize(size);
 			// Adds the explosion into the figures arraylist to be rendered.
 			figures.add(f);
 		}
@@ -156,7 +160,7 @@ public class GameData implements IStrategy {
 
 	///////////////////////////////
 	// Grants the Blue Tower the ability to shoot.
-	public void shoot(BlueTower tower, GameFigure monster) {
+	public void shoot(BlueTower tower, GameFigure monster, int bulletCount) {
 		// Instantiates a new Missile at the x and y location of the Blue Tower,
 		// color is blue
 		if (tower.getCurrentTarget() == null) {
@@ -167,12 +171,12 @@ public class GameData implements IStrategy {
 		// Sets the target of the missile via Vector math
 		f.setTarget((int) tower.getCurrentTarget().getX(), (int) tower.getCurrentTarget().getY());
 		// Creates a random seed generator
-		Random RandGen2 = new Random();
+		//Random RandGen2 = new Random();
 		// Finds a random number between
-		int size = RandGen2.nextInt(15); // int size = (int) (Math.random() *
+		//int size = RandGen2.nextInt(15); // int size = (int) (Math.random() *
 		// 10) + 5;
 		// Sets the size of the explosion to the random number
-		f.setExplosionMaxSize(size);
+		//f.setExplosionMaxSize(size);
 		// Adds the explosion into the figures arraylist to be rendered.
 		figures.add(f);
 	}
@@ -264,6 +268,10 @@ public class GameData implements IStrategy {
 			fastMonsterCount--;
 			setFastMonsterCount(fastMonsterCount);
 			break;
+		case "bloonKill":
+			bloonMonsterCount--;
+			setFastMonsterCount(bloonMonsterCount);
+			break;
 		case "bossKill":
 			bossCount--;
 			setBossCount(bossCount);
@@ -324,10 +332,10 @@ public class GameData implements IStrategy {
 			switch (n) {
 			case 1:
 				// How many monsters
-				waveSize = 2;
+				waveSize = 1000;
 
 				// this staggers the monster creation
-				while (monsterElapsedTime > 2000) {
+				while (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
 						figures.add(new BloonMonster(-50, 320, this));
@@ -347,21 +355,21 @@ public class GameData implements IStrategy {
 						} else if (creepCount <= waveSize) {
 							figures.add(new BloonMonster(-50, 200, this));
 							creepCount++;
-							bloonMonsterCount++;*/
+							bloonMonsterCount++;
 						} else if (creepCount == waveSize) {
 							figures.add(new Boss(-50, 250, this));
 							creepCount++;
 							bossCount++;
-						}
+						}*/
 					}
-				//}
+				}
 				break;
 			case 2:
-				waveSize = 6;
-				if (monsterElapsedTime > 1000) {
+				waveSize = 4;
+				if (monsterElapsedTime > 2000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						figures.add(new BloonMonster(-50, 320, this));
+						figures.add(new Boss(-50, 250, this));
 						creepCount++;
 						bloonMonsterCount++;
 					/*if (creepCount <= waveSize) {
@@ -603,9 +611,16 @@ public class GameData implements IStrategy {
 	public void update() {
 		List<GameFigure> remove = new ArrayList<>();
 		GameFigure f;
-
+		
 		bEnd = System.currentTimeMillis();
 		mEnd = System.currentTimeMillis();
+		
+		//if(shoot == false) {
+		//	bulletElapsedTime += bEnd - bStart;
+		//}
+		
+		//System.out.println("Bullet Start time: " + bStart + " , Bullet End Time: " + bEnd);
+		//System.out.println("Monster Start time: " + mStart + " , Monster End Time: " + mEnd);
 
 		bulletElapsedTime += bEnd - bStart;
 		monsterElapsedTime += mEnd - mStart;
@@ -616,22 +631,32 @@ public class GameData implements IStrategy {
 		startWave(getWaves());
 
 		// This confusing area deals with bullet collision with monsters.
-		if (bulletElapsedTime > 350) {
+		if (bulletElapsedTime >= 350) {
+			
+			bulletElapsedTime = 0;
+			bStart = System.currentTimeMillis();
+			
+			System.out.println("Bullet Elapsed Time: " + bulletElapsedTime);
+			shoot = false;
 			for (int i = 0; i < figures.size() - 2; i++) {
 				for (int j = 0; j < figures.size() - 1; j++) {
 					if(figures.get(i) instanceof BlueTower || figures.get(i) instanceof ArrowTower){
 						if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
 								figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ){
-							if(figures.get(i).collision(figures.get(j))){
-								if(figures.get(j).getIsAngry()){
-									if(!figures.get(j).collision(figures.get(i))){
-										//shoot(figures.get(i), figures.get(j));
+							if(shoot == false) {
+								if(figures.get(i).collision(figures.get(j))){
+									if(figures.get(j).getIsAngry()){
+										if(!figures.get(j).collision(figures.get(i))){
+											//shoot(figures.get(i), figures.get(j));
+										}
+										else{
+											shoot(figures.get(i), figures.get(j), figures.get(i).getBulletCount());
+											shoot = true;
+										}
+									} else {
+										shoot(figures.get(i), figures.get(j), figures.get(i).getBulletCount());
+										shoot = true;
 									}
-									else{
-										shoot(figures.get(i), figures.get(j));
-									}
-								} else {
-									shoot(figures.get(i), figures.get(j));
 								}
 							}
 						}

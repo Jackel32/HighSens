@@ -130,7 +130,7 @@ public class LevelSelectScreen extends JFrame {
 		btnMap2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-				JFrame game =  new Frame();
+			//	JFrame game =  new Frame();
 			}
 		});
 		
