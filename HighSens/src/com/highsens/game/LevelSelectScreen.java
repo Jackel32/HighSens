@@ -111,6 +111,7 @@ public class LevelSelectScreen extends JFrame {
 		btnMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
+
 				GameScreen game = new GameScreen();
 		        game.setTitle("Tower Defence");
 		        game.setResizable(false);
@@ -119,6 +120,8 @@ public class LevelSelectScreen extends JFrame {
 		        game.setVisible(true);
 		        setVisible(false);
 		        
+				ScreenManager.displayGameScreen();
+		        ScreenManager.hideLevelSelectScreen();  
 			}
 		});
 		
@@ -130,7 +133,7 @@ public class LevelSelectScreen extends JFrame {
 		btnMap2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
 			{
-			//	JFrame game =  new Frame();
+
 			}
 		});
 		
@@ -161,9 +164,13 @@ public class LevelSelectScreen extends JFrame {
 		JButton button = new JButton("<<<<<< Back");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
 				final MainScreen mainScreen = new MainScreen();
 				mainScreen.setVisible(true);
 				setVisible(false);
+
+				ScreenManager.displayMainScreen();
+				ScreenManager.hideLevelSelectScreen();
 			}
 		});
 		button.setFont(new Font("Showcard Gothic", Font.PLAIN, 11));

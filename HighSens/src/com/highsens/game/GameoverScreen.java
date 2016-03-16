@@ -62,10 +62,8 @@ public class GameoverScreen extends JFrame {
 		JButton btnPlayAgain = new JButton("Play again");
 		btnPlayAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				LevelSelectScreen lss = new LevelSelectScreen();
-				lss.setVisible(true);
-				setVisible(false);
-				dispose();
+				ScreenManager.displayLevelSelectScreen();
+				ScreenManager.hideGameScreen();
 			}
 		});
 		btnPlayAgain.setForeground(Color.BLACK);
@@ -90,5 +88,11 @@ public class GameoverScreen extends JFrame {
 		contentPane.add(btnQuit);
 		btnQuit.setContentAreaFilled(false);
 		btnQuit.setOpaque(true);
+	}
+	
+	public void setStats(int w, int s)
+	{
+		this.waves = 0;
+		this.score = 0;
 	}
 }
