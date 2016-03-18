@@ -10,6 +10,8 @@ public final class ScreenManager {
 	private static GameoverScreen gameoverscreen = new GameoverScreen(0, 0);
 	private static GameScreen game = new GameScreen();
 	private static StoreScreen store = new StoreScreen();
+	private static StoreAnimator animator = new StoreAnimator();
+	private static AboutScreen about = new AboutScreen();
 	
 	public static void displaySplashScreen()
 	{
@@ -41,9 +43,16 @@ public final class ScreenManager {
         game.setVisible(true);
 	}
 	
-	public static void displayStoreScreen()
+	public static void displayStoreScreen( GameData gameData)
 	{
+		final StorePanel storePanel = new StorePanel(animator, gameData);
 		store.setVisible(true);
+	}
+	
+	public static void displayAboutScreen()
+	{
+		about.setVisible(true);
+		hideMainScreen();
 	}
 
 	
@@ -72,6 +81,11 @@ public final class ScreenManager {
 	public static void hideStoreScreen()
 	{
 		store.setVisible(false);
+	}
+	
+	public static void hideAboutScreen()
+	{
+		about.setVisible(false);
 	}
 	
 }

@@ -201,6 +201,10 @@ public class GamePanel extends JPanel {
 			*//////////////////////////////
 
 			//////////////////////////////
+			Graphics2D gameStats = (Graphics2D) graphics;
+			gameStats.setColor(Color.ORANGE);
+			gameStats.fillRect(0, 0, 1000, 100);
+			
 			Graphics2D g12 = (Graphics2D) graphics;
 			g12.drawImage(RegularMonsterImage, 30, 30, this);
 

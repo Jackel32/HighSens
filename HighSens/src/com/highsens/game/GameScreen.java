@@ -34,6 +34,7 @@ import javax.swing.JToggleButton;
 import java.awt.Label;
 
 import javax.swing.JLabel;
+import java.awt.Color;
 
 public class GameScreen extends JFrame implements ActionListener, MouseListener, KeyListener {
 
@@ -42,10 +43,13 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private final Animator animator;
 	private final JButton playButton;
 	private final JButton quitButton;
+	private final JButton btnWave;
+	private final JButton btnStore;
+	private final JButton btnQuit;
 	private final JToggleButton arrowToggle;
 	private final JToggleButton blueToggle;
 	private final JToggleButton muteButton;
-	private final JPanel southPanel;
+	private final JPanel startPanel;
 	private boolean menuVisible;
 	private String imagePath = System.getProperty("user.dir");
 	private String separator = System.getProperty("file.separator");
@@ -87,17 +91,17 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
 		
-			    southPanel = new JPanel();
-			    southPanel.setBounds(25, 95, 531, 131);
-			    getContentPane().add(southPanel);
-			    southPanel.setBackground(SystemColor.activeCaptionBorder);
-			    southPanel.setLayout(null);
+			    startPanel = new JPanel();
+			    startPanel.setBounds(25, 95, 1500, 131);
+			    getContentPane().add(startPanel);
+			    startPanel.setBackground(SystemColor.activeCaptionBorder);
+			    startPanel.setLayout(null);
 			    playButton = new JButton("Play");
 			    playButton.setBounds(125, 63, 74, 44);
-			    southPanel.add(playButton);
+			    startPanel.add(playButton);
 			    quitButton = new JButton("Quit");
 			    quitButton.setBounds(337, 63, 69, 44);
-			    southPanel.add(quitButton);
+			    startPanel.add(quitButton);
 			    playButton.setFocusable(false);
 			    
 			    txtReady = new JTextField();
@@ -105,7 +109,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			    txtReady.setHorizontalAlignment(SwingConstants.CENTER);
 			    txtReady.setText("Ready?");
 			    txtReady.setBounds(196, 11, 138, 41);
-			    southPanel.add(txtReady);
+			    startPanel.add(txtReady);
 			    txtReady.setColumns(10);
 			    
 			    playButton.addActionListener(this);
@@ -117,47 +121,50 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		gamePanel.addMouseListener(this);
 		gamePanel.setFocusable(true);
 		
-		JPanel panel = new JPanel();
+		JPanel southPanel = new JPanel();
 		//panel.setBounds(0, 336, 573, 131);
-		panel.setBounds(0, 600, 573, 131);
-		getContentPane().add(panel);
-		panel.setLayout(null);
+		southPanel.setBounds(0, 600, 1362, 131);
+		getContentPane().add(southPanel);
+		southPanel.setLayout(null);
 		
 		arrowToggle = new JToggleButton("", arrowTowerIcon);
-		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		arrowToggle.setEnabled(false);
+		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		//arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
-		arrowToggle.setBounds(138, 24, 91, 77);
+		arrowToggle.setBounds(71, 24, 91, 77);
 		//redToggle.setIcon(new ImageIcon (imagePath + separator + "images" + separator + "BlueTower.png"));
 		arrowToggle.addActionListener(this);
-		panel.add(arrowToggle);
+		southPanel.add(arrowToggle);
 		
 		blueToggle = new JToggleButton("", blueTowerIcon);
 		blueToggle.setEnabled(false);
 		//blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
-		blueToggle.setBounds(357, 24, 77, 77);
+		blueToggle.setBounds(202, 24, 91, 77);
 		blueToggle.addActionListener(this);
-		panel.add(blueToggle);
+		southPanel.add(blueToggle);
 		
 		muteButton = new JToggleButton("", muteButtonIcon);
-		muteButton.setBounds(512, 11, 44, 45);
+		muteButton.setBounds(0, 0, 44, 45);
 		//muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
 		muteButton.addActionListener(this);
-		panel.add(muteButton);
+		southPanel.add(muteButton);
 		
 		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setBounds(104, 100, 155, 31);
-		panel.add(lblNewLabel);
+		lblNewLabel.setBounds(37, 100, 155, 31);
+		southPanel.add(lblNewLabel);
 		
 		JLabel lblBlueTowerCost = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
 		lblBlueTowerCost.setVerticalAlignment(SwingConstants.TOP);
 		lblBlueTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBlueTowerCost.setBounds(320, 100, 155, 31);
-		panel.add(lblBlueTowerCost);
+		lblBlueTowerCost.setBounds(172, 100, 155, 31);
+		southPanel.add(lblBlueTowerCost);
 		
-		JButton btnWave = new JButton("Start Wave");
+		btnWave = new JButton("Start Wave");
+		btnWave.setEnabled(false);
+		btnWave.setContentAreaFilled(false);
+		btnWave.setBackground(Color.GREEN);
 		btnWave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				gameData.setWaves(gameData.wave = gameData.wave + 1);
@@ -165,10 +172,36 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 				btnWave.setText("Next Wave");
 			}
 		});
-		btnWave.setBounds(231, 0, 110, 23);
-		panel.add(btnWave);
+		btnWave.setOpaque(true);
+		btnWave.setBounds(302, 0, 127, 23);
+		southPanel.add(btnWave);
 		
+		btnStore = new JButton("Go to Store");
+		btnStore.setEnabled(false);
+		btnStore.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ScreenManager.displayStoreScreen(gameData);
+			}
+		});
+		btnStore.setContentAreaFilled(false);
+		btnStore.setBackground(Color.YELLOW);
+		btnStore.setBounds(303, 44, 126, 23);
+		btnStore.setOpaque(true);
+		southPanel.add(btnStore);
 		
+		btnQuit = new JButton("Quit to main menu\r\n");
+		btnQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScreenManager.hideGameScreen();
+				ScreenManager.displayMainScreen();
+			}
+		});
+		btnQuit.setEnabled(false);
+		btnQuit.setContentAreaFilled(false);
+		btnQuit.setBackground(Color.RED);
+		btnQuit.setBounds(302, 96, 127, 24);
+		btnQuit.setOpaque(true);
+		southPanel.add(btnQuit);
 		
 
 	}
@@ -279,10 +312,13 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == playButton) {
-			southPanel.setVisible(false);
-			southPanel.setEnabled(false);
+			startPanel.setVisible(false);
+			startPanel.setEnabled(false);
 			blueToggle.setEnabled(true);
 			arrowToggle.setEnabled(true);
+			btnWave.setEnabled(true);
+			btnStore.setEnabled(true);
+			btnQuit.setEnabled(true);
 			gamePanel.startGame();
 
 		} else if (e.getSource() == quitButton) {
