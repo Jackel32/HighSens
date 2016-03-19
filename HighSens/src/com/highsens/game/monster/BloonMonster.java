@@ -34,12 +34,12 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	Image OrangeMonsterImage = getImage(imagePath + separator + "images" + separator + "OrangeMonster.png");
 	Image YellowMonsterImage = getImage(imagePath + separator + "images" + separator + "YellowMonster.png");
 
-	public BloonMonster(float x, float y, GameData gd) {
+	public BloonMonster(float x, float y, GameData gd, int hp) {
 		this.gd = gd;
 		this.state = PATH_0;
 		this.x = x;
 		this.y = y;
-		this.maxHealth = 100;
+		this.maxHealth = hp;
 		this.health = maxHealth;
 		this.speed = 8;
 		String imagePath = System.getProperty("user.dir");
@@ -60,17 +60,17 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 
 	@Override
 	public void render(Graphics g) {
-		drawHealthBar(g, x, y);
-		if (health > 0 && health <= 25) {
+		//drawHealthBar(g, x, y);
+		if (health == 1) {
 			g.drawImage(YellowMonsterImage, (int) x, (int) y, null);
 			this.setSpeed(2);
-		} else if (health > 25 && health <= 50) {
+		} else if (health == 2) {
 			g.drawImage(OrangeMonsterImage, (int) x, (int) y, null);
 			this.setSpeed(4);
-		} else if (health > 50 && health <= 75) {
+		} else if (health == 3) {
 			g.drawImage(GreenMonsterImage, (int) x, (int) y, null);
 			this.setSpeed(6);
-		} else if (health > 75 && health <= 100) {
+		} else if (health == 4) {
 			g.drawImage(BlueMonsterImage, (int) x, (int) y, null);
 			this.setSpeed(8);
 		}
@@ -198,11 +198,11 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 		//System.out.println("X: " + x + ", Y: " + y);
 		if (x < this.x)
 			return false;
-		if (x > this.x + 27)
+		if (x > this.x + 30)
 			return false;
 		if (y < this.y)
 			return false;
-		if (y > this.y + 20)
+		if (y > this.y + 25)
 			return false;
 
 		return true;
@@ -210,7 +210,7 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 
 	@Override
 	public void updateHealth() {
-		health -= 8;
+		health -= 1;
 		if (health <= 0) {
 			state = STATE_DONE;
 		}
@@ -299,6 +299,18 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	public void setBulletCount(int bulletCount) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -7,8 +7,8 @@ import javax.vecmath.Vector2f;
 public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
 
 	static int SIZE = 2;
-    //static int widthSIZE = 1;
-    //static int highSIZE = 1;
+	public double width;
+	public double height;
     Color color;
     Point2D.Float target;
     private int state = STATE_TRAVELING;
@@ -25,7 +25,27 @@ public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
     }
 
 
-    public boolean isTargetReached() {
+    public double getWidth() {
+		return width;
+	}
+
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+
+	public double getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+
+
+	public boolean isTargetReached() {
         return targetReached;
     }
 
@@ -91,14 +111,18 @@ public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
         setFrameFromCenter(x, y, x + explosionSize, y + explosionSize);
     }
 
+    
+    
     public void updateState() {
         if (state == STATE_TRAVELING) {
             double distance = target.distance(getCenterX(), getCenterY());
+        	//System.out.println(distance);
+
             boolean targetReached = distance <= 2.0 ? true : false;
             End = System.currentTimeMillis();
             if (targetReached) {
                 state = STATE_EXPLODING;
-            } else if (!targetReached && ElapsedTime > 1300)
+            } else if (!targetReached && this.   ElapsedTime > 1300)
             {
                 state = STATE_DONE;
             }

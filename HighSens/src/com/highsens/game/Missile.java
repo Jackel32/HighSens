@@ -12,6 +12,8 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
 	static int SIZE = 2;
 	Color color;
 	Point2D.Float target;
+	public double width;
+	public double height;
 	private int state = STATE_TRAVELING;
 	// private static final int UNIT_TRAVEL_DISTANCE = 5; Original
 	private static int UNIT_TRAVEL_DISTANCE = 5; // test
@@ -20,6 +22,24 @@ public class Missile extends Ellipse2D.Float implements GameFigure {
 	long ElapsedTime;
 	long Start, End;
 	public boolean targetReached = false;
+
+	
+	
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
 
 	public void setUNIT_TRAVEL_DISTANCE() {
 		UNIT_TRAVEL_DISTANCE += 2;

@@ -52,7 +52,7 @@ public class Angry implements MonsterState{
 	    
 	    if (tower.intersects(rangeOfFrozen)){
 	    	collision = true;
-	    	System.out.println("collision: " + collision);
+	    	//System.out.println("collision: " + collision);
 	    }else{
 	    	collision = false;
 	    }

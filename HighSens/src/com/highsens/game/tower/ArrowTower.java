@@ -154,4 +154,16 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 		return false;
 	}
 
+	@Override
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

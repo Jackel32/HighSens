@@ -2,6 +2,7 @@ package com.highsens.game;
 
 //The Color class is used to encapsulate colors in the default RGB color space
 import java.awt.Color;
+import java.awt.Rectangle;
 //Resizable-array implementation of the List interface.
 //Implements all optional list operations, and permits all elements, including null.
 //In addition to implementing the List interface,
@@ -332,13 +333,16 @@ public class GameData implements IStrategy {
 			switch (n) {
 			case 1:
 				// How many monsters
-				waveSize = 1000;
+				waveSize = 20;
 
 				// this staggers the monster creation
 				while (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						figures.add(new BloonMonster(-50, 320, this));
+						if(bloonMonsterCount < 5) {figures.add(new BloonMonster(-50, 320, this, 4));}
+						else if(bloonMonsterCount >= 5 && bloonMonsterCount < 10) {figures.add(new BloonMonster(-50, 320, this, 3));}
+						else if(bloonMonsterCount >= 10 && bloonMonsterCount < 15) {figures.add(new BloonMonster(-50, 320, this, 2));}
+						else if(bloonMonsterCount >= 15 && bloonMonsterCount <= 20) {figures.add(new BloonMonster(-50, 320, this, 1));}
 						creepCount++;
 						bloonMonsterCount++;
 						// This part is limits regular monsters to half the wave
@@ -407,7 +411,7 @@ public class GameData implements IStrategy {
 							creepCount++;
 							fastMonsterCount++;
 						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 320, this));
+							figures.add(new BloonMonster(-50, 320, this, 4));
 							creepCount++;
 							bloonMonsterCount++;
 						} else if (creepCount == waveSize) {
@@ -631,15 +635,15 @@ public class GameData implements IStrategy {
 		startWave(getWaves());
 
 		// This confusing area deals with bullet collision with monsters.
-		if (bulletElapsedTime >= 350) {
+		if (bulletElapsedTime >= 1050) {
 			
 			bulletElapsedTime = 0;
 			bStart = System.currentTimeMillis();
 			
-			System.out.println("Bullet Elapsed Time: " + bulletElapsedTime);
+			//System.out.println("Bullet Elapsed Time: " + bulletElapsedTime);
 			shoot = false;
-			for (int i = 0; i < figures.size() - 2; i++) {
-				for (int j = 0; j < figures.size() - 1; j++) {
+			for (int i = 0; i < figures.size(); i++) {  // -2
+				for (int j = 0; j < figures.size(); j++) {   // -1
 					if(figures.get(i) instanceof BlueTower || figures.get(i) instanceof ArrowTower){
 						if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
 								figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ){
@@ -659,13 +663,15 @@ public class GameData implements IStrategy {
 									}
 								}
 							}
+							shoot = false;
 						}
 					}
 				}
 			}
+		}
 
-			for (int i = 0; i < figures.size() - 2; i++) {
-				for (int j = 1; j < figures.size() - 1; j++) {
+			for (int i = 0; i < figures.size(); i++) {    // -2
+				for (int j = 0; j < figures.size(); j++) {    // -1
 					if(figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile) { 
 						if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
 							figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ) {
@@ -677,7 +683,7 @@ public class GameData implements IStrategy {
 					}
 				}
 			}
-		}
+		//}
 
 		synchronized (figures) {
 			for (int i = 0; i < figures.size(); i++) {
