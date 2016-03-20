@@ -141,6 +141,7 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 			if (x >= 560)
 				state = PATH_6;
 			break;
+			
 		case PATH_6:
 			if (x >= 1250)
 				state = LIFE_LOST;

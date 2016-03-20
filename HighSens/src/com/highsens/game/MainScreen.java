@@ -1,15 +1,19 @@
 package com.highsens.game;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
+
 import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 
 public class MainScreen extends JFrame {
 	public MainScreen() {
@@ -21,13 +25,13 @@ public class MainScreen extends JFrame {
 		getContentPane().setLayout(null);
 		getContentPane().setSize(600, 400);
 		this.setLocationRelativeTo(null);
-
+		
 		JLabel lblTowerDefense = new JLabel("Tower Defense");
 		lblTowerDefense.setBounds(0, 0, 535, 36);
 		lblTowerDefense.setFont(new Font("Showcard Gothic", Font.PLAIN, 18));
 		lblTowerDefense.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblTowerDefense);
-
+		
 		JButton btnStart = new JButton("Start");
 		btnStart.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnStart.setForeground(new Color(0, 0, 0));
@@ -42,7 +46,7 @@ public class MainScreen extends JFrame {
 		});
 		btnStart.setBounds(50, 127, 112, 46);
 		btnStart.setOpaque(true);
-
+		
 		JButton btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -55,7 +59,7 @@ public class MainScreen extends JFrame {
 		btnQuit.setBounds(386, 278, 112, 46);
 		btnQuit.setContentAreaFilled(false);
 		btnQuit.setOpaque(true);
-
+		
 		JButton btnStore = new JButton("Store");
 		btnStore.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnStore.setBackground(new Color(153, 50, 204));
@@ -63,7 +67,7 @@ public class MainScreen extends JFrame {
 		btnStore.setContentAreaFilled(false);
 		btnStore.setOpaque(true);
 		StoreAnimator animator = new StoreAnimator();
-		btnStore.addActionListener(new ActionListener() {
+		btnStore.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				GameData gamedata = new GameData();
 				final StorePanel store = new StorePanel(animator, gamedata);
@@ -74,25 +78,26 @@ public class MainScreen extends JFrame {
 				//setVisible(false);
 			}
 		});
-
+		
 		JButton btnAbout = new JButton("About");
 		btnAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ScreenManager.displayAboutScreen();
 				ScreenManager.hideMainScreen();
+				//setVisible(false);
 			}
 		});
-
+		
 		btnAbout.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnAbout.setBackground(new Color(255, 215, 0));
 		btnAbout.setBounds(386, 127, 112, 46);
 		btnAbout.setContentAreaFilled(false);
 		btnAbout.setOpaque(true);
-
+		
 		getContentPane().add(btnStart);
 		getContentPane().add(btnQuit);
 		getContentPane().add(btnStore);
 		getContentPane().add(btnAbout);
-
+		
 	}
 }

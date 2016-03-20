@@ -279,6 +279,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 		// TODO Auto-generated method stub
 		
 	}
+	}
 
 	@Override
 	public int getBulletCount() {

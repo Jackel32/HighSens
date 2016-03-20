@@ -113,12 +113,6 @@ public class LevelSelectScreen extends JFrame {
 			{
 
 				GameScreen game = new GameScreen();
-		        game.setTitle("Tower Defence");
-		        game.setResizable(false);
-		        game.setLocationRelativeTo(null);
-		        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        game.setVisible(true);
-		        setVisible(false);
 		        
 				ScreenManager.displayGameScreen();
 		        ScreenManager.hideLevelSelectScreen();  
@@ -165,9 +159,7 @@ public class LevelSelectScreen extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				final MainScreen mainScreen = new MainScreen();
-				mainScreen.setVisible(true);
-				setVisible(false);
+				ScreenManager.hideLevelSelectScreen();
 
 				ScreenManager.displayMainScreen();
 				ScreenManager.hideLevelSelectScreen();

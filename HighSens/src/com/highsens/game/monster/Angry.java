@@ -50,15 +50,21 @@ public class Angry implements MonsterState{
 	    tower =  new Rectangle2D.Double ( (int) t.getX(),(int) t.getY(), 50, 69);
 	    rangeOfFrozen = new Rectangle2D.Double(x + xOfSet, y + yOfSet, width, height);
 	    
-	    if (tower.intersects(rangeOfFrozen)){
-	    	collision = true;
-	    	System.out.println("collision: " + collision);
-	    }else{
-	    	collision = false;
-	    }
 
+		if (t.getX() > (x + xOfSet) && t.getX() <  (x + xOfSet + width) && t.getY() > (y + yOfSet) && t.getY() < (y + yOfSet + height)){  
+			collision = true;
+		}else if(t.getX() + 50 > (x + xOfSet) && t.getX() + 50 <  (x + xOfSet + width) && t.getY() > (y + yOfSet) && t.getY() < (y + yOfSet + height)){
+			collision = true;
+		}else if(t.getX() > (x + xOfSet) && t.getX() <  (x + xOfSet + width) && t.getY() + 69 > (y + yOfSet) && t.getY() + 69 < (y + yOfSet + height)){
+			collision = true;
+		}else if(t.getX() + 50 > (x + xOfSet) && t.getX() + 50 <  (x + xOfSet + width) && t.getY() + 69 > (y + yOfSet) && t.getY() + 69 < (y + yOfSet + height)){
+			collision = true;
+		}else{
+			collision = false;
+		}
+		
 		return collision;
-	
+		
 	}
 
 }

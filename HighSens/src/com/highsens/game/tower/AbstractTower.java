@@ -1,5 +1,6 @@
 package com.highsens.game.tower;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,6 +30,9 @@ public abstract class AbstractTower {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setPaint(Color.BLUE);
 		g2d.drawOval((int) x - xOffset, (int) y - yOffset, range, range);
+		// opacity
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f));
+		// g2d.fillOval((int) x - xOffset, (int) y - yOffset, range, range);
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

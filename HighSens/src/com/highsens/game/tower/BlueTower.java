@@ -113,16 +113,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public int getHealth() {
-		throw new UnsupportedOperationException("Not supported yet."); // To
-																		// change
-																		// body
-																		// of
-																		// generated
-																		// methods,
-																		// choose
-																		// Tools
-																		// |
-																		// Templates.
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	@Override
@@ -156,6 +147,17 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	@Override
 	public void setIsAngry(boolean t) {
 		// TODO Auto-generated method stub
+
+	@Override
+	public void setIsAngry(boolean t) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public boolean getIsAngry() {
+		// TODO Auto-generated method stub
+		return false;
 		
 	}
 

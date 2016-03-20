@@ -47,9 +47,7 @@ public class GameData implements IStrategy {
 	Missile missile;
 	ArrowMissile arrowMissile;
 	GameFigure gf;
-	///////////////////////////////
 
-	///////////////////////////////
 	// Variables for the players Score, Lives, and Money
 	public int score;
 	public int lives = 100;
@@ -92,8 +90,6 @@ public class GameData implements IStrategy {
 	// The monsters creation and destruction time
 	long mStart, mEnd;
 
-	///////////////////////////////
-	//
 	public GameData() {
 		mStart = System.currentTimeMillis();
 		bStart = System.currentTimeMillis();
@@ -130,41 +126,26 @@ public class GameData implements IStrategy {
 	}
 
 	public void shoot(BlueTower tower, GameFigure monster, int bulletCount) {
-		// Instantiates a new Missile at the x and y location of the Blue Tower,
-		// color is blue
 		if (tower.getCurrentTarget() == null) {
 			tower.setCurrentTarget(monster);
 		}
 
 		Missile f = new Missile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLUE);
-		// Sets the target of the missile via Vector math
 		f.setTarget((int) tower.getCurrentTarget().getX(), (int) tower.getCurrentTarget().getY());
-		// Creates a random seed generator
 		//Random RandGen2 = new Random();
-		// Finds a random number between
-		//int size = RandGen2.nextInt(15); // int size = (int) (Math.random() *
-		// 10) + 5;
-		// Sets the size of the explosion to the random number
-		//f.setExplosionMaxSize(size);
-		// Adds the explosion into the figures arraylist to be rendered.
+		int size = RandGen2.nextInt(15);
+		int size = RandGen2.nextInt(15); // int size = (int) (Math.random() *
+		f.setExplosionMaxSize(size);
 		figures.add(f);
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public void minusLives() {
-		// Decrements lives
 		lives--;
-		// Sets the lives at the decremented value
 		setLives(lives);
-		// Gets the score from the amount of lives left.
 		getScore();
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public int getLives() {
-		// Returns the current amount of lives
 		return lives;
 	}
 
@@ -213,7 +194,6 @@ public class GameData implements IStrategy {
 		}
 		setMoney(money);
 	}
-	///////////////////////////////
 
 	public void monsterManager(String val) {
 		switch (val) {
@@ -236,7 +216,6 @@ public class GameData implements IStrategy {
 		}
 	}
 
-	//////////////////////////////////
 	public int getRegularMonsterCount() {
 		return regularMonsterCount;
 	}

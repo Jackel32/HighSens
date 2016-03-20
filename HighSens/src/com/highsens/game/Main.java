@@ -3,7 +3,6 @@ package com.highsens.game;
 import static com.highsens.game.AudioPlayer.play;
 import static com.highsens.game.AudioPlayer.stop;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Image;
 import java.awt.Label;
@@ -147,32 +146,29 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 	public void drawMenuForTower(AbstractTower abstractTowerGameFigure) {
 
 		RangePanel.setText("Range: " + abstractTowerGameFigure.getRange());
-		RangePanel.setBackground(Color.WHITE);
-		RangePanel.setBounds(700, 100, 100, 100);
+		RangePanel.setBounds(700, 100, 200, 100);
 		LevelPanel.setText("Level: " + abstractTowerGameFigure.getLevel());
-		LevelPanel.setBackground(Color.WHITE);
 		LevelPanel.setBounds(700, 0, 100, 100);
 
-		// imageLabel.setText("image: " + abstractTowerGameFigure.getLevel());
-		// imageLabel.setBounds(600, 0, 100, 100);
+		imageLabel.setText("image: " + abstractTowerGameFigure.getLevel());
+		imageLabel.setBounds(600, 0, 100, 100);
 
 		// Image newImage = getImage(imagePath + separator + "images" +
 		// separator + "RedTower.png");
 
-		// imageLabel2.setText("image2: " + abstractTowerGameFigure.getLevel());
-		// imageLabel2.setBounds(600, 100, 100, 100);
+		imageLabel2.setText("image2: " + abstractTowerGameFigure.getLevel());
+		imageLabel2.setBounds(600, 100, 100, 100);
 
-		// imageLabel3.setText("image3: " + abstractTowerGameFigure.getLevel());
-		// imageLabel3.setBounds(600, 200, 100, 100);
+		imageLabel3.setText("image3: " + abstractTowerGameFigure.getLevel());
+		imageLabel3.setBounds(600, 200, 100, 100);
 
-		// gamePanel.add(imageLabel);
-		// gamePanel.add(imageLabel2);
-		// gamePanel.add(imageLabel3);
+		gamePanel.add(imageLabel);
+		gamePanel.add(imageLabel2);
+		gamePanel.add(imageLabel3);
 		gamePanel.add(RangePanel);
 		gamePanel.add(LevelPanel);
 	}
 
-//<<<<<<< HEAD
 	public Image getImage(String fileName) {
 		Image image = null;
 		try {
@@ -190,10 +186,14 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 			playButton.setEnabled(false);
 			gamePanel.startGame();
 
+		} else if (e.getSource() == quitButton) {
+			animator.running = false;
 		}
 
-		else if (e.getSource() == quitButton) {
-			animator.running = false;
+		if (e.getSource() == menuCloseButton) {
+			Label closed = new Label("ZZZZZZZZZZZZZZZZZ");
+			closed.setBounds(0, 0, 600, 400);
+			gamePanel.add(closed);
 		}
 	}
 
@@ -204,6 +204,10 @@ public class Main extends JFrame implements ActionListener, MouseListener, KeyLi
 
 		increaseSizeOfTowerRangeWhenOverlapped(x, y);
 
+		// System.out.println("X: " + x);
+		// System.out.println("Y: " + y);
+
+		// Limits the clickable range to the button
 		if (x >= 250 && x <= 350 && y >= 295 && y <= 325) {
 			nextWaveClicked = true;
 			gameData.setWaves(gameData.wave = gameData.wave + 1);
@@ -301,5 +305,4 @@ public static void main(String[] args) {
 	//mainScreen.setVisible(true);
 }
 }
-
 
