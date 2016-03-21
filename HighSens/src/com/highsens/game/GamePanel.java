@@ -39,18 +39,14 @@ public class GamePanel extends JPanel {
 		///////////////////////////////
 
 		// Set global background color
-		setBackground(Color.gray);
+		// setBackground(Color.gray);
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
 		mapImage = getImage(imagePath + separator + "images" + separator + "map_new.png");
-
-		BlueTowerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
-		RedTowerImage = getImage(imagePath + separator + "images" + separator + "RedTower.png");
 		BloonMonsterImage = getImage(imagePath + separator + "images" + separator + "BlueMonster.png");
 		RegularMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster1.png");
 		FastMonsterImage = getImage(imagePath + separator + "images" + separator + "fastMonster1.png");
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
-		mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
 
 		AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
 	}
@@ -99,7 +95,7 @@ public class GamePanel extends JPanel {
 		}
 
 		graphics.clearRect(0, 0, GamePanel.PWIDTH, GamePanel.PHEIGHT);
-		synchronized (GameData.figures) {
+		synchronized (gameData.figures) {
 
 			// Instantiates class GameFigure
 			GameFigure f;
@@ -112,68 +108,25 @@ public class GamePanel extends JPanel {
 			g2.setFont(new Font("Serif", Font.PLAIN, 20));
 			g2.drawString("Lives: " + gameData.getLives(), 375, 60);
 			g2.drawString("Gold: " + gameData.getMoney(), 470, 60);
-			if(gameData.getMoney() < 50)
-			{
+			if (gameData.getMoney() < 50) {
 				this.gamescreen.enableArrowToggle(false);
 				this.gamescreen.enableBlueToggle(false);
 			}
-			
-			else if(gameData.getMoney() >= 50 && gameData.getMoney() < 100)
-			{
+
+			else if (gameData.getMoney() >= 50 && gameData.getMoney() < 100) {
 				this.gamescreen.enableArrowToggle(true);
 				this.gamescreen.enableBlueToggle(false);
 			}
-			
-			else
-			{
-				this.gamescreen.enableArrowToggle(true);
-				this.gamescreen.enableBlueToggle(true);
-			}
 
-			///////////////////////////////
-			// Creates white box. Puts the image of the Regular Tower in it
-			/* BUTTON
-			g3.setColor(Color.WHITE);
-			g3.fillRect(440, 250, 70, 70);
-			/////////////////////////////*/
-			///////////////////////////////
-			// Creates white box. Puts the image of the Blue Tower in it
-			/* BUTTON
-			g4.setColor(Color.WHITE);
-			g4.fillRect(520, 250, 70, 70);
-			Graphics2D g5 = (Graphics2D) graphics;
-			g5.setColor(Color.RED);
-			g5.setFont(new Font("Serif", Font.PLAIN, 16));
-			g5.drawString("ARCANE", 450, 240);
-			g5.drawString("50 Gold", 450, 330);
-			/////////////////////////////*/
-			///////////////////////////////
-			// Creates Red Text with the name and price for the Regular Tower
-			/* Info Text
-			/////////////////////////////*/
-			///////////////////////////////
-			// Creates a Yellow box
-			/*
-			BUTTON
-			*//////////////////////////////
-			///////////////////////////////
-			/* Creates text for the Yellow Button
-			//if(main.nextWaveClicked == false) {g8.drawString("Start Game", 255, 317); }
-			//else {g8.drawString("Next Wave", 255, 317);}
-			*///////////////////////////////
-			///////////////////////////////
-			/* Creates the mute button
-			*//////////////////////////////
-
-			//////////////////////////////
-			Graphics2D gameStats = (Graphics2D) graphics;
-			gameStats.setColor(Color.ORANGE);
-			gameStats.fillRect(0, 0, 1000, 100);
-			
 			else {
 				this.gamescreen.enableArrowToggle(true);
 				this.gamescreen.enableBlueToggle(true);
 			}
+
+			Graphics2D gameStats = (Graphics2D) graphics;
+			gameStats.setColor(Color.ORANGE);
+			gameStats.fillRect(0, 0, 1000, 100);
+
 			Graphics2D g12 = (Graphics2D) graphics;
 			g12.drawImage(RegularMonsterImage, 30, 30, this);
 
@@ -182,7 +135,7 @@ public class GamePanel extends JPanel {
 
 			Graphics2D g14 = (Graphics2D) graphics;
 			g14.drawImage(BossImage, 144, 28, this);
-			
+
 			Graphics2D g17 = (Graphics2D) graphics;
 			g17.drawImage(BloonMonsterImage, 210, 30, this);
 
@@ -197,8 +150,8 @@ public class GamePanel extends JPanel {
 			// If the user has no more lives
 			if (gameData.lives <= 0) {
 				//
-				for (int i = 0; i < GameData.figures.size(); i++) {
-					f = (GameFigure) GameData.figures.get(i);
+				for (int i = 0; i < gameData.figures.size(); i++) {
+					f = (GameFigure) gameData.figures.get(i);
 					f.setState(GameFigure.STATE_DONE);
 					gameover = true;
 				}
@@ -210,10 +163,9 @@ public class GamePanel extends JPanel {
 			}
 			///////////////////////////////
 
-			for (int i = 0; i < GameData.figures.size(); i++) {
+			for (int i = 0; i < gameData.figures.size(); i++) {
 
-				f = (GameFigure) GameData.figures.get(i);
-
+				f = (GameFigure) gameData.figures.get(i);
 
 				// get(i): Function gets the object from the collection of
 				// figures (images) within the gamedata
@@ -234,7 +186,7 @@ public class GamePanel extends JPanel {
 
 				gamescreen.setVisible(false);
 
-				//main.dispose();
+				// main.dispose();
 
 				gameover = false;
 			}
@@ -272,6 +224,7 @@ public class GamePanel extends JPanel {
 			// Catch any errors
 		} catch (Exception e) {
 			System.out.println("Graphics error: " + e);
+			throw e;
 		}
 	}
 }
