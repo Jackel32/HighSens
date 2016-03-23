@@ -124,18 +124,28 @@ public class GamePanel extends JPanel {
 			{
 				this.gamescreen.enableArrowToggle(false);
 				this.gamescreen.enableBlueToggle(false);
+				this.gamescreen.enableLandmineToggle(false);
 			}
 			
 			else if(gameData.getMoney() >= 50 && gameData.getMoney() < 100)
 			{
 				this.gamescreen.enableArrowToggle(true);
 				this.gamescreen.enableBlueToggle(false);
+				this.gamescreen.enableLandmineToggle(false);
 			}
 			
-			else
+			else if(gameData.getMoney() >= 100 && gameData.getMoney() < 200)
 			{
 				this.gamescreen.enableArrowToggle(true);
 				this.gamescreen.enableBlueToggle(true);
+				this.gamescreen.enableLandmineToggle(false);
+			}
+			
+			else if(gameData.getMoney() >= 200)
+			{
+				this.gamescreen.enableArrowToggle(true);
+				this.gamescreen.enableBlueToggle(true);
+				this.gamescreen.enableLandmineToggle(true);
 			}
 
 			///////////////////////////////

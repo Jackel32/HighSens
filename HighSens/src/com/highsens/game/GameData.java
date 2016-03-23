@@ -20,6 +20,7 @@ import com.highsens.game.monster.FastMonster;
 import com.highsens.game.monster.RegularMonster;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
+import com.highsens.game.tower.Landmine;
 
 ///////////////////////////////
 // *** New Class ***
@@ -38,6 +39,7 @@ public class GameData implements IStrategy {
 	// Instantiates each of these classes
 	ArrowTower ArrowT;
 	BlueTower BlueT;
+	Landmine LMine;
 	RegularMonster regularMonster;
 	FastMonster fastMonster;
 	Boss boss;
@@ -170,6 +172,9 @@ public class GameData implements IStrategy {
 			break;
 		case "BlueTower":
 			money -= 100;
+			break;
+		case "Landmine":
+			money -= 200;
 			break;
 		case "regularKill":
 			money += 5;
@@ -444,10 +449,14 @@ public class GameData implements IStrategy {
 								|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
 							if (shoot == false) {
 								if (figures.get(i).collision(figures.get(j))) {
+									//if(figures.get(i) instanceof Landmine){
+									//	figures.get(i).update();
+									//	figures.get(j).updateHealth();
+									//}
+									//else if (figures.get(j).getIsAngry()) {
 									if (figures.get(j).getIsAngry()) {
 										if (!figures.get(j).collision(figures.get(i))) {
-											// shoot(figures.get(i),
-											// figures.get(j));
+											//shoot(figures.get(i), figures.get(j), figures.get(i).getBulletCount());
 										} else {
 											shoot(figures.get(i), figures.get(j), figures.get(i).getBulletCount());
 											shoot = true;
@@ -467,12 +476,22 @@ public class GameData implements IStrategy {
 
 			for (int i = 0; i < figures.size(); i++) {    // -2
 				for (int j = 0; j < figures.size(); j++) {    // -1
-					if (figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile) {
+					if (figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile || figures.get(i) instanceof Landmine) {
+						//System.out.println("figures.get(i): " + figures.get(i));
 						if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
 								|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
+							System.out.println("Landmine X: " + figures.get(i).getX() + ", Loon X: " + figures.get(j).getX());
+							
+							if(figures.get(i).getX() == figures.get(j).getX()) System.out.println("Collision");
+							
 							if (figures.get(j).contains((float) figures.get(i).getX(), (float) figures.get(i).getY())) {
-								figures.get(i).setState(GameFigure.STATE_DONE);
 								figures.get(j).updateHealth();
+								if(figures.get(i) instanceof Landmine){
+									System.out.println("Testing");
+									figures.get(i).setState(GameFigure.STATE_EXPLODING);
+								} else {
+									figures.get(i).setState(GameFigure.STATE_DONE);
+								}
 							}
 						}
 					}

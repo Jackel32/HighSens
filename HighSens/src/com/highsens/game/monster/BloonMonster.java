@@ -191,7 +191,6 @@ public class BloonMonster extends AbstractMonster implements Monster, GameFigure
 	@Override
 	public double getY() {
 		return (float) y;
-
 	}
 
 	public boolean contains(float x, float y) {

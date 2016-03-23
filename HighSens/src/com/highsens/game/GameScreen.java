@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import com.highsens.game.tower.AbstractTower;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
+import com.highsens.game.tower.Landmine;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -44,6 +45,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private final JButton quitButton;
 	private final JToggleButton arrowToggle;
 	private final JToggleButton blueToggle;
+	private final JToggleButton landmineToggle;
 	private final JToggleButton muteButton;
 	private final JPanel southPanel;
 	private boolean menuVisible;
@@ -56,11 +58,13 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	Label imageLabel3 = new Label();
 	private static ArrowTower ArrowTower;
 	private static BlueTower BlueTower;
+	private static Landmine Landmine;
 	public static ScreenManager GUI;
 	private AudioPlayer sound;
 	public ArrayList TowerPosition;
 	boolean ArrowPlaceable = false;
 	boolean BluePlaceable = false;
+	boolean LandminePlaceable = false;
 	private int sellPosition = 0;
 	private Image mute;
 	public boolean nextWaveClicked;
@@ -69,6 +73,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private JTextField txtReady;
 	ImageIcon arrowTowerIcon = createImageIcon("ArrowTower.png");
 	ImageIcon blueTowerIcon = createImageIcon("BlueTower.png");
+	ImageIcon landmineIcon = createImageIcon("Landmine.png");
 	ImageIcon muteButtonIcon = createImageIcon("mute.png");
 	
 	public GameScreen() {
@@ -127,7 +132,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		arrowToggle.setEnabled(false);
 		//arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
-		arrowToggle.setBounds(138, 24, 91, 77);
+		arrowToggle.setBounds(80, 24, 91, 77);
 		//redToggle.setIcon(new ImageIcon (imagePath + separator + "images" + separator + "BlueTower.png"));
 		arrowToggle.addActionListener(this);
 		panel.add(arrowToggle);
@@ -135,9 +140,17 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		blueToggle = new JToggleButton("", blueTowerIcon);
 		blueToggle.setEnabled(false);
 		//blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
-		blueToggle.setBounds(357, 24, 77, 77);
+		blueToggle.setBounds(301, 24, 77, 77);
 		blueToggle.addActionListener(this);
 		panel.add(blueToggle);
+		
+		landmineToggle = new JToggleButton("", landmineIcon);
+		landmineToggle.setEnabled(false);
+		//landmineToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\landmine1.png"));
+		landmineToggle.setBounds(400, 24, 100, 80);
+		landmineToggle.addActionListener(this);
+		panel.add(landmineToggle);
+
 		
 		muteButton = new JToggleButton("", muteButtonIcon);
 		muteButton.setBounds(512, 11, 44, 45);
@@ -148,14 +161,21 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setBounds(104, 100, 155, 31);
+		lblNewLabel.setBounds(50, 100, 155, 31);
 		panel.add(lblNewLabel);
 		
 		JLabel lblBlueTowerCost = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
 		lblBlueTowerCost.setVerticalAlignment(SwingConstants.TOP);
 		lblBlueTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBlueTowerCost.setBounds(320, 100, 155, 31);
+		lblBlueTowerCost.setBounds(265, 100, 155, 31);
 		panel.add(lblBlueTowerCost);
+		
+		JLabel lblLandmineCost = new JLabel("<html> Landmine  <br> Cost: 200g </html>\r\n");
+		lblLandmineCost.setVerticalAlignment(SwingConstants.TOP);
+		lblLandmineCost.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLandmineCost.setBounds(373, 100, 155, 31);
+		panel.add(lblLandmineCost);
+
 		
 		JButton btnWave = new JButton("Start Wave");
 		btnWave.addActionListener(new ActionListener() {
@@ -165,7 +185,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 				btnWave.setText("Next Wave");
 			}
 		});
-		btnWave.setBounds(231, 0, 110, 23);
+		btnWave.setBounds(181, 0, 110, 23);
 		panel.add(btnWave);
 		
 		
@@ -283,6 +303,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			southPanel.setEnabled(false);
 			blueToggle.setEnabled(true);
 			arrowToggle.setEnabled(true);
+			landmineToggle.setEnabled(true);
 			gamePanel.startGame();
 
 		} else if (e.getSource() == quitButton) {
@@ -299,7 +320,9 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		{
 			ArrowPlaceable = true;
 			BluePlaceable = false;
+			LandminePlaceable = false;
 			blueToggle.setSelected(false);
+			landmineToggle.setSelected(false);
 		}
 		
 		else if (e.getSource() == blueToggle)
@@ -308,10 +331,25 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			{
 				BluePlaceable = true;
 				ArrowPlaceable = false;
+				LandminePlaceable = false;
 				arrowToggle.setSelected(false);
-				//arrowToggle.setSelected(true);
+				landmineToggle.setSelected(false);
 			}
 		}
+		
+		else if (e.getSource() == landmineToggle)
+		{
+			if(landmineToggle.isSelected())
+			{
+				LandminePlaceable = true;
+				BluePlaceable = false;
+				ArrowPlaceable = false;
+				blueToggle.setSelected(false);
+				arrowToggle.setSelected(false);
+				
+			}
+		}
+
 		
 		else if(e.getSource() == muteButton)
 		{
@@ -386,6 +424,16 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					arrowToggle.setSelected(false);
 				}
 			}
+		} else if (gameData.money >= 200 && LandminePlaceable == true) {
+			if ((x >= 0 && x <= 1300 && y >= 270 && y <= 380)) {
+				if (LandminePlaceable == true) {
+					gameData.moneyManager("Landmine", gameData.getMoney());
+					Landmine = new Landmine(x - 50  , 278 , gameData);
+					gameData.figures.add(Landmine);
+					LandminePlaceable = false;
+					landmineToggle.setSelected(false);
+				}
+			}
 		}
 	}
 	
@@ -395,6 +443,11 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	}
 	
 	public void enableBlueToggle(boolean b)
+	{
+		this.blueToggle.setEnabled(b);
+	}
+	
+	public void enableLandmineToggle(boolean b)
 	{
 		this.blueToggle.setEnabled(b);
 	}

@@ -122,7 +122,7 @@ public class ArrowMissile  extends Ellipse2D.Float implements GameFigure{
             End = System.currentTimeMillis();
             if (targetReached) {
                 state = STATE_EXPLODING;
-            } else if (!targetReached && this.   ElapsedTime > 1300)
+            } else if (!targetReached && this.ElapsedTime > 1300)
             {
                 state = STATE_DONE;
             }
