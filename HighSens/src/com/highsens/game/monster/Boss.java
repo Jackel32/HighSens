@@ -197,7 +197,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 
 	@Override
 	public void updateHealth() {
-		health -= 5;
+		health -= 100;
 		curry.updatehealth(this);
 		
 		if (health <= 0) {
