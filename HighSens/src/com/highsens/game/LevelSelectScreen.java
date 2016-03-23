@@ -110,16 +110,7 @@ public class LevelSelectScreen extends JFrame {
 		JButton btnMap = new JButton("Map 1");
 		btnMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) 
-			{
-
-				GameScreen game = new GameScreen();
-		        game.setTitle("Tower Defence");
-		        game.setResizable(false);
-		        game.setLocationRelativeTo(null);
-		        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        game.setVisible(true);
-		        setVisible(false);
-		        
+			{   
 				ScreenManager.displayGameScreen();
 		        ScreenManager.hideLevelSelectScreen();  
 			}
@@ -164,10 +155,6 @@ public class LevelSelectScreen extends JFrame {
 		JButton button = new JButton("<<<<<< Back");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				final MainScreen mainScreen = new MainScreen();
-				mainScreen.setVisible(true);
-				setVisible(false);
 
 				ScreenManager.displayMainScreen();
 				ScreenManager.hideLevelSelectScreen();
