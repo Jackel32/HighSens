@@ -101,7 +101,7 @@ public class GameData implements IStrategy {
 	}
 
 	public void shoot(GameFigure tower, GameFigure monster, int bulletCount) {
-		if (tower instanceof BlueTower) {
+		if (tower instanceof BlueTower && monster instanceof Boss) {
 			shoot((BlueTower) tower, monster, ((BlueTower) tower).getBulletCount());
 		} else {
 			// Instantiates a new Missile at the x and y location of the Regular
