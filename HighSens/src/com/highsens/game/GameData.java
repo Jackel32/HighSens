@@ -2,7 +2,6 @@ package com.highsens.game;
 
 //The Color class is used to encapsulate colors in the default RGB color space
 import java.awt.Color;
-import java.awt.Rectangle;
 //Resizable-array implementation of the List interface.
 //Implements all optional list operations, and permits all elements, including null.
 //In addition to implementing the List interface,
@@ -13,14 +12,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 //A List is an ordered Collection (sometimes called a sequence).
 import java.util.List;
-//An instance of this class is used to generate a stream of pseudorandom numbers.
 import java.util.Random;
 
 import com.highsens.game.monster.BloonMonster;
 import com.highsens.game.monster.Boss;
 import com.highsens.game.monster.FastMonster;
 import com.highsens.game.monster.RegularMonster;
-import com.highsens.game.tower.AbstractTower;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
 
@@ -32,7 +29,7 @@ public class GameData implements IStrategy {
 
 	///////////////////////////////
 	// Creates a List of object Gamefigures
-	static List<GameFigure> figures;
+	List<GameFigure> figures;
 	///////////////////////////////
 
 	final List<SellManager> sellFigures;
@@ -48,9 +45,7 @@ public class GameData implements IStrategy {
 	Missile missile;
 	ArrowMissile arrowMissile;
 	GameFigure gf;
-	///////////////////////////////
 
-	///////////////////////////////
 	// Variables for the players Score, Lives, and Money
 	public int score;
 	public int lives = 100;
@@ -59,8 +54,8 @@ public class GameData implements IStrategy {
 
 	// Variables for an objects position
 	float x, y;
-	
-	//Shooting boolean variable
+
+	// Shooting boolean variable
 	boolean shoot = false;
 
 	// A wave has not started yet.
@@ -80,7 +75,7 @@ public class GameData implements IStrategy {
 	int fastMonsterCount = 0;
 
 	int bossCount = 0;
-	
+
 	int bloonMonsterCount = 0;
 
 	// Time variable to keep track of the bullet speed
@@ -93,141 +88,81 @@ public class GameData implements IStrategy {
 	// The monsters creation and destruction time
 	long mStart, mEnd;
 
-	///////////////////////////////
-	//
 	public GameData() {
-
-		///////////////////////////////
-		// Starts the timers for the Monsters and the Bullets
-		// currentTimeMillis();
-		// Returns the difference, measured in milliseconds, between the current
-		/////////////////////////////// time and midnight, January 1, 1970 UTC.
 		mStart = System.currentTimeMillis();
 		bStart = System.currentTimeMillis();
-		///////////////////////////////
-
-		// Returns a synchronized (thread-safe) list backed by the specified
-		// list.
 		figures = Collections.synchronizedList(new ArrayList<GameFigure>());
-
 		sellFigures = Collections.synchronizedList(new ArrayList<SellManager>());
 	}
 
-	///////////////////////////////
-	// An instance method in a subclass with the same signature (name, plus the
-	/////////////////////////////// number and the type of its parameters)
-	// and return type as an instance method in the superclass overrides the
-	/////////////////////////////// superclass's method.
 	@Override
-
-	///////////////////////////////
-	// This function is designed return a score based on the amount of lives the
-	/////////////////////////////// user has left at the end.
-	// **********BUG*********
-	// As a result of the end condition being (lives <= 0): Score will always be
-	/////////////////////////////// 0.
 	public int getScore() {
-		// Commented Out:
-		// score = lives * 5; <------------- BUG
 		return score;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
-	// Grants the Reguler Tower the ability to shoot.
 	public void shoot(GameFigure tower, GameFigure monster, int bulletCount) {
-		if(tower instanceof BlueTower){
-			shoot((BlueTower)tower, monster, ((BlueTower) tower).getBulletCount());
-		}
-		else{
+		if (tower instanceof BlueTower) {
+			shoot((BlueTower) tower, monster, ((BlueTower) tower).getBulletCount());
+		} else {
 			// Instantiates a new Missile at the x and y location of the Regular
 			// Tower, color is black
 			ArrowMissile f = new ArrowMissile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLACK);
 			// Sets the target of the missile via Vector math
 			f.setTarget((int) monster.getX(), (int) monster.getY());
 			// Creates a random seed generator
-			//Random RandGen1 = new Random();
+			// Random RandGen1 = new Random();
 			// Finds a random number between
-			//int size = RandGen1.nextInt(15); // int size = (int) (Math.random()
-												// *
-												// 10) + 5;
+			// int size = RandGen1.nextInt(15); // int size = (int)
+			// (Math.random()
+			// *
+			// 10) + 5;
 			// Sets the size of the explosion to the random number
-			//f.setExplosionMaxSize(size);
+			// f.setExplosionMaxSize(size);
 			// Adds the explosion into the figures arraylist to be rendered.
 			figures.add(f);
 		}
 	}
-	///////////////////////////////
 
-	///////////////////////////////
-	// Grants the Blue Tower the ability to shoot.
 	public void shoot(BlueTower tower, GameFigure monster, int bulletCount) {
-		// Instantiates a new Missile at the x and y location of the Blue Tower,
-		// color is blue
 		if (tower.getCurrentTarget() == null) {
 			tower.setCurrentTarget(monster);
 		}
 
 		Missile f = new Missile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLUE);
-		// Sets the target of the missile via Vector math
 		f.setTarget((int) tower.getCurrentTarget().getX(), (int) tower.getCurrentTarget().getY());
-		// Creates a random seed generator
-		//Random RandGen2 = new Random();
-		// Finds a random number between
-		//int size = RandGen2.nextInt(15); // int size = (int) (Math.random() *
-		// 10) + 5;
-		// Sets the size of the explosion to the random number
-		//f.setExplosionMaxSize(size);
-		// Adds the explosion into the figures arraylist to be rendered.
+		Random RandGen2 = new Random();
+		int size = RandGen2.nextInt(15);
+		f.setExplosionMaxSize(size);
 		figures.add(f);
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public void minusLives() {
-		// Decrements lives
 		lives--;
-		// Sets the lives at the decremented value
 		setLives(lives);
-		// Gets the score from the amount of lives left.
 		getScore();
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public int getLives() {
-		// Returns the current amount of lives
 		return lives;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public void setLives(int lives) {
-		// Sets the amount of lives with the paramater amount.
 		this.lives = lives;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public int getWaves() {
 		// Returns the current wave
 		return wave;
 	}
-	///////////////////////////////
 
-	///////////////////////////////
 	public void setWaves(int waves) {
-		// Sets the amount of waves with the parameter amount.
 		this.wave = waves;
 	}
-	///////////////////////////////
 
-	public static List<GameFigure> returnList() {
+	public List<GameFigure> returnList() {
 		return figures;
 	}
 
-	///////////////////////////////
-	// Manages the money within the game.
 	public void moneyManager(String val, int money) {
 		switch (val) {
 		case "RegularTower":
@@ -257,7 +192,6 @@ public class GameData implements IStrategy {
 		}
 		setMoney(money);
 	}
-	///////////////////////////////
 
 	public void monsterManager(String val) {
 		switch (val) {
@@ -280,7 +214,6 @@ public class GameData implements IStrategy {
 		}
 	}
 
-	//////////////////////////////////
 	public int getRegularMonsterCount() {
 		return regularMonsterCount;
 	}
@@ -300,11 +233,11 @@ public class GameData implements IStrategy {
 	public void setBloonMonsterCount(int bloonMonsterCount) {
 		this.bloonMonsterCount = bloonMonsterCount;
 	}
-	
+
 	public int getBloonMonsterCount() {
 		return bloonMonsterCount;
 	}
-	
+
 	public int getBossCount() {
 		return bossCount;
 	}
@@ -345,26 +278,6 @@ public class GameData implements IStrategy {
 						else if(bloonMonsterCount >= 15 && bloonMonsterCount <= 20) {figures.add(new BloonMonster(-50, 320, this, 1));}
 						creepCount++;
 						bloonMonsterCount++;
-						// This part is limits regular monsters to half the wave
-						// size
-/*						if (creepCount < waveSize / 2) {
-							// Adds a monster to the screen
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 250, this));
-							creepCount++;
-							bossCount++;
-						}*/
 					}
 				}
 				break;
@@ -376,24 +289,18 @@ public class GameData implements IStrategy {
 						figures.add(new Boss(-50, 250, this));
 						creepCount++;
 						bloonMonsterCount++;
-					/*if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}*/
+						/*
+						 * if (creepCount <= waveSize) { if (creepCount <
+						 * waveSize / 2) { figures.add(new RegularMonster(-50,
+						 * 200, this)); creepCount++; regularMonsterCount++; }
+						 * else if (creepCount < waveSize) { figures.add(new
+						 * FastMonster(-50, 200, this)); creepCount++;
+						 * fastMonsterCount++; } else if (creepCount <=
+						 * waveSize) { figures.add(new BloonMonster(-50, 200,
+						 * this)); creepCount++; bloonMonsterCount++; } else if
+						 * (creepCount == waveSize) { figures.add(new Boss(-50,
+						 * 120, this)); creepCount++; bossCount++; }
+						 */
 					}
 				}
 				break;
@@ -422,192 +329,78 @@ public class GameData implements IStrategy {
 					}
 				}
 				break;
-/*			case 4:
-				waveSize = 10;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}
-					}
-				}
-				break;
-			case 5:
-				waveSize = 12;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}
-					}
-				}
-				break;
-			case 6:
-				waveSize = 14;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}
-					}
-				}
-				break;
-			case 7:
-				waveSize = 16;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}
-					}
-				}
-				break;
-			case 8:
-				waveSize = 18;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}
-					}
-				}
-				break;
-			case 9:
-				waveSize = 20;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}
-					}
-				}
-				break;
-			case 10:
-				waveSize = 22;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 120, this));
-							creepCount++;
-							bossCount++;
-						}
-					}
-				}
-				break;
-			case 11:
-				waveSize = 10;
-				if (monsterElapsedTime > 1000) {
-					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						figures.add(new Boss(-50, 120, this));
-						creepCount++;
-						bossCount++;
-					}
-				}
-				break;*/
+			/*
+			 * case 4: waveSize = 10; if (monsterElapsedTime > 1000) {
+			 * monsterElapsedTime = 0; if (creepCount <= waveSize) { if
+			 * (creepCount < waveSize / 2) { figures.add(new RegularMonster(-50,
+			 * 200, this)); creepCount++; regularMonsterCount++; } else if
+			 * (creepCount < waveSize) { figures.add(new FastMonster(-50, 200,
+			 * this)); creepCount++; fastMonsterCount++; } else if (creepCount
+			 * <= waveSize) { figures.add(new BloonMonster(-50, 200, this));
+			 * creepCount++; bloonMonsterCount++; } else if (creepCount ==
+			 * waveSize) { figures.add(new Boss(-50, 120, this)); creepCount++;
+			 * bossCount++; } } } break; case 5: waveSize = 12; if
+			 * (monsterElapsedTime > 1000) { monsterElapsedTime = 0; if
+			 * (creepCount <= waveSize) { if (creepCount < waveSize / 2) {
+			 * figures.add(new RegularMonster(-50, 200, this)); creepCount++;
+			 * regularMonsterCount++; } else if (creepCount < waveSize) {
+			 * figures.add(new FastMonster(-50, 200, this)); creepCount++;
+			 * fastMonsterCount++; } else if (creepCount <= waveSize) {
+			 * figures.add(new BloonMonster(-50, 200, this)); creepCount++;
+			 * bloonMonsterCount++; } else if (creepCount == waveSize) {
+			 * figures.add(new Boss(-50, 120, this)); creepCount++; bossCount++;
+			 * } } } break; case 6: waveSize = 14; if (monsterElapsedTime >
+			 * 1000) { monsterElapsedTime = 0; if (creepCount <= waveSize) { if
+			 * (creepCount < waveSize / 2) { figures.add(new RegularMonster(-50,
+			 * 200, this)); creepCount++; regularMonsterCount++; } else if
+			 * (creepCount < waveSize) { figures.add(new FastMonster(-50, 200,
+			 * this)); creepCount++; fastMonsterCount++; } else if (creepCount
+			 * <= waveSize) { figures.add(new BloonMonster(-50, 200, this));
+			 * creepCount++; bloonMonsterCount++; } else if (creepCount ==
+			 * waveSize) { figures.add(new Boss(-50, 120, this)); creepCount++;
+			 * bossCount++; } } } break; case 7: waveSize = 16; if
+			 * (monsterElapsedTime > 1000) { monsterElapsedTime = 0; if
+			 * (creepCount <= waveSize) { if (creepCount < waveSize / 2) {
+			 * figures.add(new RegularMonster(-50, 200, this)); creepCount++;
+			 * regularMonsterCount++; } else if (creepCount < waveSize) {
+			 * figures.add(new FastMonster(-50, 200, this)); creepCount++;
+			 * fastMonsterCount++; } else if (creepCount <= waveSize) {
+			 * figures.add(new BloonMonster(-50, 200, this)); creepCount++;
+			 * bloonMonsterCount++; } else if (creepCount == waveSize) {
+			 * figures.add(new Boss(-50, 120, this)); creepCount++; bossCount++;
+			 * } } } break; case 8: waveSize = 18; if (monsterElapsedTime >
+			 * 1000) { monsterElapsedTime = 0; if (creepCount <= waveSize) { if
+			 * (creepCount < waveSize / 2) { figures.add(new RegularMonster(-50,
+			 * 200, this)); creepCount++; regularMonsterCount++; } else if
+			 * (creepCount < waveSize) { figures.add(new FastMonster(-50, 200,
+			 * this)); creepCount++; fastMonsterCount++; } else if (creepCount
+			 * <= waveSize) { figures.add(new BloonMonster(-50, 200, this));
+			 * creepCount++; bloonMonsterCount++; } else if (creepCount ==
+			 * waveSize) { figures.add(new Boss(-50, 120, this)); creepCount++;
+			 * bossCount++; } } } break; case 9: waveSize = 20; if
+			 * (monsterElapsedTime > 1000) { monsterElapsedTime = 0; if
+			 * (creepCount <= waveSize) { if (creepCount < waveSize / 2) {
+			 * figures.add(new RegularMonster(-50, 200, this)); creepCount++;
+			 * regularMonsterCount++; } else if (creepCount < waveSize) {
+			 * figures.add(new FastMonster(-50, 200, this)); creepCount++;
+			 * fastMonsterCount++; } else if (creepCount <= waveSize) {
+			 * figures.add(new BloonMonster(-50, 200, this)); creepCount++;
+			 * bloonMonsterCount++; } else if (creepCount == waveSize) {
+			 * figures.add(new Boss(-50, 120, this)); creepCount++; bossCount++;
+			 * } } } break; case 10: waveSize = 22; if (monsterElapsedTime >
+			 * 1000) { monsterElapsedTime = 0; if (creepCount <= waveSize) { if
+			 * (creepCount < waveSize / 2) { figures.add(new RegularMonster(-50,
+			 * 200, this)); creepCount++; regularMonsterCount++; } else if
+			 * (creepCount < waveSize) { figures.add(new FastMonster(-50, 200,
+			 * this)); creepCount++; fastMonsterCount++; } else if (creepCount
+			 * <= waveSize) { figures.add(new BloonMonster(-50, 200, this));
+			 * creepCount++; bloonMonsterCount++; } else if (creepCount ==
+			 * waveSize) { figures.add(new Boss(-50, 120, this)); creepCount++;
+			 * bossCount++; } } } break; case 11: waveSize = 10; if
+			 * (monsterElapsedTime > 1000) { monsterElapsedTime = 0; if
+			 * (creepCount <= waveSize) { figures.add(new Boss(-50, 120, this));
+			 * creepCount++; bossCount++; } } break;
+			 */
 			}
 		}
 	}
@@ -615,16 +408,18 @@ public class GameData implements IStrategy {
 	public void update() {
 		List<GameFigure> remove = new ArrayList<>();
 		GameFigure f;
-		
+
 		bEnd = System.currentTimeMillis();
 		mEnd = System.currentTimeMillis();
-		
-		//if(shoot == false) {
-		//	bulletElapsedTime += bEnd - bStart;
-		//}
-		
-		//System.out.println("Bullet Start time: " + bStart + " , Bullet End Time: " + bEnd);
-		//System.out.println("Monster Start time: " + mStart + " , Monster End Time: " + mEnd);
+
+		// if(shoot == false) {
+		// bulletElapsedTime += bEnd - bStart;
+		// }
+
+		// System.out.println("Bullet Start time: " + bStart + " , Bullet End
+		// Time: " + bEnd);
+		// System.out.println("Monster Start time: " + mStart + " , Monster End
+		// Time: " + mEnd);
 
 		bulletElapsedTime += bEnd - bStart;
 		monsterElapsedTime += mEnd - mStart;
@@ -636,24 +431,24 @@ public class GameData implements IStrategy {
 
 		// This confusing area deals with bullet collision with monsters.
 		if (bulletElapsedTime >= 1050) {
-			
+
 			bulletElapsedTime = 0;
 			bStart = System.currentTimeMillis();
-			
+
 			//System.out.println("Bullet Elapsed Time: " + bulletElapsedTime);
 			shoot = false;
 			for (int i = 0; i < figures.size(); i++) {  // -2
 				for (int j = 0; j < figures.size(); j++) {   // -1
-					if(figures.get(i) instanceof BlueTower || figures.get(i) instanceof ArrowTower){
-						if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
-								figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ){
-							if(shoot == false) {
-								if(figures.get(i).collision(figures.get(j))){
-									if(figures.get(j).getIsAngry()){
-										if(!figures.get(j).collision(figures.get(i))){
-											//shoot(figures.get(i), figures.get(j));
-										}
-										else{
+					if (figures.get(i) instanceof BlueTower || figures.get(i) instanceof ArrowTower) {
+						if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
+								|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
+							if (shoot == false) {
+								if (figures.get(i).collision(figures.get(j))) {
+									if (figures.get(j).getIsAngry()) {
+										if (!figures.get(j).collision(figures.get(i))) {
+											// shoot(figures.get(i),
+											// figures.get(j));
+										} else {
 											shoot(figures.get(i), figures.get(j), figures.get(i).getBulletCount());
 											shoot = true;
 										}
@@ -672,12 +467,12 @@ public class GameData implements IStrategy {
 
 			for (int i = 0; i < figures.size(); i++) {    // -2
 				for (int j = 0; j < figures.size(); j++) {    // -1
-					if(figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile) { 
-						if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
-							figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ) {
-								if(figures.get(j).contains((float) figures.get(i).getX(),(float) figures.get(i).getY())){
-									figures.get(i).setState(GameFigure.STATE_DONE);
-									figures.get(j).updateHealth();
+					if (figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile) {
+						if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
+								|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
+							if (figures.get(j).contains((float) figures.get(i).getX(), (float) figures.get(i).getY())) {
+								figures.get(i).setState(GameFigure.STATE_DONE);
+								figures.get(j).updateHealth();
 							}
 						}
 					}
