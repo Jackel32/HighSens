@@ -273,6 +273,14 @@ public class GamePanel extends JPanel {
 			// increment i by 1 each time i is
 			// less than the size of the figure object within the gameData
 			// object
+			
+			for (int j = 0; j < gameData.armsFigures.size(); j++) {
+
+				f = (GameFigure) gameData.armsFigures.get(j);
+				f.render(graphics);
+			}
+
+			
 			for (int i = 0; i < gameData.figures.size(); i++) {
 
 				// get(i): Function gets the object from the collection of

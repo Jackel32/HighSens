@@ -404,6 +404,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		// Only allow the placement of towers if we have enough money and have
 		// clicked the tower
 		// Additionally only allow the placement of towers on any buttons.
+		
 		if (gameData.money >= 100 && BluePlaceable == true) {
 			if (!(x >= 0 && x <= 1300 && y >= 270 && y <= 380)) {
 				if (BluePlaceable == true) {
@@ -429,7 +430,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 				if (LandminePlaceable == true) {
 					gameData.moneyManager("Landmine", gameData.getMoney());
 					Landmine = new Landmine(x - 50  , 278 , gameData);
-					gameData.figures.add(Landmine);
+					gameData.armsFigures.add(Landmine);
 					LandminePlaceable = false;
 					landmineToggle.setSelected(false);
 				}

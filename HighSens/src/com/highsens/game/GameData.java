@@ -34,6 +34,8 @@ public class GameData implements IStrategy {
 	///////////////////////////////
 
 	final List<SellManager> sellFigures;
+	
+	final List<Landmine> armsFigures;
 
 	////////////////////////////////
 	// Instantiates each of these classes
@@ -95,6 +97,7 @@ public class GameData implements IStrategy {
 		bStart = System.currentTimeMillis();
 		figures = Collections.synchronizedList(new ArrayList<GameFigure>());
 		sellFigures = Collections.synchronizedList(new ArrayList<SellManager>());
+		armsFigures = Collections.synchronizedList(new ArrayList<Landmine>());
 	}
 
 	@Override
@@ -413,6 +416,7 @@ public class GameData implements IStrategy {
 	public void update() {
 		List<GameFigure> remove = new ArrayList<>();
 		GameFigure f;
+		Landmine l;
 
 		bEnd = System.currentTimeMillis();
 		mEnd = System.currentTimeMillis();
@@ -473,6 +477,18 @@ public class GameData implements IStrategy {
 				}
 			}
 		}
+		
+		for (int i = 0; i < armsFigures.size(); i++){
+			for (int j = 0; j < figures.size() - 1; j++){
+				if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
+						figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ){
+					if(armsFigures.get(i).collision(figures.get(j))){
+						armsFigures.get(i).update();
+					}
+				}
+			}
+			
+		}
 
 			for (int i = 0; i < figures.size(); i++) {    // -2
 				for (int j = 0; j < figures.size(); j++) {    // -1
@@ -509,5 +525,17 @@ public class GameData implements IStrategy {
 			}
 			figures.removeAll(remove);
 		}
+		
+		synchronized (armsFigures) {
+			for (int i = 0; i < armsFigures.size(); i++) {
+				l = armsFigures.get(i);
+				l.update();
+				if (l.getState() == GameFigure.STATE_DONE) {
+					remove.add(l);
+				}
+			}
+			armsFigures.removeAll(remove);
+		}
+
 	}
 }
