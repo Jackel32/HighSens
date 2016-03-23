@@ -39,9 +39,8 @@ public class MainScreen extends JFrame {
 		btnStart.setContentAreaFilled(false);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				final LevelSelectScreen levelSelectScreen = new LevelSelectScreen();
-				levelSelectScreen.setVisible(true);
-				setVisible(false);
+				ScreenManager.displayLevelSelectScreen();
+				ScreenManager.hideMainScreen();
 			}
 		});
 		btnStart.setBounds(50, 127, 112, 46);
@@ -50,7 +49,7 @@ public class MainScreen extends JFrame {
 		JButton btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dispose();
+				ScreenManager.disposeAll();
 				System.exit(0);
 			}
 		});
@@ -70,21 +69,21 @@ public class MainScreen extends JFrame {
 		btnStore.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				GameData gamedata = new GameData();
-				final StorePanel store = new StorePanel(animator, gamedata);
-				store.setVisible(true);
-				setVisible(false);
-				final StoreScreen storeScreen = new StoreScreen();
-				storeScreen.setVisible(true);
+				//final StorePanel store = new StorePanel(animator, gamedata);
+				//store.setVisible(true);
 				//setVisible(false);
+				//final StoreScreen storeScreen = new StoreScreen();
+				//storeScreen.setVisible(true);
+				//setVisible(false);
+				ScreenManager.displayStoreScreen();
 			}
 		});
 		
 		JButton btnAbout = new JButton("About");
 		btnAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//final AboutScreen about = new AboutScreen();
-				//about.setVisible(true);
-				//setVisible(false);
+				ScreenManager.displayAboutScreen();
+				ScreenManager.hideMainScreen();
 			}
 		});
 		
