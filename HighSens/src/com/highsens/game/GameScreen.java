@@ -405,7 +405,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		// clicked the tower
 		// Additionally only allow the placement of towers on any buttons.
 		
-		if (gameData.money >= 100 && BluePlaceable == true) {
+		if (gameData.money >= 100 && BluePlaceable == true ) {
 			if (!(x >= 0 && x <= 1300 && y >= 270 && y <= 380)) {
 				if (BluePlaceable == true) {
 					gameData.moneyManager("BlueTower", gameData.getMoney());
@@ -413,6 +413,14 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					gameData.figures.add(BlueTower);
 					BluePlaceable = false;
 					blueToggle.setSelected(false);
+				}
+				if (LandminePlaceable == true) {
+					gameData.moneyManager("Landmine", gameData.getMoney());
+					Landmine = new Landmine(x - 50  , 278 , gameData);
+					gameData.armsFigures.add(Landmine);
+					LandminePlaceable = false;
+					landmineToggle.setSelected(false);
+					
 				}
 			}
 		} else if (gameData.money >= 50 && ArrowPlaceable == true) {
@@ -424,6 +432,13 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					ArrowPlaceable = false;
 					arrowToggle.setSelected(false);
 				}
+				if (BluePlaceable == true) {
+					gameData.moneyManager("BlueTower", gameData.getMoney());
+					BlueTower = new BlueTower(x - 25, y - 50, gameData);
+					gameData.figures.add(BlueTower);
+					BluePlaceable = false;
+					blueToggle.setSelected(false);
+				}
 			}
 		} else if (gameData.money >= 200 && LandminePlaceable == true) {
 			if ((x >= 0 && x <= 1300 && y >= 270 && y <= 380)) {
@@ -433,7 +448,9 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					gameData.armsFigures.add(Landmine);
 					LandminePlaceable = false;
 					landmineToggle.setSelected(false);
+					
 				}
+				
 			}
 		}
 	}
@@ -450,7 +467,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	
 	public void enableLandmineToggle(boolean b)
 	{
-		this.blueToggle.setEnabled(b);
+		this.landmineToggle.setEnabled(b);
 	}
 
 	@Override
