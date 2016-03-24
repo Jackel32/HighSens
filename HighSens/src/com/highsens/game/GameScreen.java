@@ -47,6 +47,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private final JToggleButton blueToggle;
 	private final JToggleButton landmineToggle;
 	private final JToggleButton muteButton;
+	private final JToggleButton lighting_spell;
 	private final JPanel southPanel;
 	private boolean menuVisible;
 	private String imagePath = System.getProperty("user.dir");
@@ -65,6 +66,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	boolean ArrowPlaceable = false;
 	boolean BluePlaceable = false;
 	boolean LandminePlaceable = false;
+	boolean lightingPlaceable = false;
 	private int sellPosition = 0;
 	private Image mute;
 	public boolean nextWaveClicked;
@@ -75,6 +77,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	ImageIcon blueTowerIcon = createImageIcon("BlueTower.png");
 	ImageIcon landmineIcon = createImageIcon("Landmine.png");
 	ImageIcon muteButtonIcon = createImageIcon("mute.png");
+	ImageIcon lighting_spellIcon = createImageIcon("lighting_spell.png");
 	
 	public GameScreen() {
 		nextWaveClicked = false;
@@ -157,6 +160,13 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		//muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
 		muteButton.addActionListener(this);
 		panel.add(muteButton);
+		
+		lighting_spell = new JToggleButton("", lighting_spellIcon);
+		lighting_spell.setEnabled(false);
+		lighting_spell.setBounds(200, 24, 77, 77);
+		lighting_spell.addActionListener(this);
+		panel.add(lighting_spell);
+
 		
 		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -303,6 +313,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			southPanel.setEnabled(false);
 			blueToggle.setEnabled(true);
 			arrowToggle.setEnabled(true);
+			lighting_spell.setEnabled(true);
 			landmineToggle.setEnabled(true);
 			gamePanel.startGame();
 
@@ -318,24 +329,46 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		
 		else if(e.getSource() == arrowToggle)
 		{
+			lightingPlaceable = false;
 			ArrowPlaceable = true;
 			BluePlaceable = false;
 			LandminePlaceable = false;
 			blueToggle.setSelected(false);
 			landmineToggle.setSelected(false);
+			lighting_spell.setSelected(false);
 		}
 		
 		else if (e.getSource() == blueToggle)
 		{
 			if(blueToggle.isSelected())
 			{
+				lightingPlaceable = false;
 				BluePlaceable = true;
 				ArrowPlaceable = false;
 				LandminePlaceable = false;
 				arrowToggle.setSelected(false);
+				lighting_spell.setSelected(false);
 				landmineToggle.setSelected(false);
 			}
 		}
+		
+		else if (e.getSource() == lighting_spell)
+		{
+			/*if(lighting_spell.isSelected())
+			{
+				for (int i = 0; i < gameData.figures.size(); i++) {
+					if(gameData.figures.get(i) instanceof RegularMonster || gameData.figures.get(i) instanceof FastMonster ||
+							gameData.figures.get(i) instanceof BloonMonster || gameData.figures.get(i) instanceof Boss ){
+						gameData.figures.remove(i);
+						gameData.update();
+					}
+				}
+			
+				gameData.moneyManager("LightingSpell", gameData.getMoney());
+			}*/
+			gameData.figures.clear();
+		}
+
 		
 		else if (e.getSource() == landmineToggle)
 		{
@@ -469,6 +502,12 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	{
 		this.landmineToggle.setEnabled(b);
 	}
+	
+	public void enableLightingSpell(boolean b)
+	{
+		this.lighting_spell.setEnabled(b);
+	}
+
 
 	@Override
 	public void keyPressed(KeyEvent ke) {
