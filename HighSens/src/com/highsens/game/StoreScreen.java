@@ -151,9 +151,8 @@ public class StoreScreen extends JFrame {
 	    (backButton = new JButton()).addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				final MainScreen mainScreen = new MainScreen();
-				mainScreen.setVisible(true);
-				setVisible(false);
+				//ScreenManager.displayMainScreen();
+				ScreenManager.hideStoreScreen();
 			}
 	    });
 	    backButton.setLocation(549,0);

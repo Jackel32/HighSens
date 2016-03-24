@@ -10,6 +10,7 @@ public final class ScreenManager {
 	private static GameoverScreen gameoverscreen = new GameoverScreen(0, 0);
 	private static GameScreen game = new GameScreen();
 	private static StoreScreen store = new StoreScreen();
+	private static AboutScreen about = new AboutScreen();
 	
 	public static void displaySplashScreen()
 	{
@@ -43,7 +44,22 @@ public final class ScreenManager {
 	
 	public static void displayStoreScreen()
 	{
+		//final StorePanel storePanel = new StorePanel(animator, gameData);
 		store.setVisible(true);
+		/*
+		if(game.isActive)
+		{
+			game.setEnabled(false); 
+		}
+		else
+			mainscreen.setEnabled(false); //disable the mainscreen until user closes storescreen
+			*/
+	}
+	
+	public static void displayAboutScreen()
+	{
+		about.setVisible(true);
+		hideMainScreen();
 	}
 
 	
@@ -55,6 +71,7 @@ public final class ScreenManager {
 	public static void hideLevelSelectScreen()
 	{
 		levelselectscreen.setVisible(false);
+		levelselectscreen.dispose();
 	}
 	
 	public static void hideGameoverScreen()
@@ -67,11 +84,43 @@ public final class ScreenManager {
 	{
 		game.setVisible(false);
 		game.dispose();
+		game.isActive = false;
 	}
 	
 	public static void hideStoreScreen()
 	{
 		store.setVisible(false);
+		store.dispose();
+		/*
+		if(game.isActive)
+		{
+			game.setEnabled(true);
+			displayGameScreen();
+		}
+		
+		else
+		{
+			mainscreen.setEnabled(true);
+			displayMainScreen();
+		}
+		*/
+		
 	}
 	
+	public static void hideAboutScreen()
+	{
+		about.setVisible(false);
+		about.dispose();
+
+	}
+	
+	public static void disposeAll()
+	{
+		mainscreen.dispose();
+		levelselectscreen.dispose();
+		game.dispose();
+		store.dispose();
+		about.dispose();
+		gameoverscreen.dispose();
+	}
 }

@@ -68,7 +68,7 @@ public class MainScreen extends JFrame {
 		StoreAnimator animator = new StoreAnimator();
 		btnStore.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				GameData gamedata = new GameData();
+				//GameData gamedata = new GameData();
 				//final StorePanel store = new StorePanel(animator, gamedata);
 				//store.setVisible(true);
 				//setVisible(false);

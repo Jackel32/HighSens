@@ -1,6 +1,7 @@
 package com.highsens.game;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ import java.awt.Label;
 
 import javax.swing.JLabel;
 import java.awt.Color;
+import javax.swing.JToolBar;
 
 public class GameScreen extends JFrame implements ActionListener, MouseListener, KeyListener {
 
@@ -72,6 +74,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private int sellPosition = 0;
 	private Image mute;
 	public boolean nextWaveClicked;
+	public boolean isActive;
 	private JButton menuCloseButton;
 	int muteCount = 0;
 	private JTextField txtReady;
@@ -79,6 +82,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	ImageIcon blueTowerIcon = createImageIcon("BlueTower.png");
 	ImageIcon landmineIcon = createImageIcon("Landmine.png");
 	ImageIcon muteButtonIcon = createImageIcon("mute.png");
+	Dimension size = new Dimension();
 	
 	public GameScreen() {
 		nextWaveClicked = false;
@@ -89,12 +93,13 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		gameData = new GameData();
 		gamePanel = new GamePanel(animator, gameData, this);
 		//gamePanel.setBounds(0, 0, 573, 325);
-		gamePanel.setBounds(0, 0, 1500, 590);
+		gamePanel.setBounds(0, 0, 1500, 584);
 		animator.setGamePanel(gamePanel);
 		animator.setGameData(gameData);
 		getContentPane().setLayout(null);
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
+		size.setSize(500, 500);
 		
 			    northPanel = new JPanel();
 			    northPanel.setBounds(25, 95, 531, 131);
@@ -128,7 +133,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		
 		JPanel southPanel = new JPanel();
 		//panel.setBounds(0, 336, 573, 131);
-		southPanel.setBounds(0, 600, 573, 131);
+		southPanel.setBounds(0, 621, 585, 110);
 		getContentPane().add(southPanel);
 		southPanel.setLayout(null);
 		
@@ -136,7 +141,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		arrowToggle.setEnabled(false);
 		//arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
-		arrowToggle.setBounds(80, 24, 91, 77);
+		arrowToggle.setBounds(79, 0, 91, 77);
 		//redToggle.setIcon(new ImageIcon (imagePath + separator + "images" + separator + "BlueTower.png"));
 		arrowToggle.addActionListener(this);
 		southPanel.add(arrowToggle);
@@ -144,7 +149,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		blueToggle = new JToggleButton("", blueTowerIcon);
 		blueToggle.setEnabled(false);
 		//blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
-		blueToggle.setBounds(301, 24, 77, 77);
+		blueToggle.setBounds(216, 0, 91, 77);
 		blueToggle.addActionListener(this);
 		southPanel.add(blueToggle);
 
@@ -152,30 +157,37 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		landmineToggle = new JToggleButton("", landmineIcon);
 		landmineToggle.setEnabled(false);
 		//landmineToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\landmine1.png"));
-		landmineToggle.setBounds(400, 24, 100, 80);
+		landmineToggle.setBounds(346, 0, 100, 80);
 		landmineToggle.addActionListener(this);
 		southPanel.add(landmineToggle);
 		
 		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setBounds(50, 100, 155, 31);
+		lblNewLabel.setBounds(51, 75, 155, 31);
 		southPanel.add(lblNewLabel);
 		
 		JLabel lblBlueTowerCost = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
 		lblBlueTowerCost.setVerticalAlignment(SwingConstants.TOP);
 		lblBlueTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBlueTowerCost.setBounds(203, 100, 155, 31);
+		lblBlueTowerCost.setBounds(191, 75, 155, 31);
 		southPanel.add(lblBlueTowerCost);
 		
 		JLabel lblLandmineCost = new JLabel("<html> Landmine  <br> Cost: 200g </html>\r\n");
 		lblLandmineCost.setVerticalAlignment(SwingConstants.TOP);
 		lblLandmineCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLandmineCost.setBounds(410, 100, 155, 31);
+		lblLandmineCost.setBounds(329, 75, 155, 31);
 		southPanel.add(lblLandmineCost);
 		
+
+		muteButton = new JToggleButton("", muteButtonIcon);
+		muteButton.setBounds(0, 0, 44, 45);
+		southPanel.add(muteButton);
+		//muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
+		muteButton.addActionListener(this);
+		
 		btnQuit = new JButton("Quit to main menu\r\n");
-		btnQuit.setBounds(687, 697, 127, 24);
+		btnQuit.setBounds(439, 589, 146, 21);
 		getContentPane().add(btnQuit);
 		btnQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -190,7 +202,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		btnQuit.setOpaque(true);
 		
 		btnStore = new JButton("Go to Store");
-		btnStore.setBounds(688, 645, 126, 23);
+		btnStore.setBounds(284, 589, 103, 21);
 		getContentPane().add(btnStore);
 		btnStore.setEnabled(false);
 		btnStore.addActionListener(new ActionListener() {
@@ -203,7 +215,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		btnStore.setOpaque(true);
 		
 		btnWave = new JButton("Start Wave");
-		btnWave.setBounds(687, 601, 127, 23);
+		btnWave.setBounds(140, 589, 103, 21);
 		getContentPane().add(btnWave);
 		btnWave.setEnabled(false);
 		btnWave.setContentAreaFilled(false);
@@ -216,13 +228,6 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			}
 		});
 		btnWave.setOpaque(true);
-		
-
-		muteButton = new JToggleButton("", muteButtonIcon);
-		muteButton.setBounds(881, 612, 44, 45);
-		getContentPane().add(muteButton);
-		//muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
-		muteButton.addActionListener(this);
 
 		
 		
