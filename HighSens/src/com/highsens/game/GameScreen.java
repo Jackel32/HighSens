@@ -59,11 +59,17 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private boolean menuVisible;
 	private String imagePath = System.getProperty("user.dir");
 	private String separator = System.getProperty("file.separator");
+	
 	Label LevelPanel = new Label();
 	Label RangePanel = new Label();
-	Label imageLabel = new Label();
-	Label imageLabel2 = new Label();
-	Label imageLabel3 = new Label();
+	Label TowerTypePanel = new Label();
+	Label LivesPanel = new Label();
+	Label MoneyPanel = new Label();
+	Label RegularMonsterPanel = new Label();
+	Label FastMonsterPanel = new Label();
+	Label BossMonsterPanel = new Label();
+	Label BloonMonsterPanel = new Label();
+	
 	private static ArrowTower ArrowTower;
 	private static BlueTower BlueTower;
 	private static Landmine Landmine;
@@ -321,27 +327,41 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	public void drawMenuForTower(AbstractTower abstractTowerGameFigure) {
 
 		RangePanel.setText("Range: " + abstractTowerGameFigure.getRange());
-		RangePanel.setBounds(1400, 100, 100, 100);
+		RangePanel.setBounds(1300, 0, 300, 25);
+
 		LevelPanel.setText("Level: " + abstractTowerGameFigure.getLevel());
-		LevelPanel.setBounds(1400, 0, 100, 100);
+		LevelPanel.setBounds(1300, 50, 300, 25);
 
-		imageLabel.setText("image: " + abstractTowerGameFigure.getLevel());
-		imageLabel.setBounds(1300, 0, 100, 100);
+		TowerTypePanel.setText("Tower type: " + abstractTowerGameFigure.getLevel());
+		TowerTypePanel.setBounds(1300, 100, 300, 25);
 
-		// Image newImage = getImage(imagePath + separator + "images" +
-		// separator + "RedTower.png");
+		LivesPanel.setText("Lives remaining: " + gameData.getLives());
+		LivesPanel.setBounds(1300, 150, 300, 25);
 
-		imageLabel2.setText("image2: " + abstractTowerGameFigure.getLevel());
-		imageLabel2.setBounds(1300, 100, 100, 100);
+		MoneyPanel.setText("Money remaining: " + gameData.getMoney());
+		MoneyPanel.setBounds(1300, 200, 300, 25);
 
-		imageLabel3.setText("image3: " + abstractTowerGameFigure.getLevel());
-		imageLabel3.setBounds(1300, 200, 100, 100);
+		RegularMonsterPanel.setText("Regular Monsters active: " + gameData.getRegularMonsterCount());
+		RegularMonsterPanel.setBounds(1300, 250, 300, 25);
 
-		gamePanel.add(imageLabel);
-		gamePanel.add(imageLabel2);
-		gamePanel.add(imageLabel3);
+		FastMonsterPanel.setText("Fast Monsters active: " + gameData.getFastMonsterCount());
+		FastMonsterPanel.setBounds(1300, 300, 300, 25);
+
+		BossMonsterPanel.setText("Bosses active: " + gameData.getBossCount());
+		BossMonsterPanel.setBounds(1300, 350, 300, 25);
+
+		BloonMonsterPanel.setText("Balloon Monsters active: " + gameData.getBloonMonsterCount());
+		BloonMonsterPanel.setBounds(1300, 400, 300, 25);
+
 		gamePanel.add(RangePanel);
 		gamePanel.add(LevelPanel);
+		gamePanel.add(TowerTypePanel);
+		gamePanel.add(LivesPanel);
+		gamePanel.add(MoneyPanel);
+		gamePanel.add(RegularMonsterPanel);
+		gamePanel.add(FastMonsterPanel);
+		gamePanel.add(BossMonsterPanel);
+		gamePanel.add(BloonMonsterPanel);
 	}
 
 
@@ -492,7 +512,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		// Additionally only allow the placement of towers on any buttons.
 		
 		if (gameData.money >= 100 && BluePlaceable == true ) {
-			if (!(x >= 0 && x <= 1300 && y >= 270 && y <= 380)) {
+			if (!(x >= 0 && x <= 1300 && y >= 160 && y <= 270)) {
 				if (BluePlaceable == true) {
 					gameData.moneyManager("BlueTower", gameData.getMoney());
 					BlueTower = new BlueTower(x - 25, y - 50, gameData);
@@ -510,7 +530,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 				}
 			}
 		} else if (gameData.money >= 50 && ArrowPlaceable == true) {
-			if (!(x >= 0 && x <= 1300 && y >= 270 && y <= 380)) {
+			if (!(x >= 0 && x <= 1300 && y >= 160 && y <= 270)) {
 				if (ArrowPlaceable == true) {
 					gameData.moneyManager("RegularTower", gameData.getMoney());
 					ArrowTower = new ArrowTower(x - 25, y - 50, gameData);
@@ -527,10 +547,10 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 				}
 			}
 		} else if (gameData.money >= 200 && LandminePlaceable == true) {
-			if ((x >= 0 && x <= 1300 && y >= 270 && y <= 380)) {
+			if ((x >= 0 && x <= 1300 && y >= 160 && y <= 270)) {
 				if (LandminePlaceable == true) {
 					gameData.moneyManager("Landmine", gameData.getMoney());
-					Landmine = new Landmine(x - 50  , 278 , gameData);
+					Landmine = new Landmine(x - 50  , 180, gameData);
 					gameData.armsFigures.add(Landmine);
 					LandminePlaceable = false;
 					landmineToggle.setSelected(false);

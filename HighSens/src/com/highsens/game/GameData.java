@@ -280,10 +280,10 @@ public class GameData implements IStrategy {
 				while (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						if(bloonMonsterCount < 5) {figures.add(new BloonMonster(-50, 320, this, 4));}
-						else if(bloonMonsterCount >= 5 && bloonMonsterCount < 10) {figures.add(new BloonMonster(-50, 320, this, 3));}
-						else if(bloonMonsterCount >= 10 && bloonMonsterCount < 15) {figures.add(new BloonMonster(-50, 320, this, 2));}
-						else if(bloonMonsterCount >= 15 && bloonMonsterCount <= 20) {figures.add(new BloonMonster(-50, 320, this, 1));}
+						if(bloonMonsterCount < 5) {figures.add(new BloonMonster(-50, 200, this, 4));}
+						else if(bloonMonsterCount >= 5 && bloonMonsterCount < 10) {figures.add(new BloonMonster(-50, 200, this, 3));}
+						else if(bloonMonsterCount >= 10 && bloonMonsterCount < 15) {figures.add(new BloonMonster(-50, 200, this, 2));}
+						else if(bloonMonsterCount >= 15 && bloonMonsterCount <= 20) {figures.add(new BloonMonster(-50, 200, this, 1));}
 						creepCount++;
 						bloonMonsterCount++;
 					}
@@ -294,7 +294,7 @@ public class GameData implements IStrategy {
 				if (monsterElapsedTime > 2000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						figures.add(new Boss(-50, 250, this));
+						figures.add(new Boss(-50, 150, this));
 						creepCount++;
 						bloonMonsterCount++;
 						/*
@@ -318,19 +318,19 @@ public class GameData implements IStrategy {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
 						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 320, this));
+							figures.add(new RegularMonster(-50, 200, this));
 							creepCount++;
 							regularMonsterCount++;
 						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 320, this));
+							figures.add(new FastMonster(-50, 200, this));
 							creepCount++;
 							fastMonsterCount++;
 						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 320, this, 4));
+							figures.add(new BloonMonster(-50, 200, this, 4));
 							creepCount++;
 							bloonMonsterCount++;
 						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 250, this));
+							figures.add(new Boss(-50, 150, this));
 							creepCount++;
 							bossCount++;
 						}

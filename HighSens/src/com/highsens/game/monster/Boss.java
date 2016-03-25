@@ -58,7 +58,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 	public void render(Graphics g) {
 		
 		curry.render(g, this);
-		drawHealthBar(g, x, y);
+		drawHealthBar(g, x+50, y);
 		g.drawImage(bossImage, (int) x, (int) y, null);
 	}
 
@@ -129,7 +129,7 @@ public class Boss extends AbstractMonster implements Monster, GameFigure, IStrat
 			break;
 			
 		case PATH_6:
-			if (x >= 1250)
+			if (x >= 1150)
 				state = LIFE_LOST;
 		}
 	}

@@ -116,7 +116,7 @@ public class GamePanel extends JPanel {
 
 			graphics.drawImage(mapImage, 0, 0, null);
 			Graphics2D g2 = (Graphics2D) graphics;
-			g2.setColor(Color.RED);
+			g2.setColor(Color.YELLOW);
 			g2.setFont(new Font("Serif", Font.PLAIN, 20));
 			g2.drawString("Lives: " + gameData.getLives(), 375, 60);
 			g2.drawString("Gold: " + gameData.getMoney(), 470, 60);
