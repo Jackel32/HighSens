@@ -13,23 +13,39 @@ import javax.swing.JButton;
 public class StoreScreen extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel background;
+	private JLabel selected = new JLabel();
+	private JLabel firstLabel, secondLabel, thirdLabel, fourthLabel;
+	private JLabel topLeftArrow, lowerLeftArraw;
 	private JButton firstButton = new JButton();
 	private JButton secondButton = new JButton();
 	private JButton thirdButton = new JButton();
 	private JButton fourthButton = new JButton();
 	private JButton backButton = new JButton();
 	private JButton arrowTower = new JButton();
+	private JButton redTower = new JButton();
+	private JButton blueTower = new JButton();
 	private JButton arrowTowerFirstTier = new JButton();
+	private JButton redTowerFirstTier = new JButton();
+	private JButton blueTowerFirstTier = new JButton();
 	private JButton buyButton = new JButton();
-	private JLabel firstLabel, secondLabel, thirdLabel, fourthLabel;
 	private JTextPane description;
 	private JTextPane cashPane;
 	private String imagePath = System.getProperty("user.dir");
     private String separator = System.getProperty("file.separator");
     private Player player = Player.getInstance();
-    private int currentTower = 0;
+    private int currentTowerIndex = 0;
+    private TowerData arrowTowerObj = new TowerData();
+    private TowerData emptyTower = new TowerData();
+    private TowerData redTowerObj = new TowerData();
+    private TowerData blueTowerObj = new TowerData();
+    private TowerData towerArray[] = {emptyTower, arrowTowerObj, redTowerObj, blueTowerObj};
+    
     
 	public StoreScreen() {
+		
+		arrowTowerObj.amount = 150;
+		redTowerObj.amount = 250;
+		blueTowerObj.amount = 350;
 		
 		setMaximumSize(new Dimension(600, 400));
 		setMinimumSize(new Dimension(600, 400));
@@ -45,10 +61,22 @@ public class StoreScreen extends JFrame {
 	    background.setSize(600, 400);
 	    add(background);
 	    
+	    selected = new JLabel(addImageIcon(imagePath + separator + "images" + separator
+                + "selected" + ".png"));
+	    selected.setSize(59,59);
+	    //selected.setLocation(136,99);
+	    selected.setLocation(0,0);
+	    		
+	    
 	    firstLabel = generateJLabel(189, 393, "first-selected");
 	    secondLabel = generateJLabel(189, 393, "second-selected");
 	    thirdLabel = generateJLabel(189, 393, "third-selected");
 	    fourthLabel = generateJLabel(189, 393, "fourth-selected");
+	    
+	    topLeftArrow = new JLabel(addImageIcon(imagePath + separator + "images" + separator
+                + "top-left-arrow" + ".png"));
+	    topLeftArrow.setSize(35,13);
+	    topLeftArrow.setLocation(191,124);
 	    
 	    description = new JTextPane();
 	    description.setSize(182,182);
@@ -72,9 +100,15 @@ public class StoreScreen extends JFrame {
 				firstLabel.add(thirdButton);
 				firstLabel.add(fourthButton);
 				firstLabel.add(arrowTower);
+				firstLabel.add(redTower);
+				firstLabel.add(blueTower);
 				firstLabel.add(arrowTowerFirstTier);
+				//if(towerArray[currentTowerIndex].bought == true){
+					background.add(topLeftArrow);
+				//}
 				background.add(firstLabel);
 				refresh();
+				currentTowerIndex = 0;
 			}
 	    });
 	    
@@ -87,8 +121,12 @@ public class StoreScreen extends JFrame {
 				secondLabel.add(thirdButton);
 				secondLabel.add(fourthButton);
 				secondLabel.add(arrowTower);
+				secondLabel.add(redTower);
+				secondLabel.add(redTowerFirstTier);
+				secondLabel.add(blueTower);
 				background.add(secondLabel);
 				refresh();
+				currentTowerIndex = 0;
 			}
 	    });
 	    
@@ -101,8 +139,12 @@ public class StoreScreen extends JFrame {
 				thirdLabel.add(thirdButton);
 				thirdLabel.add(fourthButton);
 				thirdLabel.add(arrowTower);
+				thirdLabel.add(redTower);
+				thirdLabel.add(blueTower);
+				thirdLabel.add(blueTowerFirstTier);
 				background.add(thirdLabel);
 				refresh();
+				currentTowerIndex = 0;
 			}
 	    });
 	    
@@ -115,8 +157,11 @@ public class StoreScreen extends JFrame {
 				fourthLabel.add(thirdButton);
 				fourthLabel.add(fourthButton);
 				fourthLabel.add(arrowTower);
+				fourthLabel.add(redTower);
+				fourthLabel.add(blueTower);
 				background.add(fourthLabel);
 				refresh();
+				currentTowerIndex = 0;
 			}
 	    });
 	    
@@ -138,7 +183,7 @@ public class StoreScreen extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				description.setText("Arrow Tower \nCost: $150");
-				currentTower = 150;
+				currentTowerIndex = 1;
 			}
 	    });
 	    arrowTowerFirstTier.setLocation(145, 107);
@@ -148,11 +193,68 @@ public class StoreScreen extends JFrame {
 	    arrowTowerFirstTier.setContentAreaFilled(false);
 	    arrowTowerFirstTier.setBorderPainted(false);
 	    
+	    (redTower = new JButton()).addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+	    });
+	    redTower.setLocation(34, 112);
+	    redTower.setSize(40,40);
+	    redTower.setIcon(new ImageIcon(imagePath + separator + "images" + separator
+                + "red-tower-icon" + ".png"));
+	    redTower.setContentAreaFilled(false);
+	    redTower.setBorderPainted(false);
+	    
+	    (redTowerFirstTier = new JButton()).addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				description.setText("Red Tower \nCost: $150");
+				currentTowerIndex = 2;
+			}
+	    });
+	    redTowerFirstTier.setLocation(145, 107);
+	    redTowerFirstTier.setSize(40,40);
+	    redTowerFirstTier.setIcon(new ImageIcon(imagePath + separator + "images" + separator
+                + "red-tower-icon" + ".png"));
+	    redTowerFirstTier.setContentAreaFilled(false);
+	    redTowerFirstTier.setBorderPainted(false);
+	    
+	    (blueTower = new JButton()).addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+	    });
+	    blueTower.setLocation(34, 202);
+	    blueTower.setSize(40,40);
+	    blueTower.setIcon(new ImageIcon(imagePath + separator + "images" + separator
+                + "blue-tower-icon" + ".png"));
+	    blueTower.setContentAreaFilled(false);
+	    blueTower.setBorderPainted(false);
+	    
+	    (blueTowerFirstTier = new JButton()).addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				description.setText("Blue Tower \nCost: $150");
+				currentTowerIndex = 3;
+			}
+	    });
+	    blueTowerFirstTier.setLocation(145, 107);
+	    blueTowerFirstTier.setSize(40,40);
+	    blueTowerFirstTier.setIcon(new ImageIcon(imagePath + separator + "images" + separator
+                + "blue-tower-icon" + ".png"));
+	    blueTowerFirstTier.setContentAreaFilled(false);
+	    blueTowerFirstTier.setBorderPainted(false);
+	    
 	    (backButton = new JButton()).addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//ScreenManager.displayMainScreen();
-				ScreenManager.hideStoreScreen();
+				final MainScreen mainScreen = new MainScreen();
+				mainScreen.setVisible(true);
+				setVisible(false);
 			}
 	    });
 	    backButton.setLocation(549,0);
@@ -178,9 +280,12 @@ public class StoreScreen extends JFrame {
 	    background.add(thirdButton);
 	    background.add(fourthButton);
 	    background.add(arrowTower);
+	    background.add(redTower);
+	    background.add(blueTower);
 	    background.add(backButton);
 	    background.add(buyButton);
 	    background.add(cashPane);
+	    background.add(selected);
 	}
 	
 	private void removeButtons(){
@@ -189,6 +294,8 @@ public class StoreScreen extends JFrame {
 		background.remove(thirdButton);
 		background.remove(fourthButton);
 		background.remove(arrowTower);
+		background.remove(redTower);
+		background.remove(blueTower);
 	}
 	
 	private void removeSelections(){
@@ -245,10 +352,18 @@ public class StoreScreen extends JFrame {
 	
 	@SuppressWarnings("static-access")
 	private void buyCurrentItem(){
-		player.setGameCash(player.getGameCash()-currentTower);
-		cashPane.setText("Game Cash: $" + player.getGameCash());
+		if(towerArray[currentTowerIndex].bought == false){
+			player.setGameCash(player.getGameCash()-towerArray[currentTowerIndex].amount);
+			towerArray[currentTowerIndex].bought = true;
+			cashPane.setText("Game Cash: $" + player.getGameCash());
+		}
 	}
 	
 	//TODO: create tower class with boolean isBought and game cash value.
 	//		initially  arrows in tier are gray, when bought change to yellow
+}
+
+class TowerData{
+	protected int amount = 0;
+	protected boolean bought = false;
 }

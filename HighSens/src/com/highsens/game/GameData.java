@@ -490,30 +490,24 @@ public class GameData implements IStrategy {
 			
 		}
 
-			for (int i = 0; i < figures.size(); i++) {    // -2
-				for (int j = 0; j < figures.size(); j++) {    // -1
-					if (figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile || figures.get(i) instanceof Landmine) {
-						//System.out.println("figures.get(i): " + figures.get(i));
-						if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
-								|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
-							System.out.println("Landmine X: " + figures.get(i).getX() + ", Loon X: " + figures.get(j).getX());
-							
-							if(figures.get(i).getX() == figures.get(j).getX()) System.out.println("Collision");
-							
-							if (figures.get(j).contains((float) figures.get(i).getX(), (float) figures.get(i).getY())) {
-								figures.get(j).updateHealth();
-								if(figures.get(i) instanceof Landmine){
-									System.out.println("Testing");
-									figures.get(i).setState(GameFigure.STATE_EXPLODING);
-								} else {
-									figures.get(i).setState(GameFigure.STATE_DONE);
-								}
+		for (int i = 0; i < figures.size(); i++) {    // -2
+			for (int j = 0; j < figures.size(); j++) {    // -1
+				if (figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile || figures.get(i) instanceof Landmine) {
+					if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
+							|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {							
+						if (figures.get(j).contains((float) figures.get(i).getX(), (float) figures.get(i).getY())) {
+							figures.get(j).updateHealth();
+							if(figures.get(i) instanceof Landmine){
+								System.out.println("Testing");
+								figures.get(i).setState(GameFigure.STATE_EXPLODING);
+							} else {
+								figures.get(i).setState(GameFigure.STATE_DONE);
 							}
 						}
 					}
 				}
 			}
-		//}
+		}
 
 		synchronized (figures) {
 			for (int i = 0; i < figures.size(); i++) {
