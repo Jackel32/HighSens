@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 public final class ScreenManager {
 	
+	private static String currentUser ="";
 	private static Splash splashscreen = new Splash();
 	private static MainScreen mainscreen = new MainScreen();
 	private static LevelSelectScreen levelselectscreen = new LevelSelectScreen();
@@ -11,6 +12,18 @@ public final class ScreenManager {
 	private static GameScreen game = new GameScreen();
 	private static StoreScreen store = new StoreScreen();
 	private static AboutScreen about = new AboutScreen();
+	private static LoginScreen login = new LoginScreen();
+	
+	public static void setUser(String user)
+	{
+		currentUser = user;
+		mainscreen.setUserLabel();
+	}
+	
+	public static String getUser()
+	{
+		return currentUser;
+	}
 	
 	public static void displaySplashScreen()
 	{
@@ -62,6 +75,19 @@ public final class ScreenManager {
 		hideMainScreen();
 	}
 
+	public static void displayLoginScreen()
+	{
+		login.setVisible(true);
+		hideMainScreen();
+	}
+
+	
+	public static void hideLoginScreen()
+	{
+		login.setVisible(false);
+		displayMainScreen();
+	}
+	
 	
 	public static void hideMainScreen()
 	{

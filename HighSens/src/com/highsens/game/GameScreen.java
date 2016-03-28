@@ -38,6 +38,7 @@ import java.awt.Label;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JToolBar;
+import java.awt.GridLayout;
 
 public class GameScreen extends JFrame implements ActionListener, MouseListener, KeyListener {
 
@@ -49,8 +50,9 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	private final JButton btnWave;
 	private final JButton btnStore;
 	private final JButton btnQuit;
-	private final JToggleButton arrowToggle;
 	private final JToggleButton blueToggle;
+	private final JToggleButton arrowToggle;
+	private final JToggleButton redToggle;
 	private final JToggleButton landmineToggle;
 	private final JToggleButton muteButton;
 	private final JPanel northPanel;
@@ -92,6 +94,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	ImageIcon landmineIcon = createImageIcon("Landmine.png");
 	ImageIcon muteButtonIcon = createImageIcon("mute.png");
 	ImageIcon lighting_spellIcon = createImageIcon("lighting_spell.png");
+	private JLabel lblNewLabel;
 
 	public GameScreen() {
 		nextWaveClicked = false;
@@ -146,28 +149,11 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		southPanel.setBounds(0, 621, 585, 110);
 		getContentPane().add(southPanel);
 		southPanel.setLayout(null);
-		
-		arrowToggle = new JToggleButton("", arrowTowerIcon);
-		arrowToggle.setVerticalAlignment(SwingConstants.BOTTOM);
-		arrowToggle.setEnabled(false);
-		//arrowToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\ArrowTower.png"));
-		arrowToggle.setBounds(79, 0, 91, 77);
-		//redToggle.setIcon(new ImageIcon (imagePath + separator + "images" + separator + "BlueTower.png"));
-		arrowToggle.addActionListener(this);
-		southPanel.add(arrowToggle);
-		
-		blueToggle = new JToggleButton("", blueTowerIcon);
-		blueToggle.setEnabled(false);
-		//blueToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\BlueTower.png"));
-		blueToggle.setBounds(216, 0, 91, 77);
-		blueToggle.addActionListener(this);
-		southPanel.add(blueToggle);
 
 		
 		landmineToggle = new JToggleButton("", landmineIcon);
 		landmineToggle.setEnabled(false);
-		//landmineToggle.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\landmine1.png"));
-		landmineToggle.setBounds(346, 0, 100, 80);
+		landmineToggle.setBounds(381, 0, 94, 77);
 		landmineToggle.addActionListener(this);
 		southPanel.add(landmineToggle);
 
@@ -177,24 +163,11 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		lighting_spell.setBounds(498, 0, 77, 77);
 		lighting_spell.addActionListener(this);
 		southPanel.add(lighting_spell);
-
-		
-		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel.setBounds(51, 75, 155, 31);
-		southPanel.add(lblNewLabel);
-		
-		JLabel lblBlueTowerCost = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
-		lblBlueTowerCost.setVerticalAlignment(SwingConstants.TOP);
-		lblBlueTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBlueTowerCost.setBounds(181, 75, 155, 31);
-		southPanel.add(lblBlueTowerCost);
 		
 		JLabel lblLandmineCost = new JLabel("<html> Landmine  <br> Cost: 200g </html>\r\n");
 		lblLandmineCost.setVerticalAlignment(SwingConstants.TOP);
 		lblLandmineCost.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLandmineCost.setBounds(317, 75, 155, 31);
+		lblLandmineCost.setBounds(352, 75, 155, 31);
 		southPanel.add(lblLandmineCost);
 		
 
@@ -207,7 +180,38 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		lblLightSpell.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLightSpell.setBounds(485, 75, 100, 31);
 		southPanel.add(lblLightSpell);
-		//muteButton.setIcon(new ImageIcon("C:\\Users\\Sha\\git\\HighSens\\HighSens\\images\\mute.jpg"));
+		
+		JPanel towerPanel = new JPanel();
+		towerPanel.setBounds(54, 11, 317, 88);
+		southPanel.add(towerPanel);
+		towerPanel.setLayout(new GridLayout(2, 3, 0, 0));
+		
+		blueToggle = new JToggleButton("", blueTowerIcon);
+		blueToggle.setVerticalAlignment(SwingConstants.BOTTOM);
+		blueToggle.setEnabled(false);
+		towerPanel.add(blueToggle);
+		
+		arrowToggle = new JToggleButton("", arrowTowerIcon);
+		arrowToggle.setEnabled(false);
+		towerPanel.add(arrowToggle);
+		
+		redToggle = new JToggleButton("", (Icon) null);
+		towerPanel.add(redToggle);
+		
+		JLabel label_1 = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
+		label_1.setVerticalAlignment(SwingConstants.TOP);
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		towerPanel.add(label_1);
+		
+		JLabel label = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
+		towerPanel.add(label);
+		label.setVerticalAlignment(SwingConstants.TOP);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lblNewLabel = new JLabel("<html> Red Tower <br> Cost: 200g </html>");
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		towerPanel.add(lblNewLabel);
 		muteButton.addActionListener(this);
 		
 		btnQuit = new JButton("Quit to main menu\r\n");

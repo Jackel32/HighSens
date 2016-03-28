@@ -16,6 +16,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 public class MainScreen extends JFrame {
+	private JLabel lblUser = new JLabel("");
+	
 	public MainScreen() {
 		setMaximumSize(new Dimension(600, 400));
 		setMinimumSize(new Dimension(600, 400));
@@ -55,7 +57,7 @@ public class MainScreen extends JFrame {
 		});
 		btnQuit.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnQuit.setBackground(new Color(255, 0, 0));
-		btnQuit.setBounds(386, 278, 112, 46);
+		btnQuit.setBounds(423, 278, 112, 46);
 		btnQuit.setContentAreaFilled(false);
 		btnQuit.setOpaque(true);
 		
@@ -89,7 +91,7 @@ public class MainScreen extends JFrame {
 		
 		btnAbout.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnAbout.setBackground(new Color(255, 215, 0));
-		btnAbout.setBounds(386, 127, 112, 46);
+		btnAbout.setBounds(423, 127, 112, 46);
 		btnAbout.setContentAreaFilled(false);
 		btnAbout.setOpaque(true);
 		
@@ -98,5 +100,31 @@ public class MainScreen extends JFrame {
 		getContentPane().add(btnStore);
 		getContentPane().add(btnAbout);
 		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScreenManager.displayLoginScreen();
+				ScreenManager.hideMainScreen();
+			}
+		});
+		
+		btnLogin.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		btnLogin.setContentAreaFilled(false);
+		btnLogin.setOpaque(true);
+		btnLogin.setBackground(new Color(0, 255, 255));
+		btnLogin.setBounds(227, 188, 112, 46);
+		getContentPane().add(btnLogin);
+		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		lblUser.setBounds(181, 47, 180, 23);
+		getContentPane().add(lblUser);
+		
+		
+	}
+	public void setUserLabel()
+	{
+		lblUser.setText("Current user: "+ ScreenManager.getUser());
+		lblUser.setVisible(true);
 	}
 }
