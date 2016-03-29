@@ -189,11 +189,14 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		blueToggle = new JToggleButton("", blueTowerIcon);
 		blueToggle.setVerticalAlignment(SwingConstants.BOTTOM);
 		blueToggle.setEnabled(false);
+		blueToggle.addActionListener(this);
 		towerPanel.add(blueToggle);
 		
 		arrowToggle = new JToggleButton("", arrowTowerIcon);
 		arrowToggle.setEnabled(false);
+		arrowToggle.addActionListener(this);
 		towerPanel.add(arrowToggle);
+		
 		
 		redToggle = new JToggleButton("", (Icon) null);
 		towerPanel.add(redToggle);
