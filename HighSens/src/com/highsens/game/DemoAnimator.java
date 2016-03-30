@@ -1,17 +1,18 @@
 package com.highsens.game;
 
-public class Animator implements Runnable {
+public class DemoAnimator implements Runnable {
     boolean running;
-    GamePanel gamePanel = null;
+    DemoPanel demoPanel = null;
     GameData gameData = null;
     
-    public Animator() {
+    public DemoAnimator() {
     }
     
-    public void setGamePanel(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-    }
+
     
+    public void setDemoPanel(DemoPanel demoPanel) {
+        this.demoPanel = demoPanel;
+    }
     
     public void setGameData(GameData gameData) {
         this.gameData = gameData;
@@ -22,8 +23,8 @@ public class Animator implements Runnable {
         running = true;
         while (running) {
             gameData.update();
-            gamePanel.gameRender();
-            gamePanel.printScreen();
+            demoPanel.gameRender();
+            demoPanel.printScreen();
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {

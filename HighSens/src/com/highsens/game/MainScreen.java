@@ -112,13 +112,22 @@ public class MainScreen extends JFrame {
 		btnLogin.setContentAreaFilled(false);
 		btnLogin.setOpaque(true);
 		btnLogin.setBackground(new Color(0, 255, 255));
-		btnLogin.setBounds(227, 188, 112, 46);
+		btnLogin.setBounds(228, 278, 112, 46);
 		getContentPane().add(btnLogin);
 		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
 		lblUser.setBounds(181, 47, 180, 23);
 		getContentPane().add(lblUser);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ScreenManager.displayTitleScreen();
+			}
+		});
+		btnNewButton.setBounds(251, 139, 89, 23);
+		getContentPane().add(btnNewButton);
 		
 		
 	}

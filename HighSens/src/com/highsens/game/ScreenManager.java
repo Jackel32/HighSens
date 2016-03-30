@@ -13,6 +13,7 @@ public final class ScreenManager {
 	private static StoreScreen store = new StoreScreen();
 	private static AboutScreen about = new AboutScreen();
 	private static LoginScreen login = new LoginScreen();
+	private static TitleScreen title = new TitleScreen();
 	
 	public static void setUser(String user)
 	{
@@ -23,6 +24,19 @@ public final class ScreenManager {
 	public static String getUser()
 	{
 		return currentUser;
+	}
+	
+	public static void displayTitleScreen()
+	{
+		title.setVisible(true);
+		title.playGame();
+	}
+	
+	public static void hideTitleScreen()
+	{
+		title.setVisible(false);
+		title.dispose();
+		displayMainScreen();
 	}
 	
 	public static void displaySplashScreen()
