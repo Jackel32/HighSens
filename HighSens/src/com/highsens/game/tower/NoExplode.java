@@ -48,7 +48,8 @@ public class NoExplode implements LandmineState{
 		
 		if(collision){
 			
-			l.curry = new Explode();
+			//l.curry = new Explode();
+			l.curry = new Timer();
 		}
 	}
 
@@ -77,7 +78,7 @@ public class NoExplode implements LandmineState{
 	    
 	    if (monster.intersects(range)){
 	    	collision = true;
-	    	m.setState(0);
+	    	//m.setState(0);
 	    	System.out.println("collision: " + collision);
 	    }else{
 	    	collision = false;

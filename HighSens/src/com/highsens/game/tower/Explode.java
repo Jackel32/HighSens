@@ -81,6 +81,7 @@ public class Explode implements LandmineState{
 	    
 	    if (monster.intersects(range)){
 	    	collision = true;
+	    	m.setState(0);
 	    	//System.out.println("collision: " + collision);
 	    }else{
 	    	collision = false;
