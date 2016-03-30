@@ -213,7 +213,7 @@ public class GameData implements IStrategy {
 			break;
 		case "bloonKill":
 			bloonMonsterCount--;
-			setFastMonsterCount(bloonMonsterCount);
+			setBloonMonsterCount(bloonMonsterCount);
 			break;
 		case "bossKill":
 			bossCount--;
@@ -296,7 +296,7 @@ public class GameData implements IStrategy {
 					if (creepCount <= waveSize) {
 						figures.add(new Boss(-50, 150, this));
 						creepCount++;
-						bloonMonsterCount++;
+						bossCount++;
 						/*
 						 * if (creepCount <= waveSize) { if (creepCount <
 						 * waveSize / 2) { figures.add(new RegularMonster(-50,
