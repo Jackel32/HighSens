@@ -148,7 +148,6 @@ public class GreenTower extends AbstractTower implements Tower, GameFigure {
 	@Override
 	public void setIsAngry(boolean t) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override

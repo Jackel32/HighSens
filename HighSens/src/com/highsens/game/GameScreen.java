@@ -414,6 +414,19 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			}
 		}
 
+		else if (e.getSource() == greenToggle) {
+			if (greenToggle.isSelected()) {
+				lightingPlaceable = false;
+				BluePlaceable = false;
+				greenPlaceable = true;
+				ArrowPlaceable = false;
+				LandminePlaceable = false;
+				arrowToggle.setSelected(false);
+				lighting_spell.setSelected(false);
+				landmineToggle.setSelected(false);
+			}
+		}
+
 		else if (e.getSource() == lighting_spell) {
 			/*
 			 * if(lighting_spell.isSelected()) { for (int i = 0; i <
@@ -500,6 +513,18 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 					gameData.armsFigures.add(Landmine);
 					LandminePlaceable = false;
 					landmineToggle.setSelected(false);
+
+				}
+
+			}
+		} else if (gameData.money >= 200) {
+			if (!(x >= 0 && x <= 1300 && y >= 160 && y <= 270)) {
+				if (greenPlaceable == true) {
+					gameData.moneyManager("GreenTower", gameData.getMoney());
+					greenTower = new GreenTower(x - 25, y - 50, gameData);
+					gameData.figures.add(greenTower);
+					greenPlaceable = false;
+					greenToggle.setSelected(false);
 
 				}
 

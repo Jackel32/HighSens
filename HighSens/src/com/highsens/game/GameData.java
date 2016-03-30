@@ -34,7 +34,7 @@ public class GameData implements IStrategy {
 	///////////////////////////////
 
 	final List<SellManager> sellFigures;
-	
+
 	final List<Landmine> armsFigures;
 
 	////////////////////////////////
@@ -179,6 +179,11 @@ public class GameData implements IStrategy {
 		case "Landmine":
 			money -= 200;
 			break;
+
+		case "GreenTower":
+			money -= 150;
+			break;
+
 		case "regularKill":
 			money += 5;
 			break;
@@ -280,10 +285,15 @@ public class GameData implements IStrategy {
 				while (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					if (creepCount <= waveSize) {
-						if(bloonMonsterCount < 5) {figures.add(new BloonMonster(-50, 200, this, 4));}
-						else if(bloonMonsterCount >= 5 && bloonMonsterCount < 10) {figures.add(new BloonMonster(-50, 200, this, 3));}
-						else if(bloonMonsterCount >= 10 && bloonMonsterCount < 15) {figures.add(new BloonMonster(-50, 200, this, 2));}
-						else if(bloonMonsterCount >= 15 && bloonMonsterCount <= 20) {figures.add(new BloonMonster(-50, 200, this, 1));}
+						if (bloonMonsterCount < 5) {
+							figures.add(new BloonMonster(-50, 200, this, 4));
+						} else if (bloonMonsterCount >= 5 && bloonMonsterCount < 10) {
+							figures.add(new BloonMonster(-50, 200, this, 3));
+						} else if (bloonMonsterCount >= 10 && bloonMonsterCount < 15) {
+							figures.add(new BloonMonster(-50, 200, this, 2));
+						} else if (bloonMonsterCount >= 15 && bloonMonsterCount <= 20) {
+							figures.add(new BloonMonster(-50, 200, this, 1));
+						}
 						creepCount++;
 						bloonMonsterCount++;
 					}
@@ -444,23 +454,25 @@ public class GameData implements IStrategy {
 			bulletElapsedTime = 0;
 			bStart = System.currentTimeMillis();
 
-			//System.out.println("Bullet Elapsed Time: " + bulletElapsedTime);
+			// System.out.println("Bullet Elapsed Time: " + bulletElapsedTime);
 			shoot = false;
-			for (int i = 0; i < figures.size(); i++) {  // -2
-				for (int j = 0; j < figures.size(); j++) {   // -1
+			for (int i = 0; i < figures.size(); i++) { // -2
+				for (int j = 0; j < figures.size(); j++) { // -1
 					if (figures.get(i) instanceof BlueTower || figures.get(i) instanceof ArrowTower) {
 						if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
 								|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
 							if (shoot == false) {
 								if (figures.get(i).collision(figures.get(j))) {
-									//if(figures.get(i) instanceof Landmine){
-									//	figures.get(i).update();
-									//	figures.get(j).updateHealth();
-									//}
-									//else if (figures.get(j).getIsAngry()) {
+									// if(figures.get(i) instanceof Landmine){
+									// figures.get(i).update();
+									// figures.get(j).updateHealth();
+									// }
+									// else if (figures.get(j).getIsAngry()) {
 									if (figures.get(j).getIsAngry()) {
 										if (!figures.get(j).collision(figures.get(i))) {
-											//shoot(figures.get(i), figures.get(j), figures.get(i).getBulletCount());
+											// shoot(figures.get(i),
+											// figures.get(j),
+											// figures.get(i).getBulletCount());
 										} else {
 											shoot(figures.get(i), figures.get(j), figures.get(i).getBulletCount());
 											shoot = true;
@@ -477,27 +489,28 @@ public class GameData implements IStrategy {
 				}
 			}
 		}
-		
-		for (int i = 0; i < armsFigures.size(); i++){
-			for (int j = 0; j < figures.size() - 1; j++){
-				if(figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster ||
-						figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss ){
-					if(armsFigures.get(i).collision(figures.get(j))){
+
+		for (int i = 0; i < armsFigures.size(); i++) {
+			for (int j = 0; j < figures.size() - 1; j++) {
+				if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
+						|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
+					if (armsFigures.get(i).collision(figures.get(j))) {
 						armsFigures.get(i).update();
 					}
 				}
 			}
-			
+
 		}
 
-		for (int i = 0; i < figures.size(); i++) {    // -2
-			for (int j = 0; j < figures.size(); j++) {    // -1
-				if (figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile || figures.get(i) instanceof Landmine) {
+		for (int i = 0; i < figures.size(); i++) { // -2
+			for (int j = 0; j < figures.size(); j++) { // -1
+				if (figures.get(i) instanceof Missile || figures.get(i) instanceof ArrowMissile
+						|| figures.get(i) instanceof Landmine) {
 					if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
-							|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {							
+							|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
 						if (figures.get(j).contains((float) figures.get(i).getX(), (float) figures.get(i).getY())) {
 							figures.get(j).updateHealth();
-							if(figures.get(i) instanceof Landmine){
+							if (figures.get(i) instanceof Landmine) {
 								System.out.println("Testing");
 								figures.get(i).setState(GameFigure.STATE_EXPLODING);
 							} else {
@@ -519,7 +532,7 @@ public class GameData implements IStrategy {
 			}
 			figures.removeAll(remove);
 		}
-		
+
 		synchronized (armsFigures) {
 			for (int i = 0; i < armsFigures.size(); i++) {
 				l = armsFigures.get(i);
