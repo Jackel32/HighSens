@@ -14,7 +14,7 @@ import com.highsens.game.GameFigure;
 import com.highsens.game.Monster;
 import com.highsens.game.Tower;
 
-public class BlueTower extends AbstractTower implements Tower, GameFigure {
+public class GreenTower extends AbstractTower implements Tower, GameFigure {
 
 	float x, y;
 	Point2D.Float target;
@@ -27,14 +27,14 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 	GameData gd;
 	private GameFigure currentTarget;
 
-	public BlueTower(float x, float y, GameData gd) {
+	public GreenTower(float x, float y, GameData gd) {
 		this.gd = gd;
 		this.x = x;
 		this.y = y;
 		this.bulletCount = 1;
 		String imagePath = System.getProperty("user.dir");
 		String separator = System.getProperty("file.separator");
-		towerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
+		towerImage = getImage(imagePath + separator + "images" + separator + "GreenTower.png");
 		boundingBox = new BoundingBox((int) x, (int) x + 50, (int) y, (int) y + 69);
 		range = 200;
 		radius = new Ellipse2D.Double((this.x + 50) - 175, (this.y + 69) - 175, 300, 300);
@@ -171,7 +171,7 @@ public class BlueTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public Image getUpgradeTowerImage() {
-		return getImage(imagePath + separator + "images" + separator + "BlueTowerUpgrade.png");
+		return getImage(imagePath + separator + "images" + separator + "GreenTowerUpgrade.png");
 
 	}
 }

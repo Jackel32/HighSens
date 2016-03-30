@@ -49,16 +49,18 @@ public class GamePanel extends JPanel {
 
 		// Adds the Regular Tower image from the images director with a distinct
 		// seperator and path
-		//ArrowTowerImage = getImage(imagePath + separator + "images" + separator + "ArrowTower.png");
+		// ArrowTowerImage = getImage(imagePath + separator + "images" +
+		// separator + "ArrowTower.png");
 		// Adds the Blue Tower image from the images director with a distinct
 		// seperator and path
-		//BlueTowerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
-
+		// BlueTowerImage = getImage(imagePath + separator + "images" +
+		// separator + "BlueTower.png");
 
 		RegularMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster1.png");
 		FastMonsterImage = getImage(imagePath + separator + "images" + separator + "fastMonster1.png");
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
-		//mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
+		// mute = getImage(imagePath + separator + "images" + separator +
+		// "mute.jpg");
 
 		AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
 	}
@@ -120,95 +122,91 @@ public class GamePanel extends JPanel {
 			g2.setFont(new Font("Serif", Font.PLAIN, 20));
 			g2.drawString("Lives: " + gameData.getLives(), 375, 60);
 			g2.drawString("Gold: " + gameData.getMoney(), 470, 60);
-			if(gameData.getMoney() < 50)
-			{
+			if (gameData.getMoney() < 50) {
 				this.gamescreen.enableArrowToggle(false);
 				this.gamescreen.enableBlueToggle(false);
+				this.gamescreen.enableGreenToggle(false);
 				this.gamescreen.enableLandmineToggle(false);
 			}
-			
-			else if(gameData.getMoney() >= 50 && gameData.getMoney() < 100)
-			{
+
+			else if (gameData.getMoney() >= 50 && gameData.getMoney() < 100) {
 				this.gamescreen.enableArrowToggle(true);
 				this.gamescreen.enableBlueToggle(false);
+				this.gamescreen.enableGreenToggle(false);
 				this.gamescreen.enableLandmineToggle(false);
 			}
-			
-			else if(gameData.getMoney() >= 100 && gameData.getMoney() < 200)
-			{
+
+			else if (gameData.getMoney() >= 100 && gameData.getMoney() < 200) {
 				this.gamescreen.enableArrowToggle(true);
 				this.gamescreen.enableBlueToggle(true);
+				this.gamescreen.enableGreenToggle(true);
 				this.gamescreen.enableLandmineToggle(false);
 			}
-			
-			else if(gameData.getMoney() >= 200)
-			{
+
+			else if (gameData.getMoney() >= 200) {
 				this.gamescreen.enableArrowToggle(true);
 				this.gamescreen.enableBlueToggle(true);
+				this.gamescreen.enableGreenToggle(true);
 				this.gamescreen.enableLandmineToggle(true);
 			}
 
 			///////////////////////////////
 			// Creates white box. Puts the image of the Regular Tower in it
-			/* BUTTON
-			Graphics2D g3 = (Graphics2D) graphics;
-			g3.setColor(Color.WHITE);
-			g3.fillRect(440, 250, 70, 70);
-			g3.drawImage(ArrowTowerImage, 450, 250, this);
-			/////////////////////////////*/
+			/*
+			 * BUTTON Graphics2D g3 = (Graphics2D) graphics;
+			 * g3.setColor(Color.WHITE); g3.fillRect(440, 250, 70, 70);
+			 * g3.drawImage(ArrowTowerImage, 450, 250, this);
+			 * /////////////////////////////
+			 */
 
 			///////////////////////////////
 			// Creates white box. Puts the image of the Blue Tower in it
-			/* BUTTON
-			Graphics2D g4 = (Graphics2D) graphics;
-			g4.setColor(Color.WHITE);
-			g4.fillRect(520, 250, 70, 70);
-			g4.drawImage(BlueTowerImage, 530, 250, this);
-			/////////////////////////////*/
+			/*
+			 * BUTTON Graphics2D g4 = (Graphics2D) graphics;
+			 * g4.setColor(Color.WHITE); g4.fillRect(520, 250, 70, 70);
+			 * g4.drawImage(BlueTowerImage, 530, 250, this);
+			 * /////////////////////////////
+			 */
 
 			///////////////////////////////
 			// Creates Red Text with the name and price for the Regular Tower
-			/* Info Text
-			Graphics2D g5 = (Graphics2D) graphics;
-			g5.setColor(Color.RED);
-			g5.setFont(new Font("Serif", Font.PLAIN, 16));
-			g5.drawString("Tower 1", 450, 240);
-			g5.drawString("50 Gold", 450, 330);
-			/////////////////////////////*/
+			/*
+			 * Info Text Graphics2D g5 = (Graphics2D) graphics;
+			 * g5.setColor(Color.RED); g5.setFont(new Font("Serif", Font.PLAIN,
+			 * 16)); g5.drawString("Tower 1", 450, 240); g5.drawString("50 Gold"
+			 * , 450, 330); /////////////////////////////
+			 */
 
 			///////////////////////////////
 			// Creates Red Text with the name and price for the Regular Tower
-			/* Info Text
-			Graphics2D g6 = (Graphics2D) graphics;
-			g6.setColor(Color.RED);
-			g6.setFont(new Font("Serif", Font.PLAIN, 16));
-			g6.drawString("Tower 2", 530, 240);
-			g6.drawString("100 Gold", 530, 330);
-			/////////////////////////////*/
+			/*
+			 * Info Text Graphics2D g6 = (Graphics2D) graphics;
+			 * g6.setColor(Color.RED); g6.setFont(new Font("Serif", Font.PLAIN,
+			 * 16)); g6.drawString("Tower 2", 530, 240); g6.drawString(
+			 * "100 Gold", 530, 330); /////////////////////////////
+			 */
 
 			///////////////////////////////
 			// Creates a Yellow box
 			/*
-			BUTTON
-			Graphics2D g7 = (Graphics2D) graphics;
-			g7.setColor(Color.yellow);
-			g7.fillRect(250, 295, 100, 30);
-			*//////////////////////////////
+			 * BUTTON Graphics2D g7 = (Graphics2D) graphics;
+			 * g7.setColor(Color.yellow); g7.fillRect(250, 295, 100, 30);
+			 *//////////////////////////////
 
 			///////////////////////////////
-			/* Creates text for the Yellow Button
-			Graphics2D g8 = (Graphics2D) graphics;
-			g8.setColor(Color.BLACK);
-			g8.setFont(new Font("Serif", Font.PLAIN, 20));
-			//if(main.nextWaveClicked == false) {g8.drawString("Start Game", 255, 317); }
-			//else {g8.drawString("Next Wave", 255, 317);}
-			*///////////////////////////////
+			/*
+			 * Creates text for the Yellow Button Graphics2D g8 = (Graphics2D)
+			 * graphics; g8.setColor(Color.BLACK); g8.setFont(new Font("Serif",
+			 * Font.PLAIN, 20)); //if(main.nextWaveClicked == false)
+			 * {g8.drawString("Start Game", 255, 317); } //else {g8.drawString(
+			 * "Next Wave", 255, 317);}
+			 *///////////////////////////////
 
 			///////////////////////////////
-			/* Creates the mute button
-			Graphics2D g16 = (Graphics2D) graphics;
-			g16.drawImage(mute, 10, 295, this);
-			*//////////////////////////////
+			/*
+			 * Creates the mute button Graphics2D g16 = (Graphics2D) graphics;
+			 * g16.drawImage(mute, 10, 295, this);
+			 *//////////////////////////////
 
 			//////////////////////////////
 			Graphics2D g12 = (Graphics2D) graphics;
@@ -219,7 +217,7 @@ public class GamePanel extends JPanel {
 
 			Graphics2D g14 = (Graphics2D) graphics;
 			g14.drawImage(BossImage, 144, 28, this);
-			
+
 			Graphics2D g17 = (Graphics2D) graphics;
 			g17.drawImage(BloonMonsterImage, 210, 30, this);
 
@@ -273,14 +271,13 @@ public class GamePanel extends JPanel {
 			// increment i by 1 each time i is
 			// less than the size of the figure object within the gameData
 			// object
-			
+
 			for (int j = 0; j < gameData.armsFigures.size(); j++) {
 
 				f = (GameFigure) gameData.armsFigures.get(j);
 				f.render(graphics);
 			}
 
-			
 			for (int i = 0; i < gameData.figures.size(); i++) {
 
 				// get(i): Function gets the object from the collection of
@@ -302,7 +299,7 @@ public class GamePanel extends JPanel {
 				gameoverScreen.setVisible(true);
 
 				gamescreen.setVisible(false);
-				//main.dispose();
+				// main.dispose();
 
 				gameover = false;
 			}
@@ -339,7 +336,7 @@ public class GamePanel extends JPanel {
 			g.dispose();
 			// Catch any errors
 		} catch (Exception e) {
-			System.out.println("Graphics error: " + e);
+			throw e;
 		}
 	}
 }
