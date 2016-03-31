@@ -20,6 +20,8 @@ public class DemoPanel extends JPanel {
 	public static final int PHEIGHT = 800;
 	private DemoAnimator animator;
 	private GameData gameData;
+	private GameScreen gamescreen;
+	private boolean gameover = false;
 	private Graphics graphics;
 	private Image dbImage;
 	private Image mapImage;
@@ -30,16 +32,14 @@ public class DemoPanel extends JPanel {
 	private Image BloonMonsterImage;
 	private Image BossImage;
 	private Image mute;
-	private String imagePath = System.getProperty("user.dir");
-	private String separator = System.getProperty("file.separator");
 
 	public DemoPanel(DemoAnimator animator, GameData gameData) {
 		///////////////////////////////
 		// Use the animator and gamedata from within this class
 		this.animator = animator;
 		this.gameData = gameData;
-		
-///////////////////////////////
+		gamescreen = new GameScreen();
+		///////////////////////////////
 
 		// Set global background color
 		setBackground(Color.gray);
@@ -49,18 +49,17 @@ public class DemoPanel extends JPanel {
 
 		// Adds the Regular Tower image from the images director with a distinct
 		// seperator and path
-		// ArrowTowerImage = getImage(imagePath + separator + "images" +
-		// separator + "ArrowTower.png");
+		//ArrowTowerImage = getImage(imagePath + separator + "images" + separator + "ArrowTower.png");
 		// Adds the Blue Tower image from the images director with a distinct
 		// seperator and path
-		// BlueTowerImage = getImage(imagePath + separator + "images" +
-		// separator + "BlueTower.png");
+		//BlueTowerImage = getImage(imagePath + separator + "images" + separator + "BlueTower.png");
+
 
 		RegularMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster1.png");
 		FastMonsterImage = getImage(imagePath + separator + "images" + separator + "fastMonster1.png");
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
-		// mute = getImage(imagePath + separator + "images" + separator +
-		// "mute.jpg");
+		//mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
+
 	}
 
 	public static Image getImage(String fileName) {
@@ -105,7 +104,7 @@ public class DemoPanel extends JPanel {
 			}
 		}
 
-		graphics.clearRect(0, 0, GamePanel.PWIDTH, GamePanel.PHEIGHT);
+		graphics.clearRect(0, 0, DemoPanel.PWIDTH, DemoPanel.PHEIGHT);
 		synchronized (gameData.figures) {
 
 			// Instantiates class GameFigure
@@ -114,90 +113,6 @@ public class DemoPanel extends JPanel {
 			//
 
 			graphics.drawImage(mapImage, 0, 0, null);
-			Graphics2D g2 = (Graphics2D) graphics;
-			g2.setColor(Color.YELLOW);
-			g2.setFont(new Font("Serif", Font.PLAIN, 20));
-			g2.drawString("Lives: " + gameData.getLives(), 375, 60);
-			g2.drawString("Gold: " + gameData.getMoney(), 470, 60);
-
-			///////////////////////////////
-			// Creates white box. Puts the image of the Regular Tower in it
-			/*
-			 * BUTTON Graphics2D g3 = (Graphics2D) graphics;
-			 * g3.setColor(Color.WHITE); g3.fillRect(440, 250, 70, 70);
-			 * g3.drawImage(ArrowTowerImage, 450, 250, this);
-			 * /////////////////////////////
-			 */
-
-			///////////////////////////////
-			// Creates white box. Puts the image of the Blue Tower in it
-			/*
-			 * BUTTON Graphics2D g4 = (Graphics2D) graphics;
-			 * g4.setColor(Color.WHITE); g4.fillRect(520, 250, 70, 70);
-			 * g4.drawImage(BlueTowerImage, 530, 250, this);
-			 * /////////////////////////////
-			 */
-
-			///////////////////////////////
-			// Creates Red Text with the name and price for the Regular Tower
-			/*
-			 * Info Text Graphics2D g5 = (Graphics2D) graphics;
-			 * g5.setColor(Color.RED); g5.setFont(new Font("Serif", Font.PLAIN,
-			 * 16)); g5.drawString("Tower 1", 450, 240); g5.drawString("50 Gold"
-			 * , 450, 330); /////////////////////////////
-			 */
-
-			///////////////////////////////
-			// Creates Red Text with the name and price for the Regular Tower
-			/*
-			 * Info Text Graphics2D g6 = (Graphics2D) graphics;
-			 * g6.setColor(Color.RED); g6.setFont(new Font("Serif", Font.PLAIN,
-			 * 16)); g6.drawString("Tower 2", 530, 240); g6.drawString(
-			 * "100 Gold", 530, 330); /////////////////////////////
-			 */
-
-			///////////////////////////////
-			// Creates a Yellow box
-			/*
-			 * BUTTON Graphics2D g7 = (Graphics2D) graphics;
-			 * g7.setColor(Color.yellow); g7.fillRect(250, 295, 100, 30);
-			 *//////////////////////////////
-
-			///////////////////////////////
-			/*
-			 * Creates text for the Yellow Button Graphics2D g8 = (Graphics2D)
-			 * graphics; g8.setColor(Color.BLACK); g8.setFont(new Font("Serif",
-			 * Font.PLAIN, 20)); //if(main.nextWaveClicked == false)
-			 * {g8.drawString("Start Game", 255, 317); } //else {g8.drawString(
-			 * "Next Wave", 255, 317);}
-			 *///////////////////////////////
-
-			///////////////////////////////
-			/*
-			 * Creates the mute button Graphics2D g16 = (Graphics2D) graphics;
-			 * g16.drawImage(mute, 10, 295, this);
-			 *//////////////////////////////
-
-			//////////////////////////////
-			Graphics2D g12 = (Graphics2D) graphics;
-			g12.drawImage(RegularMonsterImage, 30, 30, this);
-
-			Graphics2D g13 = (Graphics2D) graphics;
-			g13.drawImage(FastMonsterImage, 88, 30, this);
-
-			Graphics2D g14 = (Graphics2D) graphics;
-			g14.drawImage(BossImage, 144, 28, this);
-
-			Graphics2D g17 = (Graphics2D) graphics;
-			g17.drawImage(BloonMonsterImage, 210, 30, this);
-
-			Graphics2D g15 = (Graphics2D) graphics;
-			g15.setColor(Color.RED);
-			g15.setFont(new Font("Serif", Font.PLAIN, 20));
-			g15.drawString("x" + gameData.getRegularMonsterCount(), 64, 48);
-			g15.drawString("x" + gameData.getFastMonsterCount(), 124, 48);
-			g15.drawString("x" + gameData.getBossCount(), 180, 48);
-			g15.drawString("x" + gameData.getBloonMonsterCount(), 244, 48);
 
 			// END GAME CONDITION
 			// If the user has no more lives
@@ -206,7 +121,7 @@ public class DemoPanel extends JPanel {
 				for (int i = 0; i < gameData.figures.size(); i++) {
 					f = (GameFigure) gameData.figures.get(i);
 					f.setState(GameFigure.STATE_DONE);
-					
+					gameover = true;
 				}
 
 				///////////////////////////////
@@ -241,13 +156,14 @@ public class DemoPanel extends JPanel {
 			// increment i by 1 each time i is
 			// less than the size of the figure object within the gameData
 			// object
-
+			
 			for (int j = 0; j < gameData.armsFigures.size(); j++) {
 
 				f = (GameFigure) gameData.armsFigures.get(j);
 				f.render(graphics);
 			}
 
+			
 			for (int i = 0; i < gameData.figures.size(); i++) {
 
 				// get(i): Function gets the object from the collection of

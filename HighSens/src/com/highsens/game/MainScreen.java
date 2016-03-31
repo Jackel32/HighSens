@@ -45,7 +45,7 @@ public class MainScreen extends JFrame {
 				ScreenManager.hideMainScreen();
 			}
 		});
-		btnStart.setBounds(50, 127, 112, 46);
+		btnStart.setBounds(40, 81, 112, 46);
 		btnStart.setOpaque(true);
 		
 		JButton btnQuit = new JButton("Quit");
@@ -57,14 +57,14 @@ public class MainScreen extends JFrame {
 		});
 		btnQuit.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnQuit.setBackground(new Color(255, 0, 0));
-		btnQuit.setBounds(423, 278, 112, 46);
+		btnQuit.setBounds(420, 190, 112, 46);
 		btnQuit.setContentAreaFilled(false);
 		btnQuit.setOpaque(true);
 		
 		JButton btnStore = new JButton("Store");
 		btnStore.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnStore.setBackground(new Color(153, 50, 204));
-		btnStore.setBounds(50, 278, 112, 46);
+		btnStore.setBounds(40, 190, 112, 46);
 		btnStore.setContentAreaFilled(false);
 		btnStore.setOpaque(true);
 		StoreAnimator animator = new StoreAnimator();
@@ -91,7 +91,7 @@ public class MainScreen extends JFrame {
 		
 		btnAbout.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
 		btnAbout.setBackground(new Color(255, 215, 0));
-		btnAbout.setBounds(423, 127, 112, 46);
+		btnAbout.setBounds(420, 81, 112, 46);
 		btnAbout.setContentAreaFilled(false);
 		btnAbout.setOpaque(true);
 		
@@ -112,7 +112,7 @@ public class MainScreen extends JFrame {
 		btnLogin.setContentAreaFilled(false);
 		btnLogin.setOpaque(true);
 		btnLogin.setBackground(new Color(0, 255, 255));
-		btnLogin.setBounds(228, 278, 112, 46);
+		btnLogin.setBounds(234, 273, 112, 46);
 		getContentPane().add(btnLogin);
 		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -126,7 +126,7 @@ public class MainScreen extends JFrame {
 				ScreenManager.displayTitleScreen();
 			}
 		});
-		btnNewButton.setBounds(251, 139, 89, 23);
+		btnNewButton.setBounds(234, 93, 89, 23);
 		getContentPane().add(btnNewButton);
 		
 		
