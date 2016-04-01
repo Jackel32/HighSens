@@ -27,6 +27,10 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import com.highsens.game.monster.BloonMonster;
+import com.highsens.game.monster.Boss;
+import com.highsens.game.monster.FastMonster;
+import com.highsens.game.monster.RegularMonster;
 import com.highsens.game.tower.AbstractTower;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
@@ -428,17 +432,19 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		}
 
 		else if (e.getSource() == lighting_spell) {
-			/*
-			 * if(lighting_spell.isSelected()) { for (int i = 0; i <
-			 * gameData.figures.size(); i++) { if(gameData.figures.get(i)
-			 * instanceof RegularMonster || gameData.figures.get(i) instanceof
-			 * FastMonster || gameData.figures.get(i) instanceof BloonMonster ||
-			 * gameData.figures.get(i) instanceof Boss ){
-			 * gameData.figures.remove(i); gameData.update(); } }
-			 * 
-			 * gameData.moneyManager("LightingSpell", gameData.getMoney()); }
-			 */
-			gameData.figures.clear();
+			
+			 if(lighting_spell.isSelected()) {
+				 for (int i = 0; i <gameData.figures.size(); i++) {
+					 if(gameData.figures.get(i)instanceof RegularMonster ||
+					    gameData.figures.get(i) instanceof FastMonster ||
+						gameData.figures.get(i) instanceof BloonMonster ||
+						gameData.figures.get(i) instanceof Boss ){
+						 
+						 gameData.figures.remove(i);
+						 i = -1;
+						 } 
+				 }
+			 } 
 		}
 
 		else if (e.getSource() == landmineToggle) {
