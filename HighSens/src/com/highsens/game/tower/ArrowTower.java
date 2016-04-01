@@ -23,6 +23,9 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 	private int state = STATE_IDLE;
 	public int level;
 
+	private String imagePath = System.getProperty("user.dir");
+	private String separator = System.getProperty("file.separator");
+
 	FastMonster fastMonster;
 	RegularMonster regularMonster;
 	Boss boss;
@@ -136,7 +139,7 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 	@Override
 	public void setIsAngry(boolean t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -155,6 +158,12 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 	public double getHeight() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Image getUpgradeTowerImage() {
+		return getImage(imagePath + separator + "images" + separator + "RedTower.png");
+
 	}
 
 }
