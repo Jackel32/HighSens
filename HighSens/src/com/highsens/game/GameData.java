@@ -53,7 +53,7 @@ public class GameData implements IStrategy {
 	// Variables for the players Score, Lives, and Money
 	public int score;
 	public int lives = 100;
-	public int money = 1000;
+	public int money = 10000;
 	///////////////////////////////
 
 	// Variables for an objects position
@@ -290,6 +290,23 @@ public class GameData implements IStrategy {
 				}
 				break;
 			case 2:
+				// How many monsters
+				waveSize = 20;
+
+				// this staggers the monster creation
+				while (monsterElapsedTime > 1000) {
+					monsterElapsedTime = 0;
+					if (creepCount <= waveSize) {
+						if(bloonMonsterCount < 5) {figures.add(new BloonMonster(-50, 200, this, 4));}
+						else if(bloonMonsterCount >= 5 && bloonMonsterCount < 10) {figures.add(new BloonMonster(-50, 200, this, 3));}
+						else if(bloonMonsterCount >= 10 && bloonMonsterCount < 15) {figures.add(new BloonMonster(-50, 200, this, 2));}
+						else if(bloonMonsterCount >= 15 && bloonMonsterCount <= 20) {figures.add(new BloonMonster(-50, 200, this, 1));}
+						creepCount++;
+						bloonMonsterCount++;
+					}
+				}
+				break;
+			case 3:
 				waveSize = 4;
 				if (monsterElapsedTime > 2000) {
 					monsterElapsedTime = 0;
@@ -297,22 +314,10 @@ public class GameData implements IStrategy {
 						figures.add(new Boss(-50, 150, this));
 						creepCount++;
 						bloonMonsterCount++;
-						/*
-						 * if (creepCount <= waveSize) { if (creepCount <
-						 * waveSize / 2) { figures.add(new RegularMonster(-50,
-						 * 200, this)); creepCount++; regularMonsterCount++; }
-						 * else if (creepCount < waveSize) { figures.add(new
-						 * FastMonster(-50, 200, this)); creepCount++;
-						 * fastMonsterCount++; } else if (creepCount <=
-						 * waveSize) { figures.add(new BloonMonster(-50, 200,
-						 * this)); creepCount++; bloonMonsterCount++; } else if
-						 * (creepCount == waveSize) { figures.add(new Boss(-50,
-						 * 120, this)); creepCount++; bossCount++; }
-						 */
 					}
 				}
 				break;
-			case 3:
+			case 4:
 				waveSize = 8;
 				if (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;

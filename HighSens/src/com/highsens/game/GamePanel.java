@@ -25,14 +25,10 @@ public class GamePanel extends JPanel {
 	private Graphics graphics;
 	private Image dbImage;
 	private Image mapImage;
-	private Image ArrowTowerImage;
-	private Image BlueTowerImage;
 	private Image RegularMonsterImage;
 	private Image FastMonsterImage;
 	private Image BloonMonsterImage;
 	private Image BossImage;
-	private Image mute;
-
 	public GamePanel(Animator animator, GameData gameData, GameScreen gameScreen) {
 		///////////////////////////////
 		// Use the animator and gamedata from within this class
@@ -58,6 +54,7 @@ public class GamePanel extends JPanel {
 		RegularMonsterImage = getImage(imagePath + separator + "images" + separator + "RegularMonster1.png");
 		FastMonsterImage = getImage(imagePath + separator + "images" + separator + "fastMonster1.png");
 		BossImage = getImage(imagePath + separator + "images" + separator + "boss1.png");
+		BloonMonsterImage = getImage(imagePath + separator + "images" + separator + "BlueMonster.png");
 		//mute = getImage(imagePath + separator + "images" + separator + "mute.jpg");
 
 		AudioPlayer.loadStream("background", "sounds/bgmusic.wav");
@@ -120,6 +117,7 @@ public class GamePanel extends JPanel {
 			g2.setFont(new Font("Serif", Font.PLAIN, 20));
 			g2.drawString("Lives: " + gameData.getLives(), 375, 60);
 			g2.drawString("Gold: " + gameData.getMoney(), 470, 60);
+			
 			if(gameData.getMoney() < 50)
 			{
 				this.gamescreen.enableArrowToggle(false);
