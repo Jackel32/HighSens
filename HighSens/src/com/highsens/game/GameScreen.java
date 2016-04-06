@@ -172,7 +172,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		greenToggle.setEnabled(false);
 		greenToggle.setBounds(630, 0, 100, 80);
 		greenToggle.addActionListener(this);
-		southPanel.add(greenToggle);
+		//southPanel.add(greenToggle);
 
 		JLabel lblNewLabel = new JLabel("<html> Arrow Tower  <br> Cost: 50g </html>\r\n");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -190,7 +190,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		lblGreenTowerCost.setVerticalAlignment(SwingConstants.TOP);
 		lblGreenTowerCost.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGreenTowerCost.setBounds(600, 77, 155, 31);
-		southPanel.add(lblGreenTowerCost);
+		//southPanel.add(lblGreenTowerCost);
 
 		JLabel lblLandmineCost = new JLabel("<html> Landmine <br> Cost: 200g</html>\r\n");
 		lblLandmineCost.setVerticalAlignment(SwingConstants.TOP);
