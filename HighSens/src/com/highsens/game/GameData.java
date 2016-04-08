@@ -18,6 +18,7 @@ import com.highsens.game.monster.BloonMonster;
 import com.highsens.game.monster.Boss;
 import com.highsens.game.monster.FastMonster;
 import com.highsens.game.monster.RegularMonster;
+import com.highsens.game.tower.Airplane;
 import com.highsens.game.tower.ArrowTower;
 import com.highsens.game.tower.BlueTower;
 import com.highsens.game.tower.Landmine;
@@ -42,6 +43,7 @@ public class GameData implements IStrategy {
 	ArrowTower ArrowT;
 	BlueTower BlueT;
 	Landmine LMine;
+	Airplane airplane;
 	RegularMonster regularMonster;
 	FastMonster fastMonster;
 	Boss boss;
