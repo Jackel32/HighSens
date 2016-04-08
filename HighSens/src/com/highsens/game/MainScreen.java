@@ -16,6 +16,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 public class MainScreen extends JFrame {
+	
+	private JLabel lblUser = new JLabel("");
+
+	
 	public MainScreen() {
 		setMaximumSize(new Dimension(600, 400));
 		setMinimumSize(new Dimension(600, 400));
@@ -97,6 +101,43 @@ public class MainScreen extends JFrame {
 		getContentPane().add(btnQuit);
 		getContentPane().add(btnStore);
 		getContentPane().add(btnAbout);
+		
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ScreenManager.displayLoginScreen();
+				ScreenManager.hideMainScreen();
+			}
+		});
+		
+		btnLogin.setFont(new Font("Showcard Gothic", Font.PLAIN, 12));
+		btnLogin.setContentAreaFilled(false);
+		btnLogin.setOpaque(true);
+		btnLogin.setBackground(new Color(0, 255, 255));
+		btnLogin.setBounds(234, 273, 112, 46);
+		getContentPane().add(btnLogin);
+		lblUser.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		lblUser.setBounds(181, 47, 180, 23);
+		getContentPane().add(lblUser);
+		
+		/*JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ScreenManager.displayTitleScreen();
+			}
+		});
+		btnNewButton.setBounds(237, 123, 89, 23);
+		getContentPane().add(btnNewButton);
+		*/
+		
+		
+	}
+	public void setUserLabel()
+	{
+		lblUser.setText("Current user: "+  CurrentPlayer.getName());
+		lblUser.setVisible(true);
 		
 	}
 }

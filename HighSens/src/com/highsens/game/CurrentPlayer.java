@@ -7,6 +7,8 @@ public class CurrentPlayer {
 	private static int gameCash = 1000;
 	private static String name = "";
 	private static CurrentPlayer currentPlayer;
+	private static boolean blueTowerPurchased = false;
+	private static boolean greenTowerPurchased = false;
 	
 	protected CurrentPlayer(){}
 	
@@ -41,6 +43,27 @@ public class CurrentPlayer {
 		name = (String)j.get("name");
 		playerJSON = j;
 	}
-
+	
+	public static void setGreenTowerPurchased(boolean b)
+	{
+		greenTowerPurchased = b;
+	}
+	
+	public static void setBlueTowerPurchased(boolean b)
+	{
+		blueTowerPurchased = b;
+	}
+	
+	public static boolean getGreenTowerPurchased()
+	{
+		return greenTowerPurchased;
+	}
+	
+	public static boolean getBlueTowerPurchased()
+	{
+		return blueTowerPurchased;
+	}
+	
+	
 	
 }

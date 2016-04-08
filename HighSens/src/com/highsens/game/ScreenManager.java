@@ -11,6 +11,26 @@ public final class ScreenManager {
 	private static GameScreen game = new GameScreen();
 	private static StoreScreen store = new StoreScreen();
 	private static AboutScreen about = new AboutScreen();
+	private static LoginScreen login = new LoginScreen();
+	private static TitleScreen title = new TitleScreen();
+	
+	public static void setUser()
+	{
+		mainscreen.setUserLabel();
+	}
+	
+	public static void displayTitleScreen()
+	{
+		title.setVisible(true);
+		title.playGame();
+	}
+	
+	public static void hideTitleScreen()
+	{
+		title.setVisible(false);
+		title.dispatch();
+		displayMainScreen();
+	}
 	
 	public static void displaySplashScreen()
 	{
@@ -20,6 +40,7 @@ public final class ScreenManager {
 	public static void displayMainScreen()
 	{
 		mainscreen.setVisible(true);
+		mainscreen.setUserLabel();
 	}
 	
 	public static void displayLevelSelectScreen()
@@ -62,6 +83,19 @@ public final class ScreenManager {
 		hideMainScreen();
 	}
 
+	public static void displayLoginScreen()
+	{
+		login.setVisible(true);
+		hideMainScreen();
+	}
+
+	
+	public static void hideLoginScreen()
+	{
+		login.setVisible(false);
+		displayMainScreen();
+	}
+	
 	
 	public static void hideMainScreen()
 	{

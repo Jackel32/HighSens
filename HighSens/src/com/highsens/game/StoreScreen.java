@@ -50,6 +50,9 @@ public class StoreScreen extends JFrame {
     private TowerData towerArray[] = {emptyTower, arrowTowerObj, redTowerObj, 
     		blueTowerObj, arrowTowerTier2Obj, redTowerTier2Obj, blueTowerTier2Obj};
     private CurrentPlayer currentPlayer = CurrentPlayer.getCurrentPlayer();
+    private TempPlayer player = TempPlayer.getInstance();
+
+    
     
     
 	public StoreScreen() {
@@ -461,10 +464,12 @@ public class StoreScreen extends JFrame {
 					buy();
 					secondRefresh();
 					secondRefreshBoard();
+					CurrentPlayer.setGreenTowerPurchased(true);
 				} else if(currentTowerIndex == 3){
 					buy();
 					thirdRefresh();
 					thirdRefreshBoard();
+					CurrentPlayer.setBlueTowerPurchased(true);
 				} else if(currentTowerIndex == 4){
 					if(towerArray[1].bought == true){
 						buy();

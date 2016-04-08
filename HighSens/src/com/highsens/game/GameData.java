@@ -54,9 +54,14 @@ public class GameData implements IStrategy {
 
 	// Variables for the players Score, Lives, and Money
 	public int score;
-	public int lives = 100;
+	public int lives = 9999;
 	public int money = 1000;
 	///////////////////////////////
+	
+	Random rn;
+	int n = 4 - 1 + 1;
+	int r = 0;
+	int randomNum = 0;
 
 	// Variables for an objects position
 	float x, y;
@@ -100,6 +105,8 @@ public class GameData implements IStrategy {
 		figures = Collections.synchronizedList(new ArrayList<GameFigure>());
 		sellFigures = Collections.synchronizedList(new ArrayList<SellManager>());
 		armsFigures = Collections.synchronizedList(new ArrayList<Landmine>());
+		figures.add(0, new Airplane(300,100));
+
 	}
 
 	@Override
@@ -181,11 +188,9 @@ public class GameData implements IStrategy {
 		case "Landmine":
 			money -= 200;
 			break;
-
 		case "GreenTower":
 			money -= 150;
 			break;
-
 		case "regularKill":
 			money += 5;
 			break;
@@ -277,7 +282,12 @@ public class GameData implements IStrategy {
 
 	// This controls each wave.
 	public void startWave(int n) {
+		
 		if (!waveStarted) {
+			
+			Random ran = new Random();
+			int randomNum = ran.nextInt(3) + 1;
+			
 			switch (n) {
 			case 1:
 				// How many monsters
@@ -285,9 +295,27 @@ public class GameData implements IStrategy {
 
 				// this staggers the monster creation
 				while (monsterElapsedTime > 1000) {
+					
 					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						if (bloonMonsterCount < 5) {
+					
+					for(int i = 0; i < 20; i++)
+					{
+						figures.add(new BloonMonster(-50, 200, this, randomNum));
+						creepCount++;
+						bloonMonsterCount++;
+					}
+					//if (creepCount <= waveSize) {
+						
+						//for(int i = 0; i < 100; i++)
+						//{
+						//	figures.add(new BloonMonster(-50, 200, this, randomNum));
+
+//						}
+						//creepCount++;
+						//bloonMonsterCount++;
+						
+						
+/*						if (bloonMonsterCount < 5) {
 							figures.add(new BloonMonster(-50, 200, this, 4));
 						} else if (bloonMonsterCount >= 5 && bloonMonsterCount < 10) {
 							figures.add(new BloonMonster(-50, 200, this, 3));
@@ -297,18 +325,20 @@ public class GameData implements IStrategy {
 							figures.add(new BloonMonster(-50, 200, this, 1));
 						}
 						creepCount++;
-						bloonMonsterCount++;
-					}
+						bloonMonsterCount++;*/
+					//}
 				}
 				break;
 			case 2:
 				waveSize = 4;
 				if (monsterElapsedTime > 2000) {
 					monsterElapsedTime = 0;
-					if (creepCount <= waveSize) {
-						figures.add(new Boss(-50, 150, this));
+					for(int i = 0; i < 20; i++)
+					{
+						figures.add(new BloonMonster(-50, 200, this, randomNum));
 						creepCount++;
-						bossCount++;
+						bloonMonsterCount++;
+					}
 						/*
 						 * if (creepCount <= waveSize) { if (creepCount <
 						 * waveSize / 2) { figures.add(new RegularMonster(-50,
@@ -321,7 +351,7 @@ public class GameData implements IStrategy {
 						 * (creepCount == waveSize) { figures.add(new Boss(-50,
 						 * 120, this)); creepCount++; bossCount++; }
 						 */
-					}
+					//}
 				}
 				break;
 			case 3:
@@ -460,7 +490,7 @@ public class GameData implements IStrategy {
 			shoot = false;
 			for (int i = 0; i < figures.size(); i++) { // -2
 				for (int j = 0; j < figures.size(); j++) { // -1
-					if (figures.get(i) instanceof BlueTower || figures.get(i) instanceof ArrowTower) {
+					if (figures.get(i) instanceof BlueTower || figures.get(i) instanceof ArrowTower || figures.get(i) instanceof Airplane) {
 						if (figures.get(j) instanceof RegularMonster || figures.get(j) instanceof FastMonster
 								|| figures.get(j) instanceof BloonMonster || figures.get(j) instanceof Boss) {
 							if (shoot == false) {
