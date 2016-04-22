@@ -201,7 +201,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		greenToggle = new JToggleButton("", greenTowerIcon);
 		greenToggle.setEnabled(false);
 		greenToggle.addActionListener(this);
-		//towerPanel.add(greenToggle);
+		towerPanel.add(greenToggle);
 		
 		label_1 = new JLabel("<html> Blue Tower  <br> Cost: 100g </html>\r\n");
 		label_1.setVerticalAlignment(SwingConstants.TOP);
@@ -217,7 +217,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 		lblNewLabel = new JLabel("<html> Green Tower <br> Cost: 200g </html>");
 		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		//towerPanel.add(lblNewLabel);
+		towerPanel.add(lblNewLabel);
 		muteButton.addActionListener(this);
 		lblNewLabel.setVisible(false);
 		
@@ -272,8 +272,8 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 	{
 		blueToggle.setVisible(CurrentPlayer.getBlueTowerPurchased());
 		label_1.setVisible(CurrentPlayer.getBlueTowerPurchased());
-		//greenToggle.setVisible(CurrentPlayer.getGreenTowerPurchased());
-		//lblNewLabel.setVisible(CurrentPlayer.getGreenTowerPurchased());
+		greenToggle.setVisible(CurrentPlayer.getGreenTowerPurchased());
+		lblNewLabel.setVisible(CurrentPlayer.getGreenTowerPurchased());
 	}
 	
 	private ImageIcon createImageIcon(String path) {
@@ -417,7 +417,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			northPanel.setEnabled(false);
 			blueToggle.setEnabled(true);
 			arrowToggle.setEnabled(true);
-			//greenToggle.setEnabled(true);
+			greenToggle.setEnabled(true);
 			lighting_spell.setEnabled(true);
 			landmineToggle.setEnabled(true);
 			gamePanel.startGame();
@@ -425,7 +425,7 @@ public class GameScreen extends JFrame implements ActionListener, MouseListener,
 			btnStore.setEnabled(true);
 			btnQuit.setEnabled(true);
 			blueToggle.setVisible(false);
-			//greenToggle.setVisible(false);
+			greenToggle.setVisible(false);
 
 		} else if (e.getSource() == quitButton) {
 			animator.running = false;

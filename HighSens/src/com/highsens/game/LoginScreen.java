@@ -6,10 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.json.simple.JSONObject;
+
 import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -24,7 +31,7 @@ public class LoginScreen extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtName;
 	public LoginFunctions login = new LoginFunctions();
-	private PlayersData data;
+	private JComboBox<String> cbUsers = new JComboBox<String>();
 
 	public LoginScreen() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,8 +48,8 @@ public class LoginScreen extends JFrame {
 		lblNewLabel.setBounds(98, 11, 231, 28);
 		contentPane.add(lblNewLabel);
 		
-		JComboBox cbUsers = new JComboBox();
 		cbUsers.setBounds(131, 85, 172, 20);
+		populateComboBox();
 		contentPane.add(cbUsers);
 		
 		
@@ -54,28 +61,28 @@ public class LoginScreen extends JFrame {
 		JButton btnNewButton = new JButton("Register user");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!txtName.getText().isEmpty())
-					cbUsers.addItem(txtName.getText());
-					login.registerPlayer(txtName.getText());
-					ScreenManager.setUser();
-					ScreenManager.hideLoginScreen();
+				if(!txtName.getText().isEmpty()){
+					if(login.registerPlayer(txtName.getText())){
+						populateComboBox();
+						ScreenManager.setUser();
+						txtName.setText("");
+					}
+				}
 			}
 		});
 		btnNewButton.setBounds(168, 185, 112, 23);
 		contentPane.add(btnNewButton);
+		contentPane.getRootPane().setDefaultButton(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Select User");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(cbUsers.getSelectedIndex() > -1)
 				{
-					//ScreenManager.setUser( cbUsers.getSelectedItem().toString());
-					
-					//login.tryLogin(cbUsers.getSelectedItem().toString());
-					//login.tryLogin(txtName.getText());
-					login.setCurrentUser(cbUsers.getSelectedItem().toString());
-					ScreenManager.setUser();
-					ScreenManager.hideLoginScreen();
+					if(login.tryLogin(cbUsers.getSelectedItem().toString())){
+						ScreenManager.setUser();
+						ScreenManager.hideLoginScreen();
+					}
 				}
 			}
 		});
@@ -91,5 +98,12 @@ public class LoginScreen extends JFrame {
 		btnNewButton_2.setBounds(102, 219, 247, 23);
 		contentPane.add(btnNewButton_2);
 		this.setLocationRelativeTo(null);
+	}
+	
+	private void populateComboBox(){
+		cbUsers.removeAllItems();
+		for(int i = 0; i < PlayersData.getInstance().getPlayerArray().size(); i++){
+			cbUsers.addItem((String)((JSONObject)(PlayersData.getInstance().getPlayerArray().get(i))).get("name"));
+		}
 	}
 }

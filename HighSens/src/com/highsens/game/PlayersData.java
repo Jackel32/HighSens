@@ -8,7 +8,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class PlayersData {
-	private static JSONObject players = new JSONObject();
 	private static JSONArray playersArray = new JSONArray();
 	private static String projectDirectory = System.getProperty("user.dir");
 	private static String separator = System.getProperty("file.separator");
@@ -16,11 +15,9 @@ public class PlayersData {
 	private static JSONParser parser = new JSONParser();
 	
 	protected PlayersData(){
-		
 		try{
-			players = (JSONObject)parser.parse(new FileReader(projectDirectory + separator
+			playersArray = (JSONArray)parser.parse(new FileReader(projectDirectory + separator
 		            + "players.json"));
-			playersArray = (JSONArray) players.get(players);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -33,7 +30,7 @@ public class PlayersData {
 		return instance;
 	}
 	
-	public JSONArray getPlayerArray(){
+	public static JSONArray getPlayerArray(){
 		return playersArray;
 	}
 	
@@ -53,7 +50,7 @@ public class PlayersData {
 		try {
 			FileWriter file = new FileWriter(projectDirectory + separator
 		            + "players.json");
-			file.write(players.toJSONString());
+			file.write(playersArray.toJSONString());
 			file.flush();
 			file.close();
 		} catch (IOException e) {
@@ -61,9 +58,9 @@ public class PlayersData {
 		}
 	}
 	
-	public boolean isRegistered(String name){
+	public static boolean isRegistered(String name){
 		for(int i = 0; i < playersArray.size(); i++){
-			if(((JSONObject)playersArray.get(i)).containsKey(name)){
+			if(name.compareTo(((JSONObject)playersArray.get(i)).get("name").toString())==0){
 				return true;
 			}
 		}
