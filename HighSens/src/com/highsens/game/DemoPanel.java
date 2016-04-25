@@ -214,7 +214,7 @@ public class DemoPanel extends JPanel {
 			g.dispose();
 			// Catch any errors
 		} catch (Exception e) {
-			System.out.println("Graphics error: " + e);
+			//System.out.println("Graphics error: " + e);
 		}
 	}
 	

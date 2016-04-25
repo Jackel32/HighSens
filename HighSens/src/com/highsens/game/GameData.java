@@ -118,7 +118,7 @@ public class GameData implements IStrategy {
 	public void shoot(GameFigure tower, GameFigure monster, int bulletCount) {
 		if (tower instanceof BlueTower && monster instanceof Boss) {
 			shoot((BlueTower) tower, monster, ((BlueTower) tower).getBulletCount());
-		} else {
+		} else if (tower instanceof ArrowTower || tower instanceof BlueTower || tower instanceof GreenTower || tower instanceof Airplane){
 			// Instantiates a new Missile at the x and y location of the Regular
 			// Tower, color is black
 			ArrowMissile f = new ArrowMissile(tower.getXofMissileShoot(), tower.getYofMissileShoot(), Color.BLACK);
@@ -315,7 +315,7 @@ public class GameData implements IStrategy {
 				if (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					
-					for(int i = 0; i < 20; i++)
+					for(int i = 0; i < 10; i++)
 					{
 						figures.add(new BloonMonster(-50, 200, this, randomNum));
 						creepCount++;
@@ -330,7 +330,7 @@ public class GameData implements IStrategy {
 				if (monsterElapsedTime > 1000) {
 					monsterElapsedTime = 0;
 					
-					for(int i = 0; i < 20; i++)
+					for(int i = 0; i < 10; i++)
 					{
 						figures.add(new BloonMonster(-50, 200, this, randomNum));
 						creepCount++;
@@ -338,27 +338,37 @@ public class GameData implements IStrategy {
 					}
 					
 					CurrentPlayer.setGameCash(CurrentPlayer.getGameCash() + 200);
-
+				}
+				break;
+				
+			case 4:
+				waveSize = 8;
+				if (monsterElapsedTime > 3000) {
+					monsterElapsedTime = 0;
 					
-/*					if (creepCount <= waveSize) {
-						if (creepCount < waveSize / 2) {
-							figures.add(new RegularMonster(-50, 200, this));
-							creepCount++;
-							regularMonsterCount++;
-						} else if (creepCount < waveSize) {
-							figures.add(new FastMonster(-50, 200, this));
-							creepCount++;
-							fastMonsterCount++;
-						} else if (creepCount <= waveSize) {
-							figures.add(new BloonMonster(-50, 200, this, 4));
-							creepCount++;
-							bloonMonsterCount++;
-						} else if (creepCount == waveSize) {
-							figures.add(new Boss(-50, 150, this));
-							creepCount++;
-							bossCount++;
-						}
-					}*/
+					for(int i = 0; i < 10; i++)
+					{
+						figures.add(new Boss(-50, 140, this));
+						creepCount++;
+						bossCount++;
+					}
+					
+					CurrentPlayer.setGameCash(CurrentPlayer.getGameCash() + 200);
+				}
+				break;
+			case 5:
+				waveSize = 8;
+				if (monsterElapsedTime > 3000) {
+					monsterElapsedTime = 0;
+					
+					for(int i = 0; i < 10; i++)
+					{
+						figures.add(new Boss(-50, 140, this));
+						creepCount++;
+						bossCount++;
+					}
+					
+					CurrentPlayer.setGameCash(CurrentPlayer.getGameCash() + 200);
 				}
 				break;
 			}

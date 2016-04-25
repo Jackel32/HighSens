@@ -28,8 +28,8 @@ public final class ScreenManager {
 	public static void hideTitleScreen()
 	{
 		title.setVisible(false);
-		title.dispatch();
-		displayMainScreen();
+		title.dispose();
+		//displayMainScreen();
 	}
 	
 	public static void displaySplashScreen()

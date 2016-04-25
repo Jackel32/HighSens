@@ -69,7 +69,7 @@ public class ArrowTower extends AbstractTower implements Tower, GameFigure {
 
 	@Override
 	public void render(Graphics g) {
-		drawRange(g, x, y);
+		//drawRange(g, x, y);
 		g.drawImage(towerImage, (int) x, (int) y, null);
 	}
 
